@@ -27,18 +27,18 @@
 <!-- [EDIT] og:url and og:image MUST be absolute https:// URLs once the
      site is uploaded, otherwise no preview thumbnail will appear.
      Recommended image size: 1200 x 630 px, under 1 MB. -->
-<meta property="og:type"        content="website">
-<meta property="og:site_name"   content="Chie &amp; Cath Wedding">
-<meta property="og:title"       content="Chie &amp; Cath · 16 October 2026">
+<meta property="og:type"        content="Website">
+<meta property="og:site_name"   content="Catherine &amp; Archie Wedding">
+<meta property="og:title"       content="Catherine &amp; Archie · 16 October 2026">
 <meta property="og:description" content="Together with our families, we joyfully invite you to celebrate our wedding day. Tap to view the invitation and RSVP.">
 <meta property="og:url"         content="https://example.com/">
 <meta property="og:image"       content="https://example.com/preview.jpg">
 <meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt"   content="Chie and Cath wedding invitation">
+<meta property="og:image:alt"   content="Catherine and Archie wedding invitation">
 <meta property="og:locale"      content="en_PH">
 <meta name="twitter:card"       content="summary_large_image">
-<meta name="twitter:title"      content="Chie &amp; Cath · 16 October 2026">
+<meta name="twitter:title"      content="Catherine &amp; Archie · 16 October 2026">
 <meta name="twitter:description" content="Together with our families, we joyfully invite you to celebrate our wedding day.">
 <meta name="twitter:image"      content="https://example.com/preview.jpg">
 
@@ -164,6 +164,13 @@ p:last-child{margin-bottom:0}
 
 /* ---- floral corner ornaments ---- */
 .orn-corner{position:absolute;pointer-events:none;color:var(--rust);aspect-ratio:1;height:auto}
+
+/* ---- the C & A logo ---- */
+.logo-ca{display:block;height:2.8rem;width:auto;aspect-ratio:60/52}
+.logo-ca__letter,
+.logo-ca__amp{font-family:var(--serif);font-weight:400;fill:currentColor;text-anchor:middle}
+.logo-ca__amp{font-style:italic}
+.logo-ca__rule{fill:none;stroke:currentColor;stroke-width:1;opacity:.75}
 .hero__orn{width:clamp(4.25rem,13vw,6.5rem);opacity:.4}
 .hero__orn--tl{top:.55rem;left:.55rem}
 .hero__orn--br{bottom:.55rem;right:.55rem;transform:rotate(180deg)}
@@ -201,35 +208,34 @@ p:last-child{margin-bottom:0}
    ========================================================= */
 .site-header{
   position:sticky;top:0;z-index:90;
-  border-bottom:1px solid transparent;
-  transition:background .3s ease,box-shadow .3s ease,border-color .3s ease;
+  /* a deep rust bar, dark enough to hold the cream lettering */
+  background:var(--rust-deep);
+  border-bottom:1px solid rgba(251,234,218,.15);
+  transition:box-shadow .3s ease;
+}
+@supports (backdrop-filter:blur(10px)){
+  .site-header{background:rgba(122,52,19,.93);backdrop-filter:blur(10px)}
 }
 /* keep it out of sight and out of the tab order behind the envelope */
 .env-open .site-header{display:none}
-.site-header.is-stuck{
-  background:rgba(252,246,238,.94);
-  border-bottom-color:var(--rust-lt);
-  box-shadow:0 6px 20px -18px rgba(122,52,19,.85);
-}
-@supports (backdrop-filter:blur(10px)){
-  .site-header.is-stuck{background:rgba(252,246,238,.84);backdrop-filter:blur(10px)}
-}
+.site-header.is-stuck{box-shadow:0 10px 26px -18px rgba(46,22,8,.95)}
 .nav-wrap{
   width:min(100% - 2.25rem,62rem);margin-inline:auto;
   display:flex;align-items:center;justify-content:space-between;gap:1rem;
-  min-height:3.75rem;
+  min-height:4.5rem;
 }
 .nav-brand{
-  font-family:var(--serif);font-size:1.05rem;letter-spacing:.24em;
-  color:var(--rust);text-decoration:none;white-space:nowrap;
-  transition:color .2s ease;
+  display:inline-flex;align-items:center;
+  color:var(--shell);text-decoration:none;
+  transition:color .2s ease,opacity .2s ease;
 }
-.nav-brand:hover{color:var(--rust-dk)}
+.nav-brand:hover{color:var(--rust-lt)}
+.nav-brand:focus-visible{outline:2px solid var(--rust-lt);outline-offset:6px;border-radius:3px}
 
 /* ---- hamburger ---- */
 .nav-toggle{
-  display:grid;place-items:center;width:44px;height:44px;margin-right:-.55rem;
-  background:none;border:0;cursor:pointer;color:var(--rust-dk);
+  display:grid;place-items:center;width:46px;height:46px;margin-right:-.55rem;
+  background:none;border:0;cursor:pointer;color:var(--shell);
 }
 .nav-toggle__bars{display:block;position:relative;width:22px;height:14px}
 .nav-toggle__bars span{
@@ -247,27 +253,27 @@ p:last-child{margin-bottom:0}
 /* ---- the menu: a drop panel on phones ---- */
 .nav{
   position:absolute;top:100%;left:0;right:0;
-  background:var(--paper);
-  border-top:1px solid var(--rust-lt);border-bottom:1px solid var(--rust-lt);
-  box-shadow:0 18px 32px -24px rgba(122,52,19,.75);
+  background:var(--rust-deep);
+  border-bottom:1px solid rgba(251,234,218,.15);
+  box-shadow:0 20px 34px -22px rgba(46,22,8,.9);
   opacity:0;visibility:hidden;transform:translateY(-8px);
   transition:opacity .25s ease,transform .25s ease,visibility .25s ease;
 }
 .nav.is-open{opacity:1;visibility:visible;transform:none}
 .nav__list{
-  list-style:none;margin:0;padding:.4rem 0 .9rem;
+  list-style:none;margin:0;padding:.4rem 0 1rem;
   width:min(100% - 2.25rem,62rem);margin-inline:auto;
 }
 .nav__list a{
-  display:block;padding:.75rem .25rem;text-decoration:none;
-  font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--muted);border-bottom:1px solid var(--rule);
+  display:block;padding:.85rem .25rem;text-decoration:none;
+  font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(251,234,218,.8);border-bottom:1px solid rgba(251,234,218,.13);
   transition:color .2s ease;
 }
 .nav__list li:last-child a{border-bottom:0}
-.nav__list a:hover{color:var(--rust-dk)}
-.nav__list a.is-current{color:var(--rust-dk);font-weight:500}
-.nav__cta a{color:var(--rust-dk);font-weight:500}
+.nav__list a:hover{color:var(--shell)}
+.nav__list a.is-current{color:#fff;font-weight:500}
+.nav__cta a{color:#fff;font-weight:500}
 
 /* ---- a row of links from tablet up ---- */
 @media (min-width:62rem){
@@ -279,21 +285,24 @@ p:last-child{margin-bottom:0}
   .nav__list{display:flex;align-items:center;gap:.1rem;width:auto;margin:0;padding:0}
   .nav__list a{
     position:relative;border-bottom:0;
-    padding:.5rem .7rem;font-size:.66rem;letter-spacing:.16em;
+    padding:.55rem .72rem;font-size:.74rem;letter-spacing:.15em;
   }
   .nav__list a::after{
-    content:"";position:absolute;left:.7rem;right:.7rem;bottom:.12rem;height:1px;
-    background:var(--rust);transform:scaleX(0);transition:transform .25s ease;
+    content:"";position:absolute;left:.72rem;right:.72rem;bottom:.1rem;height:1px;
+    background:var(--rust-lt);transform:scaleX(0);transition:transform .25s ease;
   }
   .nav__list a:hover::after,.nav__list a.is-current::after{transform:scaleX(1)}
-  .nav__cta{margin-left:.55rem}
-  .nav__cta a{background:var(--rust);color:#fff;border-radius:999px;padding:.55rem 1.2rem}
-  .nav__cta a:hover{background:var(--rust-dk);color:#fff}
+  .nav__cta{margin-left:.6rem}
+  .nav__cta a{
+    background:var(--shell);color:var(--rust-deep);
+    border-radius:999px;padding:.6rem 1.3rem;
+  }
+  .nav__cta a:hover{background:#fff;color:var(--rust-deep)}
   .nav__cta a::after{display:none}
 }
 
 /* stop the sticky header covering a heading when jumping to it */
-section[id],.hero[id]{scroll-margin-top:4.75rem}
+section[id],.hero[id]{scroll-margin-top:5.6rem}
 
 /* =========================================================
    ENVELOPE SPLASH SCREEN  ·  the first thing a guest sees
@@ -320,7 +329,8 @@ section[id],.hero[id]{scroll-margin-top:4.75rem}
    content is taller than a short (or landscape) screen */
 .env-inner{max-width:28rem;width:100%;margin:auto}
 .env-eyebrow{
-  font-size:.66rem;letter-spacing:.26em;text-transform:uppercase;
+  font-size:clamp(.8rem,.72rem + .35vw,.95rem);
+  letter-spacing:.2em;text-transform:uppercase;
   color:var(--muted);margin:0 0 1.75rem;
 }
 
@@ -417,11 +427,13 @@ section[id],.hero[id]{scroll-margin-top:4.75rem}
 }
 .env-names em{font-style:normal;color:var(--rust-mid)}
 .env-date{
-  font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+  font-size:clamp(.95rem,.85rem + .5vw,1.2rem);
+  letter-spacing:.3em;text-transform:uppercase;
   color:var(--muted);margin:0;
 }
 .env-hint{
-  font-size:.64rem;letter-spacing:.28em;text-transform:uppercase;
+  font-size:clamp(.78rem,.7rem + .35vw,.92rem);
+  letter-spacing:.24em;text-transform:uppercase;
   color:var(--rust-dk);margin:0 0 1.6rem;
   animation:envBreathe 2.6s ease-in-out infinite;
 }
@@ -458,9 +470,10 @@ section[id],.hero[id]{scroll-margin-top:4.75rem}
   pointer-events:none;
 }
 .hero__monogram{
-  font-family:var(--serif);font-size:1.15rem;letter-spacing:.3em;
+  display:flex;justify-content:center;
   color:var(--rust);margin:0 0 1.5rem;
 }
+.hero__monogram .logo-ca{height:clamp(3rem,2.4rem + 2vw,4.1rem)}
 .hero__intro{
   font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;
   color:var(--muted);margin:0 0 1.4rem;
@@ -556,6 +569,103 @@ section[id],.hero[id]{scroll-margin-top:4.75rem}
   content:"";position:absolute;inset:0;pointer-events:none;
   box-shadow:inset 0 0 0 1px rgba(122,52,19,.08);
 }
+
+
+/* ---------------------------------------------------------
+   3D PHOTO SPINNER
+   The photos sit on the facets of a ring that turns on its
+   own. Everything here is scoped to .js - without JavaScript
+   the same markup stays a plain grid, so nothing is lost.
+   --------------------------------------------------------- */
+.spinner{margin-top:.4rem}
+.spinner__viewport{position:relative}
+
+.js .spinner__viewport{
+  overflow:hidden;                       /* clip the ring, not the page */
+  padding-block:clamp(.6rem,2.5vw,1.2rem);
+}
+/* the ring dissolves into the section colour instead of being cut off */
+.js .spinner__viewport::before,
+.js .spinner__viewport::after{
+  content:"";position:absolute;top:0;bottom:0;z-index:3;pointer-events:none;
+  width:clamp(1rem,5vw,4rem);
+}
+.js .spinner__viewport::before{
+  left:0;background:linear-gradient(90deg,var(--spin-fade,var(--cream-deep)),transparent);
+}
+.js .spinner__viewport::after{
+  right:0;background:linear-gradient(270deg,var(--spin-fade,var(--cream-deep)),transparent);
+}
+
+.js .spinner__stage{
+  /* [EDIT] --spin-w is how wide the photo at the front is.  */
+  --spin-w:clamp(10rem,52vw,18.5rem);
+  --spin-r:calc(var(--spin-w) * .92);    /* JS refines this to fit */
+  position:relative;height:calc(var(--spin-w) + 1rem);
+  perspective:1150px;perspective-origin:50% 46%;
+  touch-action:pan-y;cursor:grab;
+  user-select:none;-webkit-user-select:none;
+}
+.js .spinner__stage.is-grabbing{cursor:grabbing}
+.js .spinner__stage:focus-visible{
+  outline:2px solid var(--rust-dk);outline-offset:6px;border-radius:var(--radius);
+}
+
+/* the ring keeps its .gallery class, so it is a grid until JS lands */
+.js .spinner__ring{
+  display:block;position:absolute;inset:0;margin:0;
+  transform-style:preserve-3d;
+  transform:translateZ(calc(var(--spin-r) * -1)) rotateY(var(--spin-turn,0deg));
+  transition:transform .8s cubic-bezier(.22,.61,.36,1);
+}
+.js .spinner__stage.is-grabbing .spinner__ring{transition:none}
+
+.js .spinner__ring .g-item{
+  position:absolute;top:50%;left:50%;width:var(--spin-w);
+  margin:calc(var(--spin-w) / -2) 0 0 calc(var(--spin-w) / -2);
+  transform:rotateY(var(--slot,0deg)) translateZ(var(--spin-r));
+  backface-visibility:hidden;
+  box-shadow:0 14px 30px -24px rgba(122,52,19,.7);
+  transition:box-shadow .6s ease;
+}
+.js .spinner__ring .g-item.is-front{box-shadow:0 26px 52px -28px rgba(122,52,19,.9)}
+.js .spinner__ring img{pointer-events:none;-webkit-user-drag:none}
+
+/* every photo but the one at the front rests in shadow */
+.js .spinner__ring .g-item::after{
+  background:rgba(46,22,8,.45);transition:background .6s ease;
+}
+.js .spinner__ring .g-item.is-front::after{background:rgba(46,22,8,0)}
+
+.js .spinner__ring .g-item.is-clickable{cursor:pointer}
+.js .spinner__ring .g-item.is-front.is-clickable{cursor:zoom-in}
+.js .spinner__ring .g-item.is-clickable:hover img{transform:none}
+.js .spinner__ring .g-item.is-front.is-clickable:hover img{transform:scale(1.04)}
+
+/* ---- arrows and dots ---- */
+.spin-controls{display:none}
+.js .spin-controls{
+  display:flex;align-items:center;justify-content:center;
+  gap:clamp(.75rem,3vw,1.25rem);margin-top:1.15rem;
+}
+.spin-btn{
+  width:44px;height:44px;flex:none;display:grid;place-items:center;cursor:pointer;
+  border-radius:50%;border:1px solid var(--rust-lt);
+  background:var(--paper);color:var(--rust-dk);
+  font-family:var(--sans);font-size:1.45rem;line-height:1;
+  transition:background .25s ease,color .25s ease,border-color .25s ease;
+}
+.spin-btn:hover{background:var(--rust);border-color:var(--rust);color:var(--shell)}
+.spin-btn:focus-visible{outline:2px solid var(--rust-dk);outline-offset:3px}
+.spin-dots{display:flex;align-items:center;gap:.55rem}
+.spin-dot{
+  width:10px;height:10px;flex:none;padding:0;cursor:pointer;
+  border-radius:50%;border:1px solid var(--rust-lt);background:transparent;
+  transition:background .3s ease,border-color .3s ease,transform .3s ease;
+}
+.spin-dot:hover{border-color:var(--rust)}
+.spin-dot.is-on{background:var(--rust);border-color:var(--rust);transform:scale(1.25)}
+.spin-dot:focus-visible{outline:2px solid var(--rust-dk);outline-offset:3px}
 
 .video-block{margin-top:clamp(2rem,6vw,3rem)}
 .video-block h3{text-align:center;margin-bottom:1.1rem}
@@ -658,22 +768,10 @@ section[id],.hero[id]{scroll-margin-top:4.75rem}
 /* =========================================================
    10. DRESS CODE
    ========================================================= */
-/* ---- guest attire: photo beside the guidance ---- */
-.guest-attire{display:grid;gap:1.4rem;align-items:center;margin-top:.4rem}
-@media (min-width:40rem){
-  .guest-attire{grid-template-columns:15rem 1fr;gap:2.25rem}
-}
-.guest-attire figure{margin:0}
-.guest-attire img{
-  width:100%;aspect-ratio:3/4;object-fit:cover;
-  border-radius:var(--radius);border:1px solid var(--rust-lt);
-  background:var(--cream-deep);
-  box-shadow:0 16px 34px -26px rgba(122,52,19,.65);
-}
-.guest-attire p{color:var(--muted)}
-.guest-attire strong{color:var(--brown);font-weight:500}
-
-/* ---- entourage attire: one reference photo per role ---- */
+/* ---- attire references ----
+   Entourage roles and guests share one card: reference photo on
+   top, who it is for underneath. One card per row on a phone so
+   the photo is big enough to read, two from small tablets up. */
 .attire-roles__title{text-align:center;margin:2.9rem 0 .4rem}
 .attire-roles__title:first-of-type{margin-top:1.3rem}
 .attire-roles__lede{
@@ -681,30 +779,38 @@ section[id],.hero[id]{scroll-margin-top:4.75rem}
   max-width:30rem;margin:0 auto 1.6rem;
 }
 .attire-roles{
-  display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem 1rem;
+  display:grid;grid-template-columns:1fr;gap:2rem;
 }
-@media (min-width:46rem){
-  .attire-roles{grid-template-columns:repeat(4,1fr);gap:1.25rem}
+@media (min-width:30rem){
+  .attire-roles{grid-template-columns:repeat(2,1fr);gap:1.8rem 1.3rem}
 }
 .role-attire{margin:0;text-align:center}
 .role-attire img{
   width:100%;aspect-ratio:3/4;object-fit:cover;
   border-radius:var(--radius);border:1px solid var(--rust-lt);
   background:var(--cream-deep);
-  box-shadow:0 14px 30px -24px rgba(122,52,19,.7);
+  box-shadow:0 16px 34px -26px rgba(122,52,19,.7);
 }
 .role-attire__name{
-  display:block;margin-top:.7rem;
-  font-family:var(--serif);font-size:1.05rem;line-height:1.25;color:var(--brown);
+  display:block;margin-top:.85rem;
+  font-family:var(--serif);font-size:1.2rem;line-height:1.25;color:var(--brown);
 }
 .role-attire__sub{
-  display:block;margin-top:.2rem;
-  font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rust-dk);
+  display:block;margin-top:.25rem;
+  font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--rust-dk);
 }
 .role-attire__note{
-  display:block;margin-top:.4rem;
-  font-size:.8rem;line-height:1.45;color:var(--muted);
+  display:block;margin-top:.5rem;
+  font-size:.88rem;line-height:1.5;color:var(--muted);
 }
+.role-attire__note strong{color:var(--brown);font-weight:500}
+.role-attire__note + .role-attire__note{margin-top:.7rem}
+
+/* the guests get the same card, on its own and a little wider */
+.attire-roles--guest{
+  grid-template-columns:1fr;max-width:24rem;margin-inline:auto;
+}
+.attire-roles--guest .role-attire__note{font-size:.94rem;text-align:left}
 
 .swatches{
   display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;
@@ -987,7 +1093,12 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
      ========================================================= -->
 <header class="site-header" id="site-header">
   <div class="nav-wrap">
-    <a class="nav-brand" href="#top">C &amp; A<span class="sr-only">, back to top</span></a>
+    <a class="nav-brand" href="#top">
+      <svg class="logo-ca" viewBox="0 0 60 52" aria-hidden="true" focusable="false">
+        <use href="#logo-ca"></use>
+      </svg>
+      <span class="sr-only">Catherine &amp; Archie, back to top</span>
+    </a>
 
     <button class="nav-toggle" id="nav-toggle" type="button"
             aria-expanded="false" aria-controls="nav-menu">
@@ -1050,6 +1161,27 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     <use href="#leaf" x="68" y="10" width="20" height="20" transform="rotate(45 78 20)"/>
   </symbol>
 
+  <!-- ---------------------------------------------------------
+       THE C & A LOGO
+       The two initials with a swash ampersand, over a leaf rule.
+       Everything is currentColor, so the mark takes the colour of
+       whatever it sits in - rust on cream, shell on the dark bar -
+       and it is drawn, not an image, so it stays crisp at any size.
+       Use it anywhere with:
+         <svg class="logo-ca" viewBox="0 0 60 52" aria-hidden="true">
+           <use href="#logo-ca"></use></svg>
+       The <svg> viewBox must match the symbol's, or the symbol is
+       mapped twice and the drawing lands outside its own box.
+       --------------------------------------------------------- -->
+  <symbol id="logo-ca" viewBox="0 0 60 52">
+    <text class="logo-ca__letter" x="15"   y="28"   font-size="34">C</text>
+    <text class="logo-ca__amp"    x="30"   y="24.5" font-size="17">&amp;</text>
+    <text class="logo-ca__letter" x="45.5" y="28"   font-size="34">A</text>
+    <use href="#leaf" x="3.5" y="30.5" width="17" height="17" transform="rotate(-135 12 39)"/>
+    <use href="#leaf" x="40"  y="30.5" width="17" height="17" transform="rotate(45 48.5 39)"/>
+    <path class="logo-ca__rule" d="M21.5 39h17"/>
+  </symbol>
+
   <!-- arcing spray for corners: stem, three leaves, two blooms -->
   <symbol id="corner-spray" viewBox="0 0 100 100">
     <g class="orn">
@@ -1072,7 +1204,12 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     <svg class="orn-corner hero__orn hero__orn--tl" viewBox="0 0 100 100" aria-hidden="true"><use href="#corner-spray"></use></svg>
     <svg class="orn-corner hero__orn hero__orn--br" viewBox="0 0 100 100" aria-hidden="true"><use href="#corner-spray"></use></svg>
 
-    <p class="hero__monogram">C &amp; A</p>
+    <p class="hero__monogram">
+      <svg class="logo-ca" viewBox="0 0 60 52" aria-hidden="true" focusable="false">
+        <use href="#logo-ca"></use>
+      </svg>
+      <span class="sr-only">Catherine &amp; Archie</span>
+    </p>
     <p class="hero__intro">Together with our families</p>
 
     <h1 class="hero__names">
@@ -1143,8 +1280,9 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
      the whole src, e.g.  src="photos/gallery-1.jpg"
      Then update the alt text - it is read aloud by screen
      readers and shown if an image fails to load.
-     Square-ish crops (1:1) look best in this grid. Add or
-     remove <figure> blocks freely; the grid reflows.
+     Square crops (1:1) look best on the ring. Add or remove
+     <figure> blocks freely - the script measures how many
+     there are and spaces the facets to match.
      ========================================================= -->
 <section class="section section--tint" id="gallery" aria-labelledby="gallery-h">
   <div class="wrap">
@@ -1153,42 +1291,61 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       <h2 id="gallery-h">Photos &amp; Video</h2>
       <div class="divider" aria-hidden="true"><svg><use href="#floral-rule"></use></svg></div>
       <p class="lede narrow">A few of our favourites from the years that brought us here.
-        Tap any photo to see it larger.</p>
+        Swipe the ring or use the arrows to turn it &mdash; tap the photo
+        at the front to see it larger.</p>
     </div>
 
-    <div class="gallery reveal" id="gallery-grid">
+    <!-- The photos ride on the facets of a ring that turns by itself.
+         All the 3D lives in CSS scoped to .js, so if scripting is off
+         this is still the plain grid it always was. -->
+    <div class="spinner reveal" id="gallery-spinner">
+      <div class="spinner__viewport">
+        <div class="spinner__stage" id="gallery-stage">
+          <div class="gallery spinner__ring" id="gallery-grid">
 
-      <figure class="g-item"><!-- [EDIT PHOTO 1] -->
-        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%201%3C/text%3E%3C/svg%3E"
-             alt="Chie and Cath on their first trip together." loading="lazy">
-      </figure>
+          <figure class="g-item"><!-- [EDIT PHOTO 1] -->
+            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%201%3C/text%3E%3C/svg%3E"
+                 alt="Chie and Cath on their first trip together." loading="lazy">
+          </figure>
 
-      <figure class="g-item"><!-- [EDIT PHOTO 2] -->
-        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%202%3C/text%3E%3C/svg%3E"
-             alt="A quiet morning at home." loading="lazy">
-      </figure>
+          <figure class="g-item"><!-- [EDIT PHOTO 2] -->
+            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%202%3C/text%3E%3C/svg%3E"
+                 alt="A quiet morning at home." loading="lazy">
+          </figure>
 
-      <figure class="g-item"><!-- [EDIT PHOTO 3] -->
-        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%203%3C/text%3E%3C/svg%3E"
-             alt="The proposal, caught by a friend." loading="lazy">
-      </figure>
+          <figure class="g-item"><!-- [EDIT PHOTO 3] -->
+            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%203%3C/text%3E%3C/svg%3E"
+                 alt="The proposal, caught by a friend." loading="lazy">
+          </figure>
 
-      <figure class="g-item"><!-- [EDIT PHOTO 4] -->
-        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%204%3C/text%3E%3C/svg%3E"
-             alt="Celebrating with family after the engagement." loading="lazy">
-      </figure>
+          <figure class="g-item"><!-- [EDIT PHOTO 4] -->
+            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%204%3C/text%3E%3C/svg%3E"
+                 alt="Celebrating with family after the engagement." loading="lazy">
+          </figure>
 
-      <figure class="g-item"><!-- [EDIT PHOTO 5] -->
-        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%205%3C/text%3E%3C/svg%3E"
-             alt="Prenup session in the Tagaytay highlands." loading="lazy">
-      </figure>
+          <figure class="g-item"><!-- [EDIT PHOTO 5] -->
+            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%205%3C/text%3E%3C/svg%3E"
+                 alt="Prenup session in the Tagaytay highlands." loading="lazy">
+          </figure>
 
-      <figure class="g-item"><!-- [EDIT PHOTO 6] -->
-        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%206%3C/text%3E%3C/svg%3E"
-             alt="Sunset at the reception venue." loading="lazy">
-      </figure>
+          <figure class="g-item"><!-- [EDIT PHOTO 6] -->
+            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%206%3C/text%3E%3C/svg%3E"
+                 alt="Sunset at the reception venue." loading="lazy">
+          </figure>
 
-    </div>
+          </div><!-- /.spinner__ring -->
+        </div><!-- /.spinner__stage -->
+      </div><!-- /.spinner__viewport -->
+
+      <!-- Arrows and dots. The dots are built by the script, one per
+           photo, so adding or removing a <figure> above is enough. -->
+      <div class="spin-controls" id="spin-controls">
+        <button type="button" class="spin-btn" id="spin-prev" aria-label="Previous photo">&#8249;</button>
+        <div class="spin-dots" id="spin-dots" role="tablist" aria-label="Choose a photo"></div>
+        <button type="button" class="spin-btn" id="spin-next" aria-label="Next photo">&#8250;</button>
+      </div>
+      <p class="sr-only" id="spin-live" role="status" aria-live="polite"></p>
+    </div><!-- /.spinner -->
 
     <!-- ---------------------------------------------------
          [EDIT VIDEO]
@@ -1316,7 +1473,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   <div class="wrap">
     <div class="center reveal">
       <p class="eyebrow">Order of the day</p>
-      <h2 id="schedule-h">Schedule</h2>
+      <h2 id="schedule-h">Program Flow</h2>
       <div class="divider" aria-hidden="true"><svg><use href="#floral-rule"></use></svg></div>
     </div>
 
@@ -1339,8 +1496,8 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       </li>
       <li class="tl__item">
         <span class="tl__time">12:00 PM</span>
-        <h3 class="tl__title">Cocktails &amp; Reception Opens</h3>
-        <p class="tl__note">RML Garden Resort and Pavilion</p>
+        <h3 class="tl__title">Grazing Table &amp; Reception Opens</h3>
+        <p class="tl__note">The Events Place by RML - RML Garden Resort and Pavilion</p>
       </li>
       <li class="tl__item">
         <span class="tl__time">12:30 PM</span>
@@ -1353,7 +1510,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         <p class="tl__note">The floor is open &mdash; comfortable shoes encouraged.</p>
       </li>
       <li class="tl__item">
-        <span class="tl__time">3:00 PM</span>
+        <span class="tl__time">2:30 PM</span>
         <h3 class="tl__title">Last Song &amp; Send-off</h3>
         <p class="tl__note">Thank you for celebrating with us.</p>
       </li>
@@ -1378,8 +1535,9 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
            ENTOURAGE ATTIRE
            [EDIT PHOTO] one reference photo per role. Replace each
            src with e.g. src="attire-ninong.jpg" - portrait crops
-           (3:4) fit the frames best. Edit the note under each to
-           match the exact colour you have asked them to wear.
+           (3:4) fit the frames best, and the frames are large, so
+           use a picture at least 600px wide. Edit the note under
+           each to match the colour you have asked them to wear.
            ===================================================== -->
       <h3 class="attire-roles__title">For the Entourage</h3>
       <p class="attire-roles__lede">Our wedding ceremony has its own palette &mdash;
@@ -1427,6 +1585,8 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
 
       <!-- =====================================================
            GUEST ATTIRE
+           Same card as the entourage above: reference photo, then
+           who it is for and what to wear underneath.
            [EDIT PHOTO] replace the src with e.g.
            src="attire-guests.jpg" - a portrait crop (3:4) fits
            the frame best. Delete the whole <figure> if you would
@@ -1434,17 +1594,23 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
            ===================================================== -->
       <h3 class="attire-roles__title">For Our Guests</h3>
 
-      <div class="guest-attire reveal">
-        <figure>
+      <div class="attire-roles attire-roles--guest reveal">
+
+        <figure class="role-attire">
           <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='412'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%3C/text%3E%3C/svg%3E" alt="Attire reference for wedding guests." loading="lazy">
+          <figcaption>
+            <span class="role-attire__name">Our Guests</span>
+            <span class="role-attire__sub">Semi-formal</span><!-- [EDIT] -->
+            <span class="role-attire__note">Please come in <strong>semi-formal attire</strong>
+              in any of the colours below. A long dress, an elegant midi, a Barong
+              Tagalog, or a long-sleeved shirt with dark slacks all sit perfectly
+              within the palette.</span><!-- [EDIT] -->
+            <span class="role-attire__note">There is a little walking between the church
+              and the pavilion, so do choose shoes you can be comfortable in all
+              afternoon.</span>
+          </figcaption>
         </figure>
-        <div>
-          <p>Please come in <strong>semi-formal attire</strong> in any of the colours
-            below. A long dress, an elegant midi, a Barong Tagalog, or a long-sleeved
-            shirt with dark slacks all sit perfectly within the palette.</p>
-          <p>There is a little walking between the church and the pavilion, so do
-            choose shoes you can be comfortable in all afternoon.</p>
-        </div>
+
       </div>
     </div>
   </div>
@@ -1685,6 +1851,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
           <p class="hint" id="hint-guests">Including yourself, and only as many seats as your invitation reserves.</p>
           <p class="error" id="err-guests" role="alert" hidden></p>
         </div>
+      </div><!-- /#yes-only -->
 
       <div class="field">
         <label for="rsvp-message">A message for the couple <span class="hint" style="display:inline">(optional)</span></label>
@@ -1755,7 +1922,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     <div class="divider" aria-hidden="true"><svg><use href="#floral-rule"></use></svg></div>
     <h2>Share your photos with us</h2>
     <!-- [EDIT] hashtag + contact details -->
-    <p class="hashtag">#CathAndChieForever</p>
+    <p class="hashtag">#CatchingArchie</p>
     <p class="footer__contact">
       Questions? Call or message our coordinator,<br>
       Superb Ideas Events Management &middot; <a href="tel:+639171234567">0991 109 4831</a><br>
@@ -1852,8 +2019,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     // name:      "entry.111111111",
     // attending: "entry.222222222",
     // guests:    "entry.333333333",
-    // meal:      "entry.444444444",
-    // message:   "entry.555555555"
+    // message:   "entry.444444444"
   };
 
   var reduceMotion = !!(window.matchMedia &&
@@ -2155,8 +2321,11 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
      8 · GALLERY LIGHTBOX
      Progressive enhancement: if <dialog> is unsupported the
      photos simply stay inline and nothing is clickable.
+     openLightbox stays null in that case, and the spinner
+     below quietly skips the tap-to-enlarge behaviour.
      ========================================================== */
   var lightbox = document.getElementById("lightbox");
+  var openLightbox = null;
 
   if (lightbox && typeof lightbox.showModal === "function") {
     var lbImg    = document.getElementById("lightbox-img");
@@ -2164,7 +2333,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     var lbClose  = document.getElementById("lightbox-close");
     var lastOpener = null;
 
-    function openLightbox(fig) {
+    openLightbox = function (fig) {
       var img = fig.querySelector("img");
       if (!img) { return; }
       lastOpener = fig;
@@ -2172,25 +2341,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       lbImg.alt = img.alt || "";
       lbCap.textContent = img.alt || "";
       lightbox.showModal();
-    }
-
-    document.querySelectorAll("#gallery-grid .g-item").forEach(function (fig) {
-      fig.classList.add("is-clickable");
-      fig.setAttribute("role", "button");
-      fig.setAttribute("tabindex", "0");
-
-      var img = fig.querySelector("img");
-      fig.setAttribute("aria-label",
-        "View larger: " + (img && img.alt ? img.alt : "photo"));
-
-      fig.addEventListener("click", function () { openLightbox(fig); });
-      fig.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          openLightbox(fig);
-        }
-      });
-    });
+    };
 
     lbClose.addEventListener("click", function () { lightbox.close(); });
 
@@ -2203,6 +2354,301 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     lightbox.addEventListener("close", function () {
       lbImg.removeAttribute("src");
       if (lastOpener) { lastOpener.focus(); }
+    });
+  }
+
+  /* ==========================================================
+     8b · GALLERY  ·  the 3D photo spinner
+     ----------------------------------------------------------
+     The photos sit on the facets of a ring. Turning the ring
+     comes down to one number - `turn`, the running angle in
+     degrees - and the CSS does the rest.
+
+     [EDIT] SPIN_REST_MS is how long each photo faces the front
+     before the ring turns itself. Set it to 0 if you would
+     rather it only moved when a guest asks it to.
+     ========================================================== */
+  var SPIN_REST_MS = 4200;
+
+  var spinnerRunning = (function () {
+    var stage = document.getElementById("gallery-stage");
+    var ring  = document.getElementById("gallery-grid");
+    if (!stage || !ring) { return false; }
+
+    var items = Array.prototype.slice.call(ring.querySelectorAll(".g-item"));
+    var count = items.length;
+    if (count < 2) { return false; }
+
+    var box     = document.getElementById("gallery-spinner");
+    var prevBtn = document.getElementById("spin-prev");
+    var nextBtn = document.getElementById("spin-next");
+    var dotWrap = document.getElementById("spin-dots");
+    var live    = document.getElementById("spin-live");
+
+    var step  = 360 / count;  // degrees between neighbouring photos
+    var index = 0;            // which photo is facing the front
+    var turn  = 0;            // running angle; index * step, unwound
+    var timer = null;
+    var dots  = [];
+
+    // the reasons the ring might be standing still
+    var hovering = false, dragging = false, away = false, hidden = false;
+
+    /* ---- lay the photos out around the ring ---- */
+    items.forEach(function (fig, i) {
+      fig.style.setProperty("--slot", (i * step) + "deg");
+      if (openLightbox) {
+        var img = fig.querySelector("img");
+        fig.classList.add("is-clickable");
+        fig.setAttribute("role", "button");
+        fig.setAttribute("aria-label",
+          "View larger: " + (img && img.alt ? img.alt : "photo"));
+      }
+    });
+
+    stage.setAttribute("role", "group");
+    stage.setAttribute("aria-label",
+      "Photo carousel. Use the left and right arrow keys to turn it.");
+    stage.setAttribute("tabindex", "0");
+
+    /* How far each photo sits from the middle of the ring depends on
+       how wide a photo actually is and on how many there are, so it
+       is measured rather than guessed. The 1.06 leaves a little air
+       between neighbours - raise it to push them further out. */
+    function sizeRing() {
+      var w = items[0].offsetWidth;
+      if (!w) { return; }
+      stage.style.setProperty("--spin-r",
+        Math.round((w / 2) / Math.tan(Math.PI / count) * 1.06) + "px");
+    }
+
+    function paint() {
+      ring.style.setProperty("--spin-turn", (-turn) + "deg");
+      items.forEach(function (fig, i) {
+        var front = (i === index);
+        fig.classList.toggle("is-front", front);
+        // only the photo at the front is a tab stop, so the ring costs
+        // a keyboard guest one stop rather than one per photo
+        fig.tabIndex = front ? 0 : -1;
+      });
+      dots.forEach(function (d, i) {
+        var on = (i === index);
+        d.classList.toggle("is-on", on);
+        d.setAttribute("aria-selected", on ? "true" : "false");
+        d.tabIndex = on ? 0 : -1;
+      });
+      if (live) { live.textContent = "Photo " + (index + 1) + " of " + count; }
+    }
+
+    function schedule() {
+      clearTimeout(timer);
+      if (reduceMotion || !SPIN_REST_MS) { return; }
+      if (hovering || dragging || away || hidden) { return; }
+      if (lightbox && lightbox.open) { return; }
+      timer = setTimeout(function () { goTo(index + 1); }, SPIN_REST_MS);
+    }
+
+    /* Always turn the short way round, so the last photo rolls
+       forward into the first instead of winding all the way back. */
+    function goTo(to) {
+      to = ((to % count) + count) % count;
+      var delta = to - index;
+      if (delta >  count / 2) { delta -= count; }
+      if (delta < -count / 2) { delta += count; }
+      index = to;
+      turn += delta * step;
+      paint();
+      schedule();
+    }
+
+    /* ---- arrows ---- */
+    if (prevBtn) { prevBtn.addEventListener("click", function () { goTo(index - 1); }); }
+    if (nextBtn) { nextBtn.addEventListener("click", function () { goTo(index + 1); }); }
+
+    /* ---- one dot per photo ---- */
+    if (dotWrap) {
+      items.forEach(function (fig, i) {
+        var dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "spin-dot";
+        dot.setAttribute("role", "tab");
+        dot.setAttribute("aria-label", "Show photo " + (i + 1) + " of " + count);
+        dot.addEventListener("click", function () { goTo(i); });
+        dotWrap.appendChild(dot);
+        dots.push(dot);
+      });
+
+      dotWrap.addEventListener("keydown", function (e) {
+        var to;
+        if (e.key === "ArrowLeft"  || e.key === "Left")  { to = index - 1; }
+        else if (e.key === "ArrowRight" || e.key === "Right") { to = index + 1; }
+        else if (e.key === "Home") { to = 0; }
+        else if (e.key === "End")  { to = count - 1; }
+        else { return; }
+        e.preventDefault();
+        goTo(to);
+        dots[index].focus();
+      });
+    }
+
+    /* ---- arrow keys turn the ring ---- */
+    stage.addEventListener("keydown", function (e) {
+      var to;
+      if (e.key === "ArrowLeft" || e.key === "Left") { to = index - 1; }
+      else if (e.key === "ArrowRight" || e.key === "Right") { to = index + 1; }
+      else { return; }
+      e.preventDefault();
+      var onPhoto = document.activeElement &&
+                    document.activeElement.classList.contains("g-item");
+      goTo(to);
+      if (onPhoto) { items[index].focus(); }   // keep focus at the front
+    });
+
+    /* ---- tapping a photo ----
+       A tap on the photo already at the front opens it large; a tap
+       on one of the photos to the side just turns it to the front.
+       Which of the two it is has to be settled at pointerdown, since
+       the browser moves focus - and so the ring - before the click. */
+    var swallowClick = false;
+
+    items.forEach(function (fig, i) {
+      var wasAtFront = false;
+
+      fig.addEventListener("pointerdown", function () { wasAtFront = (i === index); });
+
+      fig.addEventListener("click", function () {
+        if (swallowClick) { return; }
+        if (wasAtFront && openLightbox) { openLightbox(fig); } else { goTo(i); }
+      });
+
+      fig.addEventListener("keydown", function (e) {
+        if (e.key !== "Enter" && e.key !== " " && e.key !== "Spacebar") { return; }
+        e.preventDefault();
+        if (i === index && openLightbox) { openLightbox(fig); } else { goTo(i); }
+      });
+
+      // Tabbing onto a photo brings it round to the front.
+      fig.addEventListener("focus", function () {
+        if (i !== index) { goTo(i); }
+      });
+    });
+
+    /* ---- drag or swipe to spin ----
+       touch-action:pan-y on the stage means a vertical swipe still
+       scrolls the page; only sideways movement reaches us. */
+    var drag = null;
+
+    stage.addEventListener("pointerdown", function (e) {
+      if (e.button) { return; }               // right or middle click
+      swallowClick = false;
+      drag = { id: e.pointerId, x: e.clientX, y: e.clientY,
+               from: turn, far: 0, decided: false, sideways: false };
+    });
+
+    stage.addEventListener("pointermove", function (e) {
+      if (!drag || e.pointerId !== drag.id) { return; }
+      var dx = e.clientX - drag.x;
+      var dy = e.clientY - drag.y;
+
+      if (!drag.decided) {
+        if (Math.abs(dx) < 8 && Math.abs(dy) < 8) { return; }
+        drag.decided  = true;
+        drag.sideways = Math.abs(dx) > Math.abs(dy);  // otherwise: a scroll
+        if (drag.sideways) {
+          dragging = true;
+          schedule();
+          stage.classList.add("is-grabbing");
+          if (stage.setPointerCapture) { stage.setPointerCapture(e.pointerId); }
+        }
+      }
+      if (!drag.sideways) { return; }
+
+      drag.far = Math.abs(dx);
+      // dragging one photo's width to the side turns the ring one facet
+      turn = drag.from - dx * (step / (items[0].offsetWidth * 0.9));
+      ring.style.setProperty("--spin-turn", (-turn) + "deg");
+    });
+
+    function releaseDrag(e) {
+      if (!drag || (e && e.pointerId !== drag.id)) { return; }
+      stage.classList.remove("is-grabbing");
+
+      if (drag.sideways) {
+        swallowClick = drag.far > 8;
+        // settle on whichever photo ended up nearest the front
+        var slot = Math.round(turn / step);
+        turn  = slot * step;
+        index = ((slot % count) + count) % count;
+        paint();
+      }
+      drag = null;
+      dragging = false;
+      schedule();
+    }
+
+    stage.addEventListener("pointerup", releaseDrag);
+    stage.addEventListener("pointercancel", releaseDrag);
+
+    /* ---- hold still while someone is looking or tabbing through ----
+       Touch is left out on purpose: a tap fires pointerenter and
+       never a matching pointerleave, which would park the ring for
+       good on a phone. */
+    if (box) {
+      box.addEventListener("pointerenter", function (e) {
+        if (e.pointerType !== "touch") { hovering = true; schedule(); }
+      });
+      box.addEventListener("pointerleave", function (e) {
+        if (e.pointerType !== "touch") { hovering = false; schedule(); }
+      });
+      box.addEventListener("focusin",  function () { hovering = true;  schedule(); });
+      box.addEventListener("focusout", function () { hovering = false; schedule(); });
+    }
+
+    // Nothing to see on a background tab, or before the section has
+    // scrolled into view.
+    document.addEventListener("visibilitychange", function () {
+      hidden = document.hidden;
+      schedule();
+    });
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        away = !entries[0].isIntersecting;
+        schedule();
+      }, { threshold: 0.2 }).observe(stage);
+    }
+
+    /* ---- go ---- */
+    sizeRing();
+    paint();
+    schedule();
+
+    var resizeWait;
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeWait);
+      resizeWait = setTimeout(sizeRing, 150);
+    });
+    window.addEventListener("load", sizeRing);
+
+    return true;
+  }());
+
+  // If the spinner could not start - say the markup was edited back
+  // to a plain grid - the photos still open in the lightbox.
+  if (!spinnerRunning && openLightbox) {
+    document.querySelectorAll("#gallery-grid .g-item").forEach(function (fig) {
+      var img = fig.querySelector("img");
+      fig.classList.add("is-clickable");
+      fig.setAttribute("role", "button");
+      fig.setAttribute("tabindex", "0");
+      fig.setAttribute("aria-label",
+        "View larger: " + (img && img.alt ? img.alt : "photo"));
+      fig.addEventListener("click", function () { openLightbox(fig); });
+      fig.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openLightbox(fig);
+        }
+      });
     });
   }
 
@@ -2280,7 +2726,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   var yesOnly   = document.getElementById("yes-only");
   var nameEl    = document.getElementById("rsvp-name");
   var guestsEl  = document.getElementById("rsvp-guests");
-  var mealEl    = document.getElementById("rsvp-meal");
   var messageEl = document.getElementById("rsvp-message");
   var attendEls = form.querySelectorAll('input[name="attending"]');
 
@@ -2304,21 +2749,19 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   }
 
   function clearAllErrors() {
-    ["err-name", "err-attending", "err-guests", "err-meal", "err-form"].forEach(function (id) {
+    ["err-name", "err-attending", "err-guests", "err-form"].forEach(function (id) {
       clearError(id, null);
     });
-    [nameEl, guestsEl, mealEl].forEach(function (el) { el.removeAttribute("aria-invalid"); });
+    [nameEl, guestsEl].forEach(function (el) { el.removeAttribute("aria-invalid"); });
   }
 
-  // Guest count and meal choice only apply to those attending.
+  // The guest count only applies to those attending. Everything
+  // else - the message and the Send button - stays put either way.
   function syncAttending() {
     var yes = isAttending();
     yesOnly.hidden = !yes;
     clearError("err-attending", null);
-    if (!yes) {
-      clearError("err-guests", guestsEl);
-      clearError("err-meal", mealEl);
-    }
+    if (!yes) { clearError("err-guests", guestsEl); }
   }
 
   attendEls.forEach(function (r) { r.addEventListener("change", syncAttending); });
@@ -2329,9 +2772,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   });
   guestsEl.addEventListener("change", function () {
     if (guestsEl.value) { clearError("err-guests", guestsEl); }
-  });
-  mealEl.addEventListener("change", function () {
-    if (mealEl.value) { clearError("err-meal", mealEl); }
   });
 
   function validate() {
@@ -2351,10 +2791,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         showError("err-guests", guestsEl, "Please choose how many will attend.");
         firstBad = firstBad || guestsEl;
       }
-      if (!mealEl.value) {
-        showError("err-meal", mealEl, "Please choose a meal preference.");
-        firstBad = firstBad || mealEl;
-      }
     }
 
     if (firstBad) {
@@ -2370,7 +2806,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       name:      nameEl.value.trim(),
       attending: attending ? attending.value : "",
       guests:    isAttending() ? guestsEl.value : "0",
-      meal:      isAttending() ? mealEl.value : "",
       message:   messageEl.value.trim()
     };
   }
