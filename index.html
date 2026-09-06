@@ -47,15 +47,19 @@
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Crect%20width='64'%20height='64'%20fill='%23C1571F'/%3E%3Ctext%20x='32'%20y='43'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23FDF3E8'%20text-anchor='middle'%3EC%26amp;C%3C/text%3E%3C/svg%3E">
 
 <!-- ---------- Display fonts ----------
-     The ONE external request this page makes. Great Vibes is the
-     curvy wedding script used for Archie & Catherine's names;
-     Cormorant Garamond and Jost are the serif and sans used
-     everywhere else. If it fails to load, the fallback stacks in
-     the CSS keep the page readable (the script falls back to
-     Snell Roundhand on Mac, Segoe Script on Windows).
-     To go fully self-contained, delete these two lines. -->
+     The ONE external request this page makes. Parisienne is the
+     wedding script - it sets the names, the monogram, the wax
+     seal and the signature; Cormorant Garamond and Jost are the
+     serif and sans used everywhere else. If it fails to load,
+     the fallback stacks in the CSS keep the page readable (the
+     script falls back to Snell Roundhand on Mac, Segoe Script
+     on Windows).
+     [EDIT] To try another wedding script, change the family name
+     in BOTH places: the link below and --script in the tokens.
+     Good alternatives: Allura, Pinyon+Script, Alex+Brush,
+     Tangerine, Dancing+Script. -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Great+Vibes&family=Jost:wght@300;400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Parisienne&family=Jost:wght@300;400;500&display=swap">
 
 <style>
 /* =========================================================
@@ -89,7 +93,7 @@
   /* type */
   --serif: "Cormorant Garamond","Playfair Display",Georgia,"Iowan Old Style","Times New Roman",serif;
   --sans:  "Jost","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  --script: "Great Vibes","Snell Roundhand","Segoe Script","Brush Script MT","Lucida Handwriting",cursive;
+  --script: "Parisienne","Snell Roundhand","Segoe Script","Brush Script MT","Lucida Handwriting",cursive;
 
   /* spacing */
   --gap: clamp(3.25rem, 9vw, 6.5rem);
@@ -373,7 +377,13 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
     radial-gradient(circle at 71% 78%, rgba(168,72,26,.38)   0%, rgba(168,72,26,0)   58%),
     linear-gradient(150deg, #FDF4EA 0%, #F4E2CB 46%, #DDBB92 100%);
   color:var(--rust-deep);
-  font-family:var(--script);font-size:clamp(1.35rem,6.2vw,1.85rem);line-height:1;letter-spacing:0;
+  font-family:var(--script);line-height:1;letter-spacing:0;white-space:nowrap;
+  /* Sized off the SAME measure as the envelope, not the viewport:
+     the seal is 19% of the envelope, so a vw-based size drifts out
+     of proportion once the envelope caps at 25rem. At 5.6% of the
+     envelope the monogram fills about three quarters of the ring
+     at every screen size. */
+  font-size:calc(min(86vw,25rem) * .056);
   /* initials pressed into the wax rather than sitting on it */
   text-shadow:0 1px 1px rgba(255,255,255,.95),0 -1px 1px rgba(122,52,19,.4);
   box-shadow:
@@ -434,29 +444,47 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 }
 /* The one on top of the stack is drawn out first, then the two
    beneath it fan left and right - and each leans out as it rises.
+   The lift is set so roughly a quarter of each photograph is still
+   behind the pocket at full height: enough occlusion to read as
+   coming OUT of the envelope, little enough that you see the face.
    These are the phone-sized spreads; the fan opens wider below. */
 .is-opening .env-photos img:nth-child(2){
-  transform:translate(-50%,-46%) rotate(0deg) rotateX(-7deg) scale(1.02);
+  transform:translate(-50%,-68%) rotate(0deg) rotateX(-8deg) scale(1.08);
   transition-delay:.5s;
 }
 .is-opening .env-photos img:nth-child(1){
-  transform:translate(-100%,-34%) rotate(-11deg) rotateX(-6deg) scale(.96);
+  transform:translate(-112%,-58%) rotate(-13deg) rotateX(-7deg) scale(1);
   transition-delay:.72s;
 }
 .is-opening .env-photos img:nth-child(3){
-  transform:translate(0%,-34%) rotate(11deg) rotateX(-6deg) scale(.96);
+  transform:translate(12%,-58%) rotate(13deg) rotateX(-7deg) scale(1);
   transition-delay:.94s;
 }
 /* room for a wider fan once the screen can take it */
 @media (min-width:34rem){
   .is-opening .env-photos img:nth-child(2){
-    transform:translate(-50%,-54%) rotate(0deg) rotateX(-7deg) scale(1.04);
+    transform:translate(-50%,-76%) rotate(0deg) rotateX(-8deg) scale(1.12);
   }
   .is-opening .env-photos img:nth-child(1){
-    transform:translate(-116%,-40%) rotate(-14deg) rotateX(-6deg) scale(.98);
+    transform:translate(-126%,-64%) rotate(-15deg) rotateX(-7deg) scale(1.04);
   }
   .is-opening .env-photos img:nth-child(3){
-    transform:translate(16%,-40%) rotate(14deg) rotateX(-6deg) scale(.98);
+    transform:translate(26%,-64%) rotate(15deg) rotateX(-7deg) scale(1.04);
+  }
+}
+/* Wide but short - a landscape phone, or a small laptop window. The
+   splash is already close to scrolling there, and the screen clips
+   its overflow, so hold the lift back to keep the top photograph
+   inside the frame rather than cropping its head off. */
+@media (min-width:34rem) and (max-height:41rem){
+  .is-opening .env-photos img:nth-child(2){
+    transform:translate(-50%,-54%) rotate(0deg) rotateX(-7deg) scale(1.02);
+  }
+  .is-opening .env-photos img:nth-child(1){
+    transform:translate(-114%,-46%) rotate(-13deg) rotateX(-6deg) scale(.96);
+  }
+  .is-opening .env-photos img:nth-child(3){
+    transform:translate(14%,-46%) rotate(13deg) rotateX(-6deg) scale(.96);
   }
 }
 
@@ -774,13 +802,18 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   box-shadow:0 18px 40px -28px rgba(122,52,19,.65);
   aspect-ratio:4/5;object-fit:cover;background:var(--cream-deep);
 }
+/* Upright rather than italic: only the 400 italic of Cormorant is
+   loaded, and its fine calligraphic strokes thin out badly at caption
+   size. Upright lets us use the 500 weight, and the warmer brown
+   lifts the contrast from 5.9:1 to 7.5:1 without shouting. */
 .photo figcaption{
-  font-family:var(--serif);font-style:italic;font-size:.95rem;
-  color:var(--muted);text-align:center;margin-top:.75rem;
+  font-family:var(--serif);font-weight:500;
+  font-size:1.08rem;letter-spacing:.02em;
+  color:var(--brown);text-align:center;margin-top:.85rem;
 }
 .signature{
-  font-family:var(--script);font-style:normal;font-size:1.95rem;
-  line-height:1.3;color:var(--rust-dk);margin-top:1.5rem;
+  font-family:var(--script);font-style:normal;font-size:1.35rem;
+  line-height:1.35;color:var(--rust-dk);margin-top:1.4rem;
 }
 
 /* =========================================================
@@ -1337,6 +1370,12 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   color:rgba(239,220,201,.75);border-top:1px solid rgba(251,234,218,.2);
   padding-top:1.5rem;margin:0;
 }
+/* the maker credit: the quietest line on the page */
+.footer__by{
+  font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(239,220,201,.5);margin:.95rem 0 0;
+}
+.footer__by strong{color:rgba(239,220,201,.82);font-weight:500}
 
 /* =========================================================
    BACKGROUND MUSIC TOGGLE  ·  floating, always reachable
@@ -1463,7 +1502,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         <li><a href="#gallery">Gallery</a></li>
         <li><a href="#details">Details</a></li>
         <li><a href="#schedule">Schedule</a></li>
-        <li><a href="#dresscode">Attire</a></li>
+        <li><a href="#dresscode">Dress Code</a></li>
         <li><a href="#entourage">Entourage</a></li>
         <li><a href="#gifts">Gifts</a></li>
         <li><a href="#savedate">Save the Date</a></li>
@@ -2013,81 +2052,44 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
 
     <div class="narrow" style="max-width:44rem">
       <!-- =====================================================
-           ENTOURAGE ATTIRE
-           [EDIT PHOTO] one reference photo per role. Replace each
-           src with e.g. src="attire-ninong.jpg" - portrait crops
-           (3:4) fit the frames best, and the frames are large, so
-           use a picture at least 600px wide. Edit the note under
-           each to match the colour you have asked them to wear.
+           DRESS CODE
+           Two reference pictures - ladies and gentlemen - then a
+           short note on what not to wear.
+           [EDIT PHOTO] replace each src with e.g.
+           src="attire-ladies.jpg" - portrait crops (3:4) fit the
+           frames best, and the frames are large, so use pictures
+           at least 600px wide.
+           [EDIT] reword the notes and the avoid line to suit.
            ===================================================== -->
-      <h3 class="attire-roles__title">For the Entourage</h3>
-      <p class="attire-roles__lede">Our wedding ceremony has its own palette &mdash;
-        please follow the reference for your role.</p>
+      <p class="attire-roles__lede">Semi-formal, please, in the warm earth
+        tones of our palette.</p>
 
       <div class="attire-roles reveal">
 
         <figure class="role-attire">
-          <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='412'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%3C/text%3E%3C/svg%3E" alt="Attire reference for the male principal sponsors." loading="lazy">
+          <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='412'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3ELADIES%3C/text%3E%3C/svg%3E" alt="Dress code reference for ladies." loading="lazy">
           <figcaption>
-            <span class="role-attire__name">Principal Sponsors</span>
-            <span class="role-attire__sub">Male</span>
-            <span class="role-attire__note">Beige Barong Tagalog with Black Slacks</span><!-- [EDIT] -->
-          </figcaption>
-        </figure>
-
-        <figure class="role-attire">
-          <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='412'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%3C/text%3E%3C/svg%3E" alt="Attire reference for the female principal sponsors." loading="lazy">
-          <figcaption>
-            <span class="role-attire__name">Principal Sponsors</span>
-            <span class="role-attire__sub">Female</span>
-            <span class="role-attire__note">Long dress in Khaki/Beige</span><!-- [EDIT] -->
-          </figcaption>
-        </figure>
-
-        <figure class="role-attire">
-          <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='412'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%3C/text%3E%3C/svg%3E" alt="Attire reference for the groomsmen." loading="lazy">
-          <figcaption>
-            <span class="role-attire__name">Groomsmen</span>
-            <span class="role-attire__sub">Male</span>
-            <span class="role-attire__note">Terracotta Barong with black slacks</span><!-- [EDIT] -->
-          </figcaption>
-        </figure>
-
-        <figure class="role-attire">
-          <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='412'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%3C/text%3E%3C/svg%3E" alt="Attire reference for the bridesmaids." loading="lazy">
-          <figcaption>
-            <span class="role-attire__name">Bridesmaids</span>
-            <span class="role-attire__sub">Female</span>
-            <span class="role-attire__note">Long dress in burnt orange</span><!-- [EDIT] -->
-          </figcaption>
-        </figure>
-
-      </div>
-
-      <!-- =====================================================
-           GUEST ATTIRE
-           Same card as the entourage above: reference photo, then
-           who it is for and what to wear underneath.
-           [EDIT PHOTO] replace the src with e.g.
-           src="attire-guests.jpg" - a portrait crop (3:4) fits
-           the frame best. Delete the whole <figure> if you would
-           rather show no photo here.
-           ===================================================== -->
-      <h3 class="attire-roles__title">For Our Guests</h3>
-
-      <div class="attire-roles attire-roles--guest reveal">
-
-        <figure class="role-attire">
-          <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='412'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%3C/text%3E%3C/svg%3E" alt="Attire reference for wedding guests." loading="lazy">
-          <figcaption>
-            <span class="role-attire__name">Our Guests</span>
+            <span class="role-attire__name">Ladies</span>
             <span class="role-attire__sub">Semi-formal</span><!-- [EDIT] -->
-            <span class="role-attire__note">Long dress, elegant midi, Barong Tagalog,
-              or a long-sleeved shirt with dark slacks</span><!-- [EDIT] -->
+            <span class="role-attire__note">A long dress or an elegant midi.</span><!-- [EDIT] -->
+          </figcaption>
+        </figure>
+
+        <figure class="role-attire">
+          <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='412'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EGENTLEMEN%3C/text%3E%3C/svg%3E" alt="Dress code reference for gentlemen." loading="lazy">
+          <figcaption>
+            <span class="role-attire__name">Gentlemen</span>
+            <span class="role-attire__sub">Semi-formal</span><!-- [EDIT] -->
+            <span class="role-attire__note">Barong Tagalog, or a long-sleeved
+              shirt with dark slacks.</span><!-- [EDIT] -->
           </figcaption>
         </figure>
 
       </div>
+
+      <!-- [EDIT] what you would rather guests did not wear -->
+      <p class="avoid"><strong>Kindly avoid</strong> white, ivory and cream &mdash; these
+        are kept for the bride &mdash; and denim, shorts, slippers or casual sneakers.</p>
     </div>
   </div>
 </section>
@@ -2118,7 +2120,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       <div>
         <h3 class="role">Parents of the Groom</h3>
         <ul class="names">
-          <li>Mr. Joel S. Menisis</li>
+          <li>Mr. Jose Enrico G. Nieva</li>
           <li>Mrs. Alona V. Almojuela</li>
         </ul>
       </div>
@@ -2136,6 +2138,26 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
           <li>Ninong Name Four</li>
           <li>Ninang Name Five</li>
           <li>Ninong Name Five</li>
+          <li>Ninang Name Six</li>
+          <li>Ninong Name Six</li>
+          <li>Ninang Name Seven</li>
+          <li>Ninong Name Seven</li>
+          <li>Ninang Name Eight</li>
+          <li>Ninong Name Eight</li>
+          <li>Ninang Name Nine</li>
+          <li>Ninong Name Nine</li>
+          <li>Ninang Name Ten</li>
+          <li>Ninong Name Ten</li>
+          <li>Ninang Name Eleven</li>
+          <li>Ninong Name Eleven</li>
+          <li>Ninang Name Twelve</li>
+          <li>Ninong Name Twelve</li>
+          <li>Ninang Name Thirteen</li>
+          <li>Ninong Name Thirteen</li>
+          <li>Ninang Name Fourteen</li>
+          <li>Ninong Name Fourteen</li>
+          <li>Ninang Name Fifteen</li>
+          <li>Ninong Name Fifteen</li>
         </ul>
       </div>
 
@@ -2235,7 +2257,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       <p class="verse">Your presence at our wedding is the greatest gift of all.</p>
       <p>Truly, having you with us as we say our vows is more than enough. But should you
         wish to honour us with something more, a monetary gift towards our first home
-        would be warmly and gratefully received. Please do not feel any obligation &mdash; simply come, eat well, and celebrate with us.</p>
+        would be warmly and gratefully received.</p>
 
       <!-- =====================================================
            [EDIT QR] Monetary gift QR codes - one tile per bank.
@@ -2350,7 +2372,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       <div class="field">
         <label for="rsvp-message">A message for the couple <span class="hint" style="display:inline">(optional)</span></label>
         <textarea class="textarea" id="rsvp-message" name="message"
-                  placeholder="Well wishes, song requests, dietary notes, allergies&hellip;"></textarea>
+                  placeholder="Leave a note for Chie & Cath&hellip;"></textarea>
       </div>
 
       <div class="form__actions">
@@ -2391,7 +2413,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         <p class="std__monthyear">October 2026</p>
       </div>
 
-      <p class="std__where">Lipa City, Batangas</p><!-- [EDIT] -->
+      <p class="std__where">Santo Tomas-Lipa Rd, Talisay, Lipa City, Batangas</p><!-- [EDIT] -->
       <p class="std__note">We would be honoured to have you with us. Add the day to your
         calendar now, and we will send any final details closer to the time.</p>
 
@@ -2434,6 +2456,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       Thank you for being part of our story. We cannot wait to celebrate this day with you.
     </p>
     <p class="footer__fine">Chie &amp; Cath &middot; 16 October 2026 &middot; Lipa City</p>
+    <p class="footer__by">Powered by <strong>Invites</strong></p>
   </div>
 </footer>
 
