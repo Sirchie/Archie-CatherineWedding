@@ -18,7 +18,7 @@
           [EDIT PHOTO] and [EDIT VIDEO] notes there.
      ============================================================ -->
 
-<title>Catherine &amp; Archie · Wedding Invitation</title>
+<title>Archie &amp; Catherine · Wedding Invitation</title>
 <meta name="description" content="Together with our families, we joyfully invite you to celebrate our wedding on 16 October 2026 in Tagaytay City."><!-- [EDIT] -->
 <meta name="theme-color" content="#C1571F">
 <meta name="color-scheme" content="light">
@@ -28,17 +28,17 @@
      site is uploaded, otherwise no preview thumbnail will appear.
      Recommended image size: 1200 x 630 px, under 1 MB. -->
 <meta property="og:type"        content="Website">
-<meta property="og:site_name"   content="Catherine &amp; Archie Wedding">
-<meta property="og:title"       content="Catherine &amp; Archie · 16 October 2026">
+<meta property="og:site_name"   content="Archie &amp; Catherine Wedding">
+<meta property="og:title"       content="Archie &amp; Catherine · 16 October 2026">
 <meta property="og:description" content="Together with our families, we joyfully invite you to celebrate our wedding day. Tap to view the invitation and RSVP.">
 <meta property="og:url"         content="https://example.com/">
 <meta property="og:image"       content="https://example.com/preview.jpg">
 <meta property="og:image:width"  content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt"   content="Catherine and Archie wedding invitation">
+<meta property="og:image:alt"   content="Archie and Catherine wedding invitation">
 <meta property="og:locale"      content="en_PH">
 <meta name="twitter:card"       content="summary_large_image">
-<meta name="twitter:title"      content="Catherine &amp; Archie · 16 October 2026">
+<meta name="twitter:title"      content="Archie &amp; Catherine · 16 October 2026">
 <meta name="twitter:description" content="Together with our families, we joyfully invite you to celebrate our wedding day.">
 <meta name="twitter:image"      content="https://example.com/preview.jpg">
 
@@ -48,7 +48,7 @@
 
 <!-- ---------- Display fonts ----------
      The ONE external request this page makes. Great Vibes is the
-     curvy wedding script used for Catherine & Archie's names;
+     curvy wedding script used for Archie & Catherine's names;
      Cormorant Garamond and Jost are the serif and sans used
      everywhere else. If it fails to load, the fallback stacks in
      the CSS keep the page readable (the script falls back to
@@ -165,12 +165,13 @@ p:last-child{margin-bottom:0}
 /* ---- floral corner ornaments ---- */
 .orn-corner{position:absolute;pointer-events:none;color:var(--rust);aspect-ratio:1;height:auto}
 
-/* ---- the C & A logo ---- */
-.logo-ca{display:block;height:2.8rem;width:auto;aspect-ratio:60/52}
-.logo-ca__letter,
-.logo-ca__amp{font-family:var(--serif);font-weight:400;fill:currentColor;text-anchor:middle}
-.logo-ca__amp{font-style:italic}
-.logo-ca__rule{fill:none;stroke:currentColor;stroke-width:1;opacity:.75}
+/* ---- the A & C logo ---- */
+.logo-ac{display:block;height:2.8rem;width:auto;aspect-ratio:96/60}
+.logo-ac__word{
+  font-family:var(--script);font-weight:400;
+  fill:currentColor;text-anchor:middle;
+}
+.logo-ac__rule{fill:none;stroke:currentColor;stroke-width:1;opacity:.75}
 .hero__orn{width:clamp(4.25rem,13vw,6.5rem);opacity:.4}
 .hero__orn--tl{top:.55rem;left:.55rem}
 .hero__orn--br{bottom:.55rem;right:.55rem;transform:rotate(180deg)}
@@ -335,90 +336,146 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 }
 
 /* ---- the envelope ---- */
-/* the envelope is the button that opens the invitation */
+/* purely a picture now - the slide control below opens it */
 .envelope{
   position:relative;display:block;
-  width:min(86vw,25rem);aspect-ratio:7/5;
-  margin:0 auto 1.05rem;perspective:1100px;
-  background:none;border:0;padding:0;cursor:pointer;overflow:visible;
-  -webkit-tap-highlight-color:transparent;
-  transition:transform .3s ease;
+  width:min(86vw,25rem);aspect-ratio:7/5.9;
+  margin:0 auto 2rem;perspective:1100px;
+  overflow:visible;
 }
-.envelope:hover{transform:translateY(-4px)}
-.envelope:active{transform:translateY(-1px)}
-.envelope:focus-visible{outline:2px solid var(--rust-dk);outline-offset:12px;border-radius:5px}
-.is-opening .envelope{cursor:default;transform:none}
 .env-body{
-  position:absolute;inset:0;border-radius:4px;
-  background:linear-gradient(158deg,var(--paper) 0%,var(--rust-pale) 100%);
-  border:1px solid var(--rust-lt);
-  box-shadow:0 20px 42px -26px rgba(122,52,19,.65);
+  position:absolute;inset:0;z-index:1;border-radius:4px;
+  /* the back panel, and the inside once the flap lifts: a shade under
+     the flap, so the corners beside it read as folded side flaps */
+  background:linear-gradient(158deg,#C25C20 0%,#93401A 100%);
+  border:1px solid rgba(251,234,218,.22);
+  box-shadow:0 22px 46px -26px rgba(46,22,8,.85);
 }
 .env-flap{
-  position:absolute;top:0;left:0;right:0;height:66%;
-  background:linear-gradient(180deg,var(--cream-deep) 0%,var(--rust-pale) 100%);
+  position:absolute;top:0;left:0;right:0;height:66%;z-index:4;
+  background:linear-gradient(180deg,#DA7223 0%,#C1571F 100%);
   clip-path:polygon(0 0,100% 0,50% 100%);
-  filter:drop-shadow(0 1px 0 var(--rust-lt));
+  filter:drop-shadow(0 1px 0 rgba(251,234,218,.3));
   transform-origin:top center;
   transition:transform .75s cubic-bezier(.55,.06,.32,1);
 }
-.is-opening .env-flap{transform:rotateX(170deg)}
-/* wax seal: poured burnt orange, pressed while still soft */
+.is-opening .env-flap{transform:rotateX(170deg);z-index:2}
+/* wax seal: poured ivory, pressed while still soft. It is the pale
+   note against the rust envelope, so it stays the thing you look at. */
 .env-seal{
-  position:absolute;left:50%;top:66%;transform:translate(-50%,-50%);
-  width:5.6rem;height:5.6rem;
+  position:absolute;left:50%;top:66%;z-index:5;transform:translate(-50%,-50%);
+  width:19%;height:auto;aspect-ratio:1;
   display:grid;place-items:center;
   /* an uneven rim, the way real wax spreads */
   border-radius:47% 53% 51% 49% / 52% 47% 53% 48%;
   background:
-    radial-gradient(circle at 33% 26%, rgba(246,175,116,.62) 0%, rgba(246,175,116,0) 46%),
-    radial-gradient(circle at 71% 78%, rgba(84,32,9,.55)   0%, rgba(84,32,9,0)   56%),
-    linear-gradient(150deg, #D2691E 0%, #C1571F 46%, #8C3D14 100%);
-  color:#FCE9D6;
-  font-family:var(--serif);font-size:1.4rem;letter-spacing:.1em;
+    radial-gradient(circle at 33% 26%, rgba(255,255,255,.85) 0%, rgba(255,255,255,0) 48%),
+    radial-gradient(circle at 71% 78%, rgba(168,72,26,.38)   0%, rgba(168,72,26,0)   58%),
+    linear-gradient(150deg, #FDF4EA 0%, #F4E2CB 46%, #DDBB92 100%);
+  color:var(--rust-deep);
+  font-family:var(--script);font-size:clamp(1.35rem,6.2vw,1.85rem);line-height:1;letter-spacing:0;
   /* initials pressed into the wax rather than sitting on it */
-  text-shadow:0 1px 1px rgba(74,28,8,.9),0 -1px 0 rgba(255,203,163,.3);
+  text-shadow:0 1px 1px rgba(255,255,255,.95),0 -1px 1px rgba(122,52,19,.4);
   box-shadow:
-    inset 0 2px 5px rgba(255,199,153,.45),
-    inset 0 -4px 8px rgba(88,34,11,.6),
-    0 7px 16px -6px rgba(74,28,8,.8);
+    inset 0 2px 5px rgba(255,255,255,.9),
+    inset 0 -4px 8px rgba(168,72,26,.35),
+    0 8px 18px -6px rgba(46,22,8,.75);
   transition:opacity .4s ease .1s;
 }
 /* the ring the stamp leaves behind */
 .env-seal::before{
   content:"";position:absolute;inset:9%;
-  border:1px solid rgba(255,214,178,.38);
+  border:1px solid rgba(122,52,19,.26);
   border-radius:inherit;pointer-events:none;
 }
 .is-opening .env-seal{opacity:0}
 
-/* ---- the three photographs that fan out on opening ---- */
+/* ---- the three photographs that slide out on opening ----
+   Layer order inside the envelope, back to front:
+     .env-body (1) - .env-flap (4, drops to 2 once open) -
+     .env-photos (3) - .env-front (4) - .env-seal (5)
+   The photographs sit BETWEEN the back of the envelope and its front
+   panel, so at rest they are genuinely inside it, and as they rise
+   their lower halves stay tucked behind the pocket the whole way up.
+   That occlusion is what sells it - without it they just float. */
 .env-photos{
-  position:absolute;inset:0;z-index:5;pointer-events:none;display:block;
+  position:absolute;inset:0;z-index:3;pointer-events:none;display:block;
+  /* its own perspective, so the photographs can lean out towards the
+     guest as they clear the pocket - the button's perspective only
+     reaches its direct children */
+  perspective:900px;
 }
 .env-photos img{
-  position:absolute;left:50%;bottom:16%;
-  width:34%;aspect-ratio:3/4;object-fit:cover;
+  position:absolute;left:50%;bottom:2%;
+  width:44%;aspect-ratio:3/4;object-fit:cover;   /* [EDIT] photo size */
   background:var(--cream-deep);
-  border:4px solid #FFFDF8;border-radius:2px;
-  box-shadow:0 12px 26px -10px rgba(74,28,8,.7);
+  border:5px solid #FFFDF8;border-radius:2px;
+  box-shadow:0 8px 16px -12px rgba(74,28,8,.5);
   opacity:0;
-  transform:translate(-50%,26%) scale(.5);
-  transition:transform 1s cubic-bezier(.2,.75,.3,1),opacity .55s ease;
+  /* they pivot on their bottom edge, so they rise and fan out of the
+     slot rather than sliding around as whole rectangles */
+  transform-origin:50% 100%;
+  /* at rest: standing on the floor of the envelope and just short
+     enough to sit under the lip of the pocket */
+  transform:translate(-50%,0) rotate(0deg) scale(.74);
+  transition:
+    transform 1.35s cubic-bezier(.17,.68,.26,1),
+    box-shadow 1.35s ease,
+    opacity .28s ease;
 }
+/* loosely stacked inside, the way photographs actually sit */
+.env-photos img:nth-child(1){transform:translate(-50%,0) rotate(-2.5deg) scale(.74)}
+.env-photos img:nth-child(3){transform:translate(-50%,0) rotate(2.5deg)  scale(.74)}
 .env-photos img:nth-child(2){z-index:2}
-.is-opening .env-photos img{opacity:1}
-.is-opening .env-photos img:nth-child(1){
-  transform:translate(-135%,-40%) rotate(-13deg);
+.is-opening .env-photos img{
+  opacity:1;
+  /* the shadow deepens as each one clears the envelope */
+  box-shadow:0 26px 42px -16px rgba(74,28,8,.78);
+}
+/* The one on top of the stack is drawn out first, then the two
+   beneath it fan left and right - and each leans out as it rises.
+   These are the phone-sized spreads; the fan opens wider below. */
+.is-opening .env-photos img:nth-child(2){
+  transform:translate(-50%,-46%) rotate(0deg) rotateX(-7deg) scale(1.02);
   transition-delay:.5s;
 }
-.is-opening .env-photos img:nth-child(2){
-  transform:translate(-50%,-52%) scale(1.04);
-  transition-delay:.68s;
+.is-opening .env-photos img:nth-child(1){
+  transform:translate(-100%,-34%) rotate(-11deg) rotateX(-6deg) scale(.96);
+  transition-delay:.72s;
 }
 .is-opening .env-photos img:nth-child(3){
-  transform:translate(35%,-40%) rotate(13deg);
-  transition-delay:.86s;
+  transform:translate(0%,-34%) rotate(11deg) rotateX(-6deg) scale(.96);
+  transition-delay:.94s;
+}
+/* room for a wider fan once the screen can take it */
+@media (min-width:34rem){
+  .is-opening .env-photos img:nth-child(2){
+    transform:translate(-50%,-54%) rotate(0deg) rotateX(-7deg) scale(1.04);
+  }
+  .is-opening .env-photos img:nth-child(1){
+    transform:translate(-116%,-40%) rotate(-14deg) rotateX(-6deg) scale(.98);
+  }
+  .is-opening .env-photos img:nth-child(3){
+    transform:translate(16%,-40%) rotate(14deg) rotateX(-6deg) scale(.98);
+  }
+}
+
+/* ---- the envelope's front pocket ----
+   The panel the photographs slide out from. Its pointed top edge is
+   the bottom flap folded up; the main flap's tip overlaps it, the way
+   a real envelope closes. */
+.env-front{
+  position:absolute;left:0;right:0;bottom:0;height:66%;z-index:4;
+  background:linear-gradient(168deg,#CF6522 0%,#BC5320 62%,#A2441A 100%);
+  border-radius:0 0 4px 4px;
+  clip-path:polygon(0 8%,50% 0,100% 8%,100% 100%,0 100%);
+  filter:drop-shadow(0 -4px 8px rgba(46,22,8,.45));
+}
+/* the seam along the folded edge, so the panel reads as a separate flap */
+.env-front::before{
+  content:"";position:absolute;left:0;right:0;top:0;height:11%;
+  background:linear-gradient(180deg,rgba(46,22,8,.32),transparent);
+  clip-path:polygon(0 92%,50% 0,100% 92%,100% 100%,50% 8%,0 100%);
 }
 
 .env-names{
@@ -431,14 +488,93 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   letter-spacing:.3em;text-transform:uppercase;
   color:var(--muted);margin:0;
 }
-.env-hint{
-  font-size:clamp(.78rem,.7rem + .35vw,.92rem);
-  letter-spacing:.24em;text-transform:uppercase;
-  color:var(--rust-dk);margin:0 0 1.6rem;
-  animation:envBreathe 2.6s ease-in-out infinite;
+/* ---- slide to open ----
+   Drag-to-confirm rather than a tap, so the invitation only opens on
+   a deliberate gesture. The thumb starts at the left and is pulled
+   right; let go before the end and it springs back. JS writes two
+   custom properties as it moves: --x, the thumb offset in px, and
+   --p, the same thing as 0-1 for the fade. */
+.slide-open{
+  --thumb:2.75rem;
+  width:min(86vw,21rem);margin:0 auto 1.6rem;
+  transition:opacity .3s ease;
 }
-@keyframes envBreathe{0%,100%{opacity:.7}50%{opacity:1}}
-.is-opening .env-hint{opacity:0;animation:none;transition:opacity .3s ease}
+.slide-open__track{
+  position:relative;display:flex;align-items:center;
+  height:calc(var(--thumb) + .55rem);padding:.275rem;
+  border-radius:999px;overflow:hidden;
+  background:var(--paper);
+  border:1px solid var(--rust-lt);
+  box-shadow:inset 0 2px 6px rgba(122,52,19,.13);
+}
+/* the trail the thumb leaves behind it */
+.slide-open__fill{
+  position:absolute;left:0;top:0;bottom:0;pointer-events:none;
+  width:calc(var(--x,0px) + var(--thumb) + .55rem);
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--rust-pale),var(--rust-lt));
+  opacity:.8;
+}
+.slide-open__label{
+  position:absolute;left:calc(var(--thumb) + .9rem);right:1rem;
+  text-align:center;pointer-events:none;
+  font-size:clamp(.7rem,.64rem + .3vw,.82rem);
+  letter-spacing:.22em;text-transform:uppercase;
+  color:var(--rust-dk);
+  /* fades out as the thumb travels; the nudge only moves it, so the
+     two never fight over opacity */
+  opacity:calc(1 - var(--p,0) * 1.7);
+}
+.slide-open__label span{
+  display:inline-block;
+  animation:slideNudge 2.4s ease-in-out infinite;
+}
+@keyframes slideNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+
+.slide-open__thumb{
+  position:relative;z-index:2;flex:none;
+  width:var(--thumb);height:var(--thumb);
+  display:grid;place-items:center;
+  padding:0;border:0;border-radius:50%;cursor:grab;
+  background:linear-gradient(150deg,var(--rust-mid) 0%,var(--rust) 55%,var(--rust-deep) 100%);
+  color:var(--shell);
+  box-shadow:0 6px 14px -6px rgba(74,28,8,.8);
+  transform:translateX(var(--x,0px));
+  transition:transform .4s cubic-bezier(.22,.9,.3,1.05);
+  -webkit-tap-highlight-color:transparent;
+  touch-action:none;              /* we handle the horizontal drag */
+}
+.slide-open__thumb svg{
+  width:22px;height:22px;fill:none;stroke:currentColor;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+}
+.slide-open__thumb:active{cursor:grabbing}
+.slide-open__thumb:focus-visible{outline:2px solid var(--rust-dk);outline-offset:3px}
+/* no easing while a finger is on it, or it lags behind */
+.slide-open.is-dragging .slide-open__thumb{transition:none}
+.slide-open.is-done .slide-open__thumb{cursor:default}
+.slide-open.is-done .slide-open__label{opacity:0}
+
+.is-opening .slide-open{opacity:0;pointer-events:none}
+
+/* ---- the slider, riding on the envelope pocket ----
+   It sits below the wax seal, inside the envelope art rather than
+   under it. The thumb scales with the viewport so the track always
+   clears the seal on a narrow phone. */
+.envelope .slide-open{
+  --thumb:clamp(1.9rem,9vw,2.6rem);
+  position:absolute;left:50%;bottom:4%;z-index:6;
+  width:82%;margin:0;transform:translateX(-50%);
+}
+.envelope .slide-open__track{
+  background:rgba(255,251,245,.95);
+  border-color:rgba(251,234,218,.7);
+  box-shadow:inset 0 2px 6px rgba(74,28,8,.18),
+             0 7px 18px -8px rgba(46,22,8,.85);
+}
+/* the flap folds back across this line as it opens, so it steps aside */
+.env-eyebrow{transition:opacity .35s ease}
+.is-opening .env-eyebrow{opacity:0}
 
 @media (prefers-reduced-motion:reduce){
   .js .envelope-screen,.env-flap,.env-seal{transition:none}
@@ -473,7 +609,7 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   display:flex;justify-content:center;
   color:var(--rust);margin:0 0 1.5rem;
 }
-.hero__monogram .logo-ca{height:clamp(3rem,2.4rem + 2vw,4.1rem)}
+.hero__monogram .logo-ac{height:clamp(3rem,2.4rem + 2vw,4.1rem)}
 .hero__intro{
   font-size:.68rem;letter-spacing:.26em;text-transform:uppercase;
   color:var(--muted);margin:0 0 1.4rem;
@@ -495,32 +631,133 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);
 }
 .hero__meta .dot{width:4px;height:4px;border-radius:50%;background:var(--rust);flex:none}
+/* The date is the one fact a guest comes back to check, so it drops
+   the row's uppercase: Cormorant is a fine-stroked serif, and wide-
+   tracked caps in it read slowly. Mixed case keeps the word shapes,
+   and a heavier weight holds the thin strokes together. */
 .hero__date{
-  font-family:var(--serif);font-size:clamp(1.15rem,1rem + .8vw,1.5rem);
-  letter-spacing:.14em;color:var(--brown);
+  font-family:var(--serif);font-weight:600;
+  font-size:clamp(1.35rem,1.1rem + 1.15vw,1.85rem);
+  text-transform:none;letter-spacing:.03em;
+  color:var(--brown);
 }
+
+.hero__photo{
+  margin:1.8rem auto 0;width:min(60vw,13rem);aspect-ratio:3/4;
+  border:1px solid var(--rust-lt);border-radius:2px;background:var(--cream-deep);
+  overflow:hidden;
+}
+.hero__photo img{width:100%;height:100%;object-fit:cover}
+/* ---- "now playing" ----
+   No frame around it: the play disc, the two lines of text and the
+   clock sit straight on the page, with a hairline timeline under
+   them that fills as the track runs. */
+.hero__music{
+  display:block;width:100%;max-width:20rem;margin:2.2rem auto 0;
+  padding:0;border:0;background:none;text-align:left;
+  cursor:pointer;font-family:var(--sans);color:var(--rust);
+}
+.hero__music:focus-visible{outline:2px solid var(--rust);outline-offset:5px;border-radius:2px}
+
+.hero__music-row{display:flex;align-items:center;gap:1.1rem}
+
+.hero__music-play{
+  flex:none;width:3rem;height:3rem;
+  display:grid;place-items:center;
+  border-radius:50%;background:var(--rust);color:#fff;
+  transition:background .25s ease,transform .25s ease;
+}
+.hero__music:hover .hero__music-play{background:var(--rust-dk);transform:scale(1.06)}
+.hero__music-icon{width:1.95rem;height:1.95rem}
+.hero__music .hm-play,
+.hero__music .hm-stop{transition:opacity .2s ease}
+.hero__music .hm-play{opacity:0}
+.hero__music .hm-stop{opacity:1}
+.hero__music.is-paused .hm-play{opacity:1}
+.hero__music.is-paused .hm-stop{opacity:0}
+
+.hero__music-info{flex:1;min-width:0}
+.hero__music-label{
+  display:block;font-size:.75rem;font-weight:500;
+  letter-spacing:.15em;text-transform:uppercase;
+  color:var(--rust-dk);line-height:1.2;
+}
+.hero__music-artist{
+  display:block;font-size:.68rem;font-style:italic;color:var(--rust);
+  margin-top:.25rem;line-height:1.2;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.hero__music-time{
+  flex:none;font-family:var(--serif);font-size:.75rem;font-weight:500;
+  letter-spacing:.05em;color:var(--rust-lt);font-variant-numeric:tabular-nums;
+}
+
+/* the timeline: a hairline that fills left to right as it plays */
+.hero__music-bar{
+  display:block;position:relative;height:2px;margin-top:.9rem;
+  background:rgba(233,190,150,.55);border-radius:2px;overflow:hidden;
+}
+.hero__music-bar-fill{
+  display:block;height:100%;width:0;
+  background:linear-gradient(90deg,var(--rust-mid),var(--rust));
+  border-radius:2px;transition:width .25s linear;
+}
+
+@media (max-width:33.9rem){
+  .hero__music-row{gap:.85rem}
+  .hero__music-play{width:2.7rem;height:2.7rem}
+  .hero__music-icon{width:1.75rem;height:1.75rem}
+}
+
+/* ---- countdown section ---- */
+.section--countdown{background:var(--cream-deep)}
 
 /* ---- countdown ---- */
 .countdown{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:.4rem;margin:2.4rem auto 0;max-width:24rem;
+  text-align:center;margin:0 auto;
 }
-.cd__cell{
-  background:rgba(255,251,245,.85);border:1px solid var(--rust-lt);
-  border-radius:var(--radius);padding:.7rem .2rem .55rem;
-}
-.cd__num{
+.cd__heading{margin:0 0 1.6rem;font-weight:500}
+.cd__heading-main{
   display:block;font-family:var(--serif);
-  font-size:clamp(1.5rem,1.15rem + 1.7vw,2.15rem);
-  line-height:1.1;color:var(--rust-dk);font-variant-numeric:tabular-nums;
+  font-size:clamp(1.45rem,1.05rem + 2.1vw,2.5rem);
+  letter-spacing:.14em;text-transform:uppercase;
+  color:var(--rust);line-height:1.15;
+}
+.cd__heading-sub{
+  display:block;font-family:var(--sans);font-weight:400;
+  font-size:clamp(.72rem,.66rem + .3vw,.86rem);
+  letter-spacing:.28em;text-transform:uppercase;
+  color:var(--rust-dk);margin-top:.7rem;
+}
+.cd__cells{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  /* the gap closes up on a narrow phone so the tiles keep their size */
+  gap:clamp(.4rem,2vw,1.1rem);margin:2.4rem auto 0;max-width:30rem;
+}
+.cd__cell{padding:0}
+/* Each figure sits in its own square tile, the caption outside it.
+   A square aspect-ratio keeps the four tiles the same shape at every
+   width; grid centring puts the digits on both axes of the box, and
+   lining figures stop the serif dropping 4, 7 and 9 below the line. */
+.cd__num{
+  display:grid;place-items:center;
+  aspect-ratio:1;padding:.15rem;
+  font-family:var(--serif);
+  font-size:clamp(2.3rem,1.4rem + 4.2vw,4rem);
+  line-height:1;color:var(--rust-dk);
+  font-variant-numeric:lining-nums tabular-nums;
+  background:var(--paper);
+  border:1px solid var(--rust-lt);
+  border-radius:var(--radius);
+  box-shadow:0 8px 20px -14px rgba(122,52,19,.8);
 }
 .cd__label{
-  display:block;font-size:.56rem;letter-spacing:.19em;text-transform:uppercase;
-  color:var(--muted);margin-top:.3rem;
+  display:block;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);margin-top:.75rem;
 }
 .countdown--done{
   grid-template-columns:1fr;text-align:center;
-  font-family:var(--serif);font-size:1.35rem;color:var(--rust-dk);
+  font-family:var(--serif);font-size:clamp(1.6rem,1.25rem + 1.8vw,2.3rem);color:var(--rust-dk);line-height:1.3;
 }
 
 /* =========================================================
@@ -742,28 +979,96 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 /* =========================================================
    9. TIMELINE
    ========================================================= */
-.timeline{list-style:none;margin:0 auto;padding:0 0 0 1.9rem;position:relative;max-width:34rem}
-.timeline::before{
-  content:"";position:absolute;left:5px;top:.5rem;bottom:.5rem;width:1px;
-  background:linear-gradient(180deg,transparent,var(--rust-lt) 10%,var(--rust-lt) 90%,transparent);
+/* Each row carries an icon medallion. The track behind them is two
+   stacked lines: a pale one for the whole day, and a rust one that
+   JS grows as you scroll, so the day appears to draw itself. JS also
+   measures the track from the first and last medallion, which keeps
+   it honest whatever the rows contain. */
+.timeline{
+  list-style:none;margin:2.2rem auto 0;padding:0 0 0 3.9rem;
+  position:relative;max-width:34rem;
 }
-.tl__item{position:relative;padding-bottom:2.1rem}
+.timeline::before,
+.timeline::after{
+  content:"";position:absolute;left:1.3rem;width:2px;border-radius:2px;
+  top:var(--tl-top,1.35rem);
+}
+.timeline::before{height:var(--tl-len,calc(100% - 2.7rem));background:var(--rust-lt);opacity:.55}
+.timeline::after{
+  height:var(--tl-fill,0px);
+  background:linear-gradient(180deg,var(--rust-mid),var(--rust));
+  transition:height .18s linear;
+}
+
+.tl__item{position:relative;padding-bottom:2.3rem}
 .tl__item:last-child{padding-bottom:0}
-.tl__item::before{
-  content:"";position:absolute;left:-1.9rem;top:.55rem;
-  width:11px;height:11px;border-radius:50%;
-  background:var(--rust);box-shadow:0 0 0 3.5px var(--cream);
+
+.tl__marker{
+  position:absolute;left:-3.9rem;top:-.15rem;
+  width:2.7rem;height:2.7rem;display:grid;place-items:center;
+  border-radius:50%;color:var(--rust);
+  background:var(--paper);border:1px solid var(--rust-lt);
+  box-shadow:0 6px 14px -10px rgba(122,52,19,.85);
+  transition:transform .35s cubic-bezier(.22,.9,.3,1.1),
+             background .3s ease,color .3s ease,
+             border-color .3s ease,box-shadow .3s ease;
 }
-.section--tint .tl__item::before{box-shadow:0 0 0 3.5px var(--cream-deep)}
+.tl__marker svg{width:1.3rem;height:1.3rem;display:block}
+.tl__body{transition:transform .35s cubic-bezier(.22,.9,.3,1.05)}
+
+/* hover on a pointer, tap-and-hold on a phone */
+.tl__item:hover .tl__marker,
+.tl__item:focus-within .tl__marker{
+  transform:scale(1.12);
+  background:var(--rust);color:var(--shell);border-color:var(--rust);
+  box-shadow:0 12px 22px -10px rgba(122,52,19,.95);
+}
+.tl__item:hover .tl__body,
+.tl__item:focus-within .tl__body{transform:translateX(5px)}
+.tl__item:hover .tl__title{color:var(--rust-dk)}
+
 .tl__time{
   display:block;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
   color:var(--rust-dk);margin-bottom:.2rem;
 }
 .tl__title{
   font-family:var(--serif);font-size:1.3rem;color:var(--brown);
-  line-height:1.3;margin:0;
+  line-height:1.3;margin:0;transition:color .3s ease;
 }
 .tl__note{color:var(--muted);font-size:.94rem;margin:.15rem 0 0}
+
+/* ---- on the day itself ---- */
+.tl__now{
+  display:none;margin-left:.55rem;padding:.16rem .5rem .1rem;
+  border-radius:999px;background:var(--rust);color:var(--shell);
+  font-size:.55rem;letter-spacing:.16em;
+}
+.tl__item.is-now .tl__now{display:inline-block}
+.tl__item.is-now .tl__marker{
+  background:var(--rust);color:var(--shell);border-color:var(--rust);
+  animation:tlPulse 2.4s ease-out infinite;
+}
+@keyframes tlPulse{
+  0%{box-shadow:0 0 0 0 rgba(193,87,31,.55)}
+  70%{box-shadow:0 0 0 16px rgba(193,87,31,0)}
+  100%{box-shadow:0 0 0 0 rgba(193,87,31,0)}
+}
+.tl__item.is-past .tl__marker{
+  background:var(--rust-lt);border-color:var(--rust-lt);color:var(--rust-deep);
+}
+.tl__item.is-past .tl__body{opacity:.6}
+
+/* ---- each row eases in as it arrives ---- */
+.js .tl__item{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .7s cubic-bezier(.22,.61,.36,1),
+             transform .7s cubic-bezier(.22,.61,.36,1);
+  transition-delay:calc(var(--i,0) * 85ms);
+}
+.js .tl__item.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .js .tl__item{opacity:1;transform:none}
+}
 
 /* =========================================================
    10. DRESS CODE
@@ -786,9 +1091,9 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 }
 .role-attire{margin:0;text-align:center}
 .role-attire img{
-  width:100%;aspect-ratio:3/4;object-fit:cover;
+  width:100%;aspect-ratio:3/4;object-fit:contain;
   border-radius:var(--radius);border:1px solid var(--rust-lt);
-  background:var(--cream-deep);
+  background:var(--paper);
   box-shadow:0 16px 34px -26px rgba(122,52,19,.7);
 }
 .role-attire__name{
@@ -806,11 +1111,10 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 .role-attire__note strong{color:var(--brown);font-weight:500}
 .role-attire__note + .role-attire__note{margin-top:.7rem}
 
-/* the guests get the same card, on its own and a little wider */
+/* the guests get exactly the entourage card, on its own and centred */
 .attire-roles--guest{
-  grid-template-columns:1fr;max-width:24rem;margin-inline:auto;
+  grid-template-columns:1fr;max-width:22rem;margin-inline:auto;
 }
-.attire-roles--guest .role-attire__note{font-size:.94rem;text-align:left}
 
 .swatches{
   display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;
@@ -836,19 +1140,22 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 @media (min-width:34rem){.entourage{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:56rem){.entourage{grid-template-columns:repeat(3,1fr);gap:2.75rem 2rem}}
 .role{
-  font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;
-  color:var(--rust-dk);margin:0 0 .9rem;padding-bottom:.65rem;
+  font-size:.8rem;font-weight:500;letter-spacing:.17em;text-transform:uppercase;
+  color:var(--rust-dk);margin:0 0 1.15rem;padding-bottom:.7rem;
   border-bottom:1px solid var(--rust-lt);
 }
 .names{list-style:none;margin:0;padding:0}
-.names li{font-family:var(--serif);font-size:1.1rem;line-height:1.65;color:var(--ink)}
+.names li{
+  font-family:var(--serif);font-size:1.24rem;line-height:1.4;
+  color:var(--ink);padding:.32rem 0;
+}
 .names li em{
   display:block;font-family:var(--sans);font-style:normal;
-  font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
-  color:var(--sage-dk);margin-top:.35rem;
+  font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--sage-dk);margin-top:.3rem;
 }
-.pair{display:grid;grid-template-columns:1fr;gap:.15rem}
-@media (min-width:26rem){.pair{grid-template-columns:1fr 1fr;gap:.15rem 1rem}}
+.pair{display:grid;grid-template-columns:1fr;gap:0}
+@media (min-width:26rem){.pair{grid-template-columns:1fr 1fr;gap:0 1.4rem}}
 
 /* =========================================================
    12. GIFTS  ·  rust band
@@ -872,20 +1179,27 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   font-family:var(--serif);font-style:italic;font-size:1.25rem;line-height:1.6;
   color:#FDF3E8;margin-bottom:1.1rem;
 }
-/* ---- QR code for monetary gifts ---- */
-.qr{
+/* ---- QR codes for monetary gifts: one tile per bank ---- */
+.qr-pair{
   margin:1.9rem auto 0;padding-top:1.7rem;
   border-top:1px solid rgba(251,234,218,.25);
+  display:grid;grid-template-columns:1fr;gap:2.4rem;
 }
+@media (min-width:34rem){
+  .qr-pair{grid-template-columns:repeat(2,1fr);gap:1.75rem;max-width:38rem}
+}
+.qr{margin:0}
+/* 15rem keeps both codes big enough to scan straight off a screen */
 .qr__tile{
-  width:min(100%,12.5rem);margin:0 auto;
+  width:min(100%,15rem);margin:0 auto;
   background:var(--paper);border-radius:var(--radius);
   padding:.75rem;box-shadow:0 10px 26px -16px rgba(46,22,8,.85);
 }
 .qr__tile img{width:100%;height:auto;aspect-ratio:1/1;object-fit:contain;border-radius:2px}
 .qr__label{
-  display:block;margin-top:1.1rem;
-  font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;color:var(--rust-lt);
+  display:block;margin-top:1rem;
+  font-size:.78rem;letter-spacing:.26em;text-transform:uppercase;
+  font-weight:500;color:var(--rust-lt);
 }
 .qr__detail{
   display:block;margin-top:.25rem;
@@ -996,7 +1310,24 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
 }
 .footer a{color:#F3C49A;text-decoration:none;border-bottom:1px solid rgba(243,196,154,.45)}
 .footer a:hover{color:#fff;border-color:#fff}
-.footer__contact{font-size:.92rem;color:#EFDCC9;margin-bottom:1.75rem}
+.footer__contact{font-size:.92rem;color:#EFDCC9;margin:0}
+.footer__contact strong{color:#FDF3E8;font-weight:500}
+
+/* ---- the coordinator's mark, beside their name ---- */
+.coordinator{
+  display:flex;flex-direction:column;align-items:center;
+  gap:1rem;margin-bottom:1.75rem;
+}
+@media (min-width:32rem){
+  .coordinator{flex-direction:row;justify-content:center;gap:1.35rem}
+  .coordinator .footer__contact{text-align:left}
+}
+.coordinator__logo{
+  width:5.5rem;height:5.5rem;flex:none;
+  border-radius:50%;object-fit:contain;
+  background:#fff;padding:.3rem;
+  box-shadow:0 10px 22px -12px rgba(46,22,8,.95);
+}
 .footer__thanks{
   font-family:var(--serif);font-style:italic;font-size:1.15rem;
   color:var(--shell);max-width:26rem;margin:0 auto 1.75rem;
@@ -1065,23 +1396,43 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   <div class="env-inner">
     <p class="env-eyebrow">You are invited to the wedding of</p>
 
-    <!-- the envelope IS the button - press the seal to open -->
-    <button class="envelope" type="button" id="env-open" aria-label="Open the invitation">
+    <!-- the envelope, with the slide-to-open sitting on its pocket -->
+    <div class="envelope" id="envelope-art">
       <span class="env-body" aria-hidden="true"></span>
-      <span class="env-flap" aria-hidden="true"></span>
-      <span class="env-seal" aria-hidden="true">C&nbsp;&amp;&nbsp;A</span>
-      <!-- [EDIT PHOTO] these three fan out of the envelope as it
-           opens. Swap the src of each for your own pictures -
-           portrait crops (3:4) sit best in the frames. -->
+      <!-- [EDIT PHOTO] these three slide out of the envelope as it
+           opens. They are blank templates - replace each whole
+           src="data:image/svg+xml,..." with your own picture, e.g.
+           src="photos/us-1.jpg". Portrait crops (3:4) sit best in
+           the frames; the middle one is the top of the stack. -->
       <span class="env-photos" aria-hidden="true">
-        <img src="st-therese.jpg" alt="" width="700" height="700">
-        <img src="dress-code.jpg" alt="" width="1024" height="1536">
-        <img src="rml.jpg" alt="" width="828" height="477">
+        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Crect%20x='26'%20y='26'%20width='548'%20height='748'%20fill='none'%20stroke='%23D9B58C'%20stroke-width='2'/%3E%3Ccircle%20cx='300'%20cy='352'%20r='62'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'/%3E%3Cpath%20d='M268%20372l26-30%2022%2024%2016-16%2030%2034z'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='278'%20cy='330'%20r='9'%20fill='%23C1571F'/%3E%3Ctext%20x='300'%20y='486'%20font-family='Georgia,serif'%20font-size='30'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='9'%3EPHOTO%201%3C/text%3E%3C/svg%3E" alt="" width="600" height="800">
+        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Crect%20x='26'%20y='26'%20width='548'%20height='748'%20fill='none'%20stroke='%23D9B58C'%20stroke-width='2'/%3E%3Ccircle%20cx='300'%20cy='352'%20r='62'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'/%3E%3Cpath%20d='M268%20372l26-30%2022%2024%2016-16%2030%2034z'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='278'%20cy='330'%20r='9'%20fill='%23C1571F'/%3E%3Ctext%20x='300'%20y='486'%20font-family='Georgia,serif'%20font-size='30'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='9'%3EPHOTO%202%3C/text%3E%3C/svg%3E" alt="" width="600" height="800">
+        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Crect%20x='26'%20y='26'%20width='548'%20height='748'%20fill='none'%20stroke='%23D9B58C'%20stroke-width='2'/%3E%3Ccircle%20cx='300'%20cy='352'%20r='62'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'/%3E%3Cpath%20d='M268%20372l26-30%2022%2024%2016-16%2030%2034z'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='278'%20cy='330'%20r='9'%20fill='%23C1571F'/%3E%3Ctext%20x='300'%20y='486'%20font-family='Georgia,serif'%20font-size='30'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='9'%3EPHOTO%203%3C/text%3E%3C/svg%3E" alt="" width="600" height="800">
       </span>
-    </button>
-    <p class="env-hint" aria-hidden="true">Tap to open</p>
+      <!-- the pocket comes after the photographs so it covers them -->
+      <span class="env-front" aria-hidden="true"></span>
+      <span class="env-flap" aria-hidden="true"></span>
+      <span class="env-seal" aria-hidden="true">A&nbsp;&amp;&nbsp;C</span>
 
-    <p class="env-names" id="env-names">Catherine <em>&amp;</em> Archie</p>
+      <!-- [EDIT] slide-to-open. Change the wording in .slide-open__label
+           to suit; the thumb is a real <button>, so Enter or Space
+           opens the invitation for anyone using a keyboard. -->
+      <div class="slide-open" id="slide-open">
+        <div class="slide-open__track" id="slide-track">
+          <span class="slide-open__fill" aria-hidden="true"></span>
+          <button class="slide-open__thumb" type="button" id="env-open"
+                  aria-label="Slide to open the invitation, or press Enter">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M8 6l5 6-5 6"/>
+              <path d="M14 6l5 6-5 6" opacity=".5"/>
+            </svg>
+          </button>
+          <span class="slide-open__label" aria-hidden="true"><span>Slide to open</span></span>
+        </div>
+      </div>
+    </div>
+
+    <p class="env-names" id="env-names">Archie <em>&amp;</em> Catherine</p>
     <p class="env-date">16 &middot; 10 &middot; 2026</p>
   </div>
 </div>
@@ -1094,10 +1445,10 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
 <header class="site-header" id="site-header">
   <div class="nav-wrap">
     <a class="nav-brand" href="#top">
-      <svg class="logo-ca" viewBox="0 0 60 52" aria-hidden="true" focusable="false">
-        <use href="#logo-ca"></use>
+      <svg class="logo-ac" viewBox="0 0 96 60" aria-hidden="true" focusable="false">
+        <use href="#logo-ac"></use>
       </svg>
-      <span class="sr-only">Catherine &amp; Archie, back to top</span>
+      <span class="sr-only">Archie &amp; Catherine, back to top</span>
     </a>
 
     <button class="nav-toggle" id="nav-toggle" type="button"
@@ -1162,25 +1513,74 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   </symbol>
 
   <!-- ---------------------------------------------------------
-       THE C & A LOGO
+       THE A & C LOGO
        The two initials with a swash ampersand, over a leaf rule.
        Everything is currentColor, so the mark takes the colour of
        whatever it sits in - rust on cream, shell on the dark bar -
        and it is drawn, not an image, so it stays crisp at any size.
        Use it anywhere with:
-         <svg class="logo-ca" viewBox="0 0 60 52" aria-hidden="true">
-           <use href="#logo-ca"></use></svg>
+         <svg class="logo-ac" viewBox="0 0 96 60" aria-hidden="true">
+           <use href="#logo-ac"></use></svg>
        The <svg> viewBox must match the symbol's, or the symbol is
        mapped twice and the drawing lands outside its own box.
        --------------------------------------------------------- -->
-  <symbol id="logo-ca" viewBox="0 0 60 52">
-    <text class="logo-ca__letter" x="15"   y="28"   font-size="34">C</text>
-    <text class="logo-ca__amp"    x="30"   y="24.5" font-size="17">&amp;</text>
-    <text class="logo-ca__letter" x="45.5" y="28"   font-size="34">A</text>
-    <use href="#leaf" x="3.5" y="30.5" width="17" height="17" transform="rotate(-135 12 39)"/>
-    <use href="#leaf" x="40"  y="30.5" width="17" height="17" transform="rotate(45 48.5 39)"/>
-    <path class="logo-ca__rule" d="M21.5 39h17"/>
+  <symbol id="logo-ac" viewBox="0 0 96 60">
+    <!-- one <text> for the whole acronym: the script face carries its
+         own spacing and joins, and placing the letters separately
+         makes their swashes collide -->
+    <text class="logo-ac__word" x="48" y="32" font-size="30">A &amp; C</text>
+    <use href="#leaf" x="16" y="45" width="15" height="15" transform="rotate(-135 23.5 52.5)"/>
+    <use href="#leaf" x="65" y="45" width="15" height="15" transform="rotate(45 72.5 52.5)"/>
+    <path class="logo-ac__rule" d="M33 52.5h30"/>
   </symbol>
+
+  <!-- ---------------------------------------------------------
+       PROGRAM FLOW ICONS
+       One per row of the schedule, drawn in the same line style as
+       the rest of the ornaments. [EDIT] If you add a row to the
+       timeline, either reuse one of these or copy a <symbol> and
+       give it a new id.
+       --------------------------------------------------------- -->
+  <symbol id="ic-arrival" viewBox="0 0 24 24"><g class="orn">
+    <path d="M4.5 20.5V10a7.5 7.5 0 0 1 15 0v10.5"/>
+    <path d="M9.5 20.5v-5.2a2.5 2.5 0 0 1 5 0v5.2"/>
+    <path d="M2.5 20.5h19"/>
+  </g></symbol>
+
+  <symbol id="ic-rings" viewBox="0 0 24 24"><g class="orn">
+    <circle cx="9" cy="14.5" r="5.5"/>
+    <circle cx="15.5" cy="12" r="5.5"/>
+    <path d="M13.5 3.2l1 1.6 1-1.6"/>
+  </g></symbol>
+
+  <symbol id="ic-camera" viewBox="0 0 24 24"><g class="orn">
+    <path d="M2.5 8.5h4l1.6-2.4h7.8l1.6 2.4h4v11h-19z"/>
+    <circle cx="12" cy="13.5" r="3.6"/>
+  </g></symbol>
+
+  <symbol id="ic-table" viewBox="0 0 24 24"><g class="orn">
+    <path d="M3 17.5h18"/>
+    <path d="M5.5 17.5a6.5 6.5 0 0 1 13 0"/>
+    <path d="M12 8v3"/>
+    <path d="M7 20.5h10"/>
+  </g></symbol>
+
+  <symbol id="ic-toast" viewBox="0 0 24 24"><g class="orn">
+    <path d="M4 3.5h6l-3 6.5z"/><path d="M7 10v8"/><path d="M4.5 19.5h5"/>
+    <path d="M14 3.5h6l-3 6.5z"/><path d="M17 10v8"/><path d="M14.5 19.5h5"/>
+  </g></symbol>
+
+  <symbol id="ic-music" viewBox="0 0 24 24"><g class="orn">
+    <path d="M9 17.5V5.2l10-2v12"/>
+    <circle cx="6.6" cy="17.8" r="2.6"/>
+    <circle cx="16.6" cy="15.7" r="2.6"/>
+  </g></symbol>
+
+  <symbol id="ic-sparkle" viewBox="0 0 24 24"><g class="orn">
+    <path d="M12 2.5v5M12 16.5v5M2.5 12h5M16.5 12h5"/>
+    <path d="M5.6 5.6l3 3M15.4 15.4l3 3M18.4 5.6l-3 3M8.6 15.4l-3 3"/>
+    <circle cx="12" cy="12" r="2.2"/>
+  </g></symbol>
 
   <!-- arcing spray for corners: stem, three leaves, two blooms -->
   <symbol id="corner-spray" viewBox="0 0 100 100">
@@ -1205,18 +1605,18 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     <svg class="orn-corner hero__orn hero__orn--br" viewBox="0 0 100 100" aria-hidden="true"><use href="#corner-spray"></use></svg>
 
     <p class="hero__monogram">
-      <svg class="logo-ca" viewBox="0 0 60 52" aria-hidden="true" focusable="false">
-        <use href="#logo-ca"></use>
+      <svg class="logo-ac" viewBox="0 0 96 60" aria-hidden="true" focusable="false">
+        <use href="#logo-ac"></use>
       </svg>
-      <span class="sr-only">Catherine &amp; Archie</span>
+      <span class="sr-only">Archie &amp; Catherine</span>
     </p>
     <p class="hero__intro">Together with our families</p>
 
     <h1 class="hero__names">
-      <span>Catherine</span>
+      <span>Archie</span>
       <span class="hero__amp" aria-hidden="true">&amp;</span>
       <span class="sr-only">and</span>
-      <span>Archie</span>
+      <span>Catherine</span>
     </h1>
 
     <div class="divider" aria-hidden="true"><svg><use href="#floral-rule"></use></svg></div>
@@ -1225,16 +1625,53 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       <!-- [EDIT] date + city -->
       <span class="hero__date">Friday, 16 October 2026</span>
       <span class="dot" aria-hidden="true"></span>
-      <span>Alaminos-Lipa City Road, Lipa City, Batangas</span>
+      <span>Santo Tomas-Lipa Rd, Talisay, Lipa City, Batangas</span>
     </p>
 
-    <!-- live countdown; numbers are filled in by JS -->
+    <!-- [EDIT PHOTO] replace src with e.g. src="photos/hero.jpg" -->
+    <figure class="hero__photo">
+      <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='412'%20font-family='Georgia,serif'%20font-size='28'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='8'%3EPHOTO%3C/text%3E%3C/svg%3E"
+           alt="Archie and Catherine" loading="lazy">
+    </figure>
+
+    <button class="hero__music is-paused" id="music-toggle-hero" type="button" aria-label="Play background music">
+      <span class="hero__music-row">
+        <span class="hero__music-play">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="hero__music-icon">
+            <polygon class="hm-play" points="8,4.8 8,19.2 19.4,12" fill="currentColor"/>
+            <rect class="hm-stop" x="5.8" y="5.8" width="12.4" height="12.4" rx="1.7" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="hero__music-info">
+          <span class="hero__music-label">Now Playing</span>
+          <span class="hero__music-artist">Tahanan &middot; Wedding Version</span>
+        </span>
+        <span class="hero__music-time" id="music-time">00:00</span>
+      </span>
+      <span class="hero__music-bar" aria-hidden="true">
+        <span class="hero__music-bar-fill" id="music-progress"></span>
+      </span>
+    </button>
+  </div>
+</section>
+
+<!-- =========================================================
+     COUNTDOWN TO OCTOBER 16, 2026
+     ========================================================= -->
+<section class="section section--countdown" id="countdown-section" aria-labelledby="countdown-h">
+  <div class="wrap center">
     <div class="countdown" id="countdown" role="timer" aria-live="off">
-      <p class="sr-only">Counting down to the wedding day.</p>
-      <div class="cd__cell"><span class="cd__num" id="cd-days">--</span><span class="cd__label">Days</span></div>
-      <div class="cd__cell"><span class="cd__num" id="cd-hours">--</span><span class="cd__label">Hours</span></div>
-      <div class="cd__cell"><span class="cd__num" id="cd-mins">--</span><span class="cd__label">Minutes</span></div>
-      <div class="cd__cell"><span class="cd__num" id="cd-secs">--</span><span class="cd__label">Seconds</span></div>
+      <p class="sr-only">Counting down to the wedding day October 16, 2026.</p>
+      <h2 id="countdown-h" class="cd__heading">
+        <span class="cd__heading-main">Counting Down</span>
+        <span class="cd__heading-sub">Until the Big Day</span>
+      </h2>
+      <div class="cd__cells">
+        <div class="cd__cell"><span class="cd__num" id="cd-days">--</span><span class="cd__label">Days</span></div>
+        <div class="cd__cell"><span class="cd__num" id="cd-hours">--</span><span class="cd__label">Hours</span></div>
+        <div class="cd__cell"><span class="cd__num" id="cd-mins">--</span><span class="cd__label">Mins</span></div>
+        <div class="cd__cell"><span class="cd__num" id="cd-secs">--</span><span class="cd__label">Secs</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -1265,7 +1702,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       <div class="reveal">
         <!-- [EDIT] your story - two or three short paragraphs read best on a phone -->
         <p>It started the way the best things usually do &mdash; quietly, and completely by accident.</p>
-        <p class="signature">With love, Cath &amp; Chie</p>
+        <p class="signature">With love, Chie &amp; Cath</p>
       </div>
     </div>
   </div>
@@ -1435,7 +1872,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       <article class="card reveal">
         <!-- [EDIT PHOTO] reception venue photo -->
         <figure class="card__photo">
-          <img src="RML.jpg"
+          <img src="rml.jpg"
                alt="The garden pavilion at RML Garden Resort and Pavilion." loading="lazy">
         </figure>
         <div class="card__icon" aria-hidden="true">
@@ -1477,42 +1914,86 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       <div class="divider" aria-hidden="true"><svg><use href="#floral-rule"></use></svg></div>
     </div>
 
-    <!-- [EDIT] add or remove <li> blocks freely -->
-    <ol class="timeline reveal">
-      <li class="tl__item">
-        <span class="tl__time">9:30 AM</span>
-        <h3 class="tl__title">Guest Arrival</h3>
-        <p class="tl__note">Please be seated fifteen minutes before the processional.</p>
+    <!-- [EDIT] add or remove <li> blocks freely.
+         data-at is the same time in 24-hour form; it is what lets
+         the page mark which item is happening on the day itself.
+         Drop the attribute and that row simply never highlights. -->
+    <ol class="timeline reveal" id="program-flow">
+      <li class="tl__item" data-at="09:30">
+        <span class="tl__marker" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><use href="#ic-arrival"></use></svg>
+        </span>
+        <div class="tl__body">
+          <span class="tl__time">9:30 AM<span class="tl__now">Now</span></span>
+          <h3 class="tl__title">Guest Arrival</h3>
+          <p class="tl__note">Please be seated fifteen minutes before the processional.</p>
+        </div>
       </li>
-      <li class="tl__item">
-        <span class="tl__time">10:00 AM</span>
-        <h3 class="tl__title">Wedding Ceremony</h3>
-        <p class="tl__note">St. Therese of the Child Jesus and the Holy Face Parish Church.</p>
+
+      <li class="tl__item" data-at="10:00">
+        <span class="tl__marker" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><use href="#ic-rings"></use></svg>
+        </span>
+        <div class="tl__body">
+          <span class="tl__time">10:00 AM<span class="tl__now">Now</span></span>
+          <h3 class="tl__title">Wedding Ceremony</h3>
+          <p class="tl__note">St. Therese of the Child Jesus and the Holy Face Parish Church.</p>
+        </div>
       </li>
-      <li class="tl__item">
-        <span class="tl__time">11:30 AM</span>
-        <h3 class="tl__title">Photo Session</h3>
-        <p class="tl__note">Family and group portraits at the Church.</p>
+
+      <li class="tl__item" data-at="11:30">
+        <span class="tl__marker" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><use href="#ic-camera"></use></svg>
+        </span>
+        <div class="tl__body">
+          <span class="tl__time">11:30 AM<span class="tl__now">Now</span></span>
+          <h3 class="tl__title">Photo Session</h3>
+          <p class="tl__note">Family and group portraits at the Church.</p>
+        </div>
       </li>
-      <li class="tl__item">
-        <span class="tl__time">12:00 PM</span>
-        <h3 class="tl__title">Grazing Table &amp; Reception Opens</h3>
-        <p class="tl__note">The Events Place by RML - RML Garden Resort and Pavilion</p>
+
+      <li class="tl__item" data-at="12:00">
+        <span class="tl__marker" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><use href="#ic-table"></use></svg>
+        </span>
+        <div class="tl__body">
+          <span class="tl__time">12:00 PM<span class="tl__now">Now</span></span>
+          <h3 class="tl__title">Grazing Table &amp; Reception Opens</h3>
+          <p class="tl__note">The Events Place by RML - RML Garden Resort and Pavilion</p>
+        </div>
       </li>
-      <li class="tl__item">
-        <span class="tl__time">12:30 PM</span>
-        <h3 class="tl__title">Lunch &amp; Programme</h3>
-        <p class="tl__note">Toasts, first dance, and a few happy tears.</p>
+
+      <li class="tl__item" data-at="12:30">
+        <span class="tl__marker" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><use href="#ic-toast"></use></svg>
+        </span>
+        <div class="tl__body">
+          <span class="tl__time">12:30 PM<span class="tl__now">Now</span></span>
+          <h3 class="tl__title">Lunch &amp; Programme</h3>
+          <p class="tl__note">Toasts, first dance, and a few happy tears.</p>
+        </div>
       </li>
-      <li class="tl__item">
-        <span class="tl__time">1:30 PM</span>
-        <h3 class="tl__title">Dancing</h3>
-        <p class="tl__note">The floor is open &mdash; comfortable shoes encouraged.</p>
+
+      <li class="tl__item" data-at="13:30">
+        <span class="tl__marker" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><use href="#ic-music"></use></svg>
+        </span>
+        <div class="tl__body">
+          <span class="tl__time">1:30 PM<span class="tl__now">Now</span></span>
+          <h3 class="tl__title">Dancing</h3>
+          <p class="tl__note">The floor is open &mdash; comfortable shoes encouraged.</p>
+        </div>
       </li>
-      <li class="tl__item">
-        <span class="tl__time">2:30 PM</span>
-        <h3 class="tl__title">Last Song &amp; Send-off</h3>
-        <p class="tl__note">Thank you for celebrating with us.</p>
+
+      <li class="tl__item" data-at="14:30">
+        <span class="tl__marker" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><use href="#ic-sparkle"></use></svg>
+        </span>
+        <div class="tl__body">
+          <span class="tl__time">2:30 PM<span class="tl__now">Now</span></span>
+          <h3 class="tl__title">Last Song &amp; Send-off</h3>
+          <p class="tl__note">Thank you for celebrating with us.</p>
+        </div>
       </li>
     </ol>
   </div>
@@ -1550,7 +2031,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
           <figcaption>
             <span class="role-attire__name">Principal Sponsors</span>
             <span class="role-attire__sub">Male</span>
-            <span class="role-attire__note">Beige Barong Tagalog with black slacks</span><!-- [EDIT] -->
+            <span class="role-attire__note">Beige Barong Tagalog with Black Slacks</span><!-- [EDIT] -->
           </figcaption>
         </figure>
 
@@ -1559,7 +2040,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
           <figcaption>
             <span class="role-attire__name">Principal Sponsors</span>
             <span class="role-attire__sub">Female</span>
-            <span class="role-attire__note">Long dress in champagne or sand</span><!-- [EDIT] -->
+            <span class="role-attire__note">Long dress in Khaki/Beige</span><!-- [EDIT] -->
           </figcaption>
         </figure>
 
@@ -1601,13 +2082,8 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
           <figcaption>
             <span class="role-attire__name">Our Guests</span>
             <span class="role-attire__sub">Semi-formal</span><!-- [EDIT] -->
-            <span class="role-attire__note">Please come in <strong>semi-formal attire</strong>
-              in any of the colours below. A long dress, an elegant midi, a Barong
-              Tagalog, or a long-sleeved shirt with dark slacks all sit perfectly
-              within the palette.</span><!-- [EDIT] -->
-            <span class="role-attire__note">There is a little walking between the church
-              and the pavilion, so do choose shoes you can be comfortable in all
-              afternoon.</span>
+            <span class="role-attire__note">Long dress, elegant midi, Barong Tagalog,
+              or a long-sleeved shirt with dark slacks</span><!-- [EDIT] -->
           </figcaption>
         </figure>
 
@@ -1762,25 +2238,43 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         would be warmly and gratefully received. Please do not feel any obligation &mdash; simply come, eat well, and celebrate with us.</p>
 
       <!-- =====================================================
-           [EDIT QR] Monetary gift QR code
-           Currently: bdo-qr.jpg - a BDO InstaPay / QR Ph code.
-           Renamed from "BDO QR.jpg" because spaces in a filename
-           break the URL once the site is hosted.
-           To swap it: drop a square image (600px or larger)
-           beside this file and change the src below. Keep the
-           white tile - scanners need that quiet border to lock
-           on. To offer a second option, copy this whole <figure>.
+           [EDIT QR] Monetary gift QR codes - one tile per bank.
+           Both are live:
+             chie-bdo-qr.jpg  - BDO InstaPay, Chie's account
+             cath-bpi-qr.jpg  - BPI InstaPay, Cath's account
+           Renamed from "Chie BDO QR.jpg" and "Cath BPI QR.jpg" -
+           spaces in a filename break the URL once the site is
+           hosted. Keep the white tile too; scanners need that quiet
+           border to lock on.
+           To add a third bank, copy a whole <figure class="qr">.
            ===================================================== -->
-      <figure class="qr">
-        <div class="qr__tile">
-          <img src="bdo-qr.jpg"
-               alt="BDO InstaPay QR code for sending a monetary gift to Catherine and Archie."
-               width="650" height="656" loading="lazy">
-        </div>
-        <figcaption>
-          <span class="qr__detail">Cath and Chie</span><!-- [EDIT] -->
-        </figcaption>
-      </figure>
+      <div class="qr-pair">
+
+        <figure class="qr">
+          <div class="qr__tile">
+            <img src="chie-bdo-qr.jpg"
+                 alt="BDO InstaPay QR code for sending a monetary gift to Chie."
+                 width="650" height="656" loading="lazy">
+          </div>
+          <figcaption>
+            <span class="qr__label">BDO</span><!-- [EDIT] bank -->
+            <span class="qr__detail">Chie &amp; Cath</span><!-- [EDIT] account name -->
+          </figcaption>
+        </figure>
+
+        <figure class="qr">
+          <div class="qr__tile">
+            <img src="cath-bpi-qr.jpg"
+                 alt="BPI InstaPay QR code for sending a monetary gift to Cath."
+                 width="455" height="458" loading="lazy">
+          </div>
+          <figcaption>
+            <span class="qr__label">BPI</span><!-- [EDIT] bank -->
+            <span class="qr__detail">Chie &amp; Cath</span><!-- [EDIT] account name -->
+          </figcaption>
+        </figure>
+
+      </div>
     </div>
   </div>
 </section>
@@ -1862,7 +2356,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       <div class="form__actions">
         <button class="btn" type="submit" id="rsvp-submit">Send RSVP</button>
         <p class="error" id="err-form" role="alert" hidden style="justify-content:center"></p>
-        <p class="form__legal">Only the two of us will see your response.</p>
       </div>
     </form>
 
@@ -1904,7 +2397,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
 
       <div class="std__actions">
         <a class="btn" id="gcal-link" href="https://calendar.google.com/" target="_blank" rel="noopener">Add to Google Calendar</a>
-        <a class="btn btn--ghost" id="ics-link" href="#" download="catherine-and-archie-wedding.ics">Apple &amp; Outlook</a>
+        <a class="btn btn--ghost" id="ics-link" href="#" download="archie-and-catherine-wedding.ics">Apple &amp; Outlook</a>
       </div>
     </div>
   </div>
@@ -1923,22 +2416,31 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     <h2>Share your photos with us</h2>
     <!-- [EDIT] hashtag + contact details -->
     <p class="hashtag">#CatchingArchie</p>
-    <p class="footer__contact">
-      Questions? Call or message our coordinator,<br>
-      Superb Ideas Events Management &middot; <a href="tel:+639171234567">0991 109 4831</a><br>
-      <a href="mailto:superb.ideas01@gmail.com">superb.ideas01@gmail.com</a>
-    </p>
+    <!-- [EDIT] coordinator. The logo file was renamed from
+         "Superb Logo.jpg" to superb-logo.jpg - spaces in a filename
+         break the URL once the site is hosted. -->
+    <div class="coordinator">
+      <img class="coordinator__logo" src="superb-logo.jpg"
+           alt="Superb Ideas Events Management logo"
+           width="424" height="418" loading="lazy">
+      <p class="footer__contact">
+        Questions? Call or message our coordinator,<br>
+        <strong>Superb Ideas Events Management</strong><br>
+        <a href="tel:+639911094831">0991 109 4831</a><br>
+        <a href="mailto:superb.ideas01@gmail.com">superb.ideas01@gmail.com</a>
+      </p>
+    </div>
     <p class="footer__thanks">
       Thank you for being part of our story. We cannot wait to celebrate this day with you.
     </p>
-    <p class="footer__fine">Cath &amp; Chie &middot; 16 October 2026 &middot; Lipa City</p>
+    <p class="footer__fine">Chie &amp; Cath &middot; 16 October 2026 &middot; Lipa City</p>
   </div>
 </footer>
 
 <!-- =========================================================
      BACKGROUND MUSIC
-     Track: Pachelbel - "Canon in D", Jacob's Piano arrangement
-            (canon-in-d.mp3, 3.0 MB)
+     Track: "Tahanan" (Wedding Version) - El Manu & Jessy Kang
+            (tahanan-wedding-version.mp3, 4.1 MB)
      Renamed from the original download - spaces and punctuation
      in a filename break the URL when the site is hosted.
      [EDIT] To change songs: drop the new file beside this page
@@ -1947,7 +2449,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
      the envelope, so the page still loads fast on mobile data.
      ========================================================= -->
 <audio id="bg-music" loop preload="none">
-  <source src="canon-in-d.mp3" type="audio/mpeg">
+  <source src="tahanan-wedding-version.mp3" type="audio/mpeg">
 </audio>
 
 <button class="music-toggle" id="music-toggle" type="button" aria-label="Play background music">
@@ -2062,9 +2564,97 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     }, reduceMotion ? 900 : OPEN_HOLD_MS);
   }
 
-  if (envelope && envBtn) {
+  /* ---- slide to open -------------------------------------
+     The thumb is dragged from the left end of the track to the
+     right. Let go past OPEN_AT of the way and the invitation
+     opens; short of it, the thumb springs back. A bare tap does
+     nothing on purpose - that is the point of a slider - but the
+     thumb is a real <button>, so Enter, Space, arrow keys and
+     Escape all still work.
+     -------------------------------------------------------- */
+  var slide      = document.getElementById("slide-open");
+  var slideTrack = document.getElementById("slide-track");
+  var OPEN_AT    = 0.92;   // [EDIT] how far along counts as "opened"
+
+  if (envelope && envBtn && slide && slideTrack) {
     try { envBtn.focus({ preventScroll: true }); } catch (err) { envBtn.focus(); }
-    envBtn.addEventListener("click", openInvitation);
+
+    var drag = null;
+
+    // how far the thumb can travel: the track's inner width less itself
+    function maxTravel() {
+      var cs = window.getComputedStyle(slideTrack);
+      var inner = slideTrack.clientWidth -
+                  parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      return Math.max(0, inner - envBtn.offsetWidth);
+    }
+
+    function thumbAt() {
+      return parseFloat(slide.style.getPropertyValue("--x")) || 0;
+    }
+
+    function setThumb(x) {
+      var t = maxTravel();
+      x = Math.max(0, Math.min(x, t));
+      slide.style.setProperty("--x", x + "px");
+      slide.style.setProperty("--p", t ? (x / t).toFixed(4) : "0");
+      return x;
+    }
+
+    function complete() {
+      slide.classList.add("is-done");
+      setThumb(maxTravel());
+      openInvitation();
+    }
+
+    function settle(x) {
+      var t = maxTravel();
+      if (t && x >= t * OPEN_AT) { complete(); } else { setThumb(0); }
+    }
+
+    envBtn.addEventListener("pointerdown", function (e) {
+      if (e.button || slide.classList.contains("is-done")) { return; }
+      drag = { id: e.pointerId, from: e.clientX, at: thumbAt() };
+      slide.classList.add("is-dragging");
+      if (envBtn.setPointerCapture) { envBtn.setPointerCapture(e.pointerId); }
+    });
+
+    envBtn.addEventListener("pointermove", function (e) {
+      if (!drag || e.pointerId !== drag.id) { return; }
+      setThumb(drag.at + (e.clientX - drag.from));
+    });
+
+    function endDrag(e) {
+      if (!drag || (e && e.pointerId !== drag.id)) { return; }
+      drag = null;
+      slide.classList.remove("is-dragging");
+      settle(thumbAt());
+    }
+    envBtn.addEventListener("pointerup", endDrag);
+    envBtn.addEventListener("pointercancel", endDrag);
+
+    // A keyboard "click" reports detail 0; a tap or mouse click does
+    // not, and is ignored so the slider cannot be defeated by tapping.
+    envBtn.addEventListener("click", function (e) {
+      if (e.detail === 0) { complete(); }
+    });
+
+    // Arrow keys walk the thumb along, End sends it home.
+    envBtn.addEventListener("keydown", function (e) {
+      var t = maxTravel(), at = thumbAt(), to;
+      if (e.key === "ArrowRight" || e.key === "Right") { to = at + t / 4; }
+      else if (e.key === "ArrowLeft" || e.key === "Left") { to = at - t / 4; }
+      else if (e.key === "End") { to = t; }
+      else { return; }
+      e.preventDefault();
+      if (t && to >= t * OPEN_AT) { complete(); } else { setThumb(to); }
+    });
+
+    // The track is a different width after a rotate or resize.
+    window.addEventListener("resize", function () {
+      if (!slide.classList.contains("is-done")) { setThumb(0); }
+    });
+
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && !envelope.hidden) { openInvitation(); }
     });
@@ -2154,8 +2744,9 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
      the floating button is left showing "play" so they can start
      it themselves.
      ========================================================== */
-  var music    = document.getElementById("bg-music");
-  var musicBtn = document.getElementById("music-toggle");
+  var music        = document.getElementById("bg-music");
+  var musicBtn     = document.getElementById("music-toggle");
+  var musicBtnHero = document.getElementById("music-toggle-hero");
 
   var MUSIC_LEVEL = 0.35;   // [EDIT] 0 = silent, 1 = full volume
   var FADE_MS     = 1400;   // [EDIT] length of the fade in and out
@@ -2173,11 +2764,24 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     catch (err) { /* private browsing - carry on regardless */ }
   }
 
+  function formatTime(seconds) {
+    if (!seconds || isNaN(seconds)) return "00:00";
+    var mins = Math.floor(seconds / 60);
+    var secs = Math.floor(seconds % 60);
+    return (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+  }
+
   function paintMusicBtn(playing) {
-    if (!musicBtn) { return; }
-    musicBtn.classList.toggle("is-playing", playing);
-    musicBtn.setAttribute("aria-label",
-      playing ? "Pause background music" : "Play background music");
+    if (musicBtn) {
+      musicBtn.classList.toggle("is-playing", playing);
+      musicBtn.setAttribute("aria-label",
+        playing ? "Pause background music" : "Play background music");
+    }
+    if (musicBtnHero) {
+      musicBtnHero.classList.toggle("is-paused", !playing);
+      musicBtnHero.setAttribute("aria-label",
+        playing ? "Pause background music" : "Play background music");
+    }
   }
 
   function fadeTo(target, done) {
@@ -2225,16 +2829,45 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     fadeTo(0, function () { music.pause(); });
   }
 
-  if (music && musicBtn) {
+  if (music && (musicBtn || musicBtnHero)) {
     paintMusicBtn(false);
 
-    musicBtn.addEventListener("click", function () {
-      if (music.paused) {
-        rememberMusic(true);
-        startMusic();
-      } else {
-        rememberMusic(false);
-        stopMusic();
+    if (musicBtn) {
+      musicBtn.addEventListener("click", function () {
+        if (music.paused) {
+          rememberMusic(true);
+          startMusic();
+        } else {
+          rememberMusic(false);
+          stopMusic();
+        }
+      });
+    }
+
+    if (musicBtnHero) {
+      musicBtnHero.addEventListener("click", function () {
+        if (music.paused) {
+          rememberMusic(true);
+          startMusic();
+        } else {
+          rememberMusic(false);
+          stopMusic();
+        }
+      });
+    }
+
+    // Clock and timeline, kept in step with the track. The audio
+    // loops, so both simply run back to zero at the end of each pass.
+    var timeEl = document.getElementById("music-time");
+    var barEl  = document.getElementById("music-progress");
+
+    music.addEventListener("timeupdate", function () {
+      if (timeEl) { timeEl.textContent = formatTime(music.currentTime); }
+      if (barEl) {
+        var d = music.duration;
+        barEl.style.width = (d && isFinite(d))
+          ? ((music.currentTime / d) * 100).toFixed(2) + "%"
+          : "0";
       }
     });
 
@@ -2316,6 +2949,112 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     // Older browsers: just show everything.
     revealables.forEach(function (el) { el.classList.add("is-visible"); });
   }
+
+  /* ==========================================================
+     7b · PROGRAM FLOW
+     ----------------------------------------------------------
+     Three things: each row eases in as it arrives, the line
+     down the side fills as you scroll past it, and on the day
+     itself the row that is happening now is marked.
+     ========================================================== */
+  (function () {
+    var timeline = document.getElementById("program-flow");
+    if (!timeline) { return; }
+
+    var rows = Array.prototype.slice.call(timeline.querySelectorAll(".tl__item"));
+    if (!rows.length) { return; }
+
+    // --i staggers each row's entrance in CSS
+    rows.forEach(function (li, i) { li.style.setProperty("--i", i); });
+
+    /* ---- rows ease in, one after another ---- */
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) { return; }
+          en.target.classList.add("is-in");
+          io.unobserve(en.target);
+        });
+      }, { threshold: 0.2, rootMargin: "0px 0px -6% 0px" });
+      rows.forEach(function (li) { io.observe(li); });
+    } else {
+      rows.forEach(function (li) { li.classList.add("is-in"); });
+    }
+
+    /* ---- the line draws itself down the day ----
+       Measured from the first and last medallion rather than from
+       fixed offsets, so it still lines up if rows are added, the
+       text wraps differently, or the font size changes. */
+    var firstDot = rows[0].querySelector(".tl__marker");
+    var lastDot  = rows[rows.length - 1].querySelector(".tl__marker");
+    var trackTop = 0, trackLen = 0;
+
+    function centreOf(el) {
+      var r = el.getBoundingClientRect();
+      return r.top + r.height / 2;
+    }
+
+    function measure() {
+      if (!firstDot || !lastDot) { return; }
+      var top = timeline.getBoundingClientRect().top;
+      trackTop = centreOf(firstDot) - top;
+      trackLen = centreOf(lastDot) - centreOf(firstDot);
+      timeline.style.setProperty("--tl-top", trackTop.toFixed(1) + "px");
+      timeline.style.setProperty("--tl-len", trackLen.toFixed(1) + "px");
+    }
+
+    function draw() {
+      pending = false;
+      if (!firstDot || trackLen <= 0) { return; }
+      // fill down to a line a little above the middle of the screen
+      var mark = window.innerHeight * 0.58;
+      var fill = Math.max(0, Math.min(mark - centreOf(firstDot), trackLen));
+      timeline.style.setProperty("--tl-fill", fill.toFixed(1) + "px");
+    }
+
+    var pending = false;
+    function onScroll() {
+      if (pending) { return; }
+      pending = true;
+      window.requestAnimationFrame(draw);
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", function () { measure(); draw(); });
+    window.addEventListener("load", function () { measure(); draw(); });
+    measure();
+    draw();
+
+    /* ---- on the wedding day, mark where we are ----
+       data-at on each row is Manila time; so is the schedule. Any
+       other day this does nothing at all. */
+    function markToday() {
+      var day;
+      try {
+        day = WEDDING_DATE.toLocaleDateString("en-CA", { timeZone: "Asia/Manila" });
+      } catch (err) { return; }
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) { return; }
+
+      var now   = new Date();
+      var start = new Date(day + "T00:00:00+08:00");
+      var end   = new Date(day + "T23:59:59+08:00");
+      if (now < start || now > end) { return; }   // not the day - nothing to mark
+
+      var current = -1;
+      rows.forEach(function (li, i) {
+        var at = li.getAttribute("data-at");
+        if (!at) { return; }
+        if (now >= new Date(day + "T" + at + ":00+08:00")) { current = i; }
+      });
+
+      rows.forEach(function (li, i) {
+        li.classList.toggle("is-past", current > -1 && i < current);
+        li.classList.toggle("is-now",  i === current);
+      });
+    }
+    markToday();
+    window.setInterval(markToday, 60000);
+  }());
 
   /* ==========================================================
      8 · GALLERY LIGHTBOX
@@ -2660,7 +3399,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
      even for guests whose phone is set to another timezone.
      ========================================================== */
   var CALENDAR = {
-    title:    "The Wedding of Catherine & Archie",
+    title:    "The Wedding of Archie & Catherine",
     start:    "2026-10-16T10:00:00+08:00",
     end:      "2026-10-16T16:00:00+08:00",
     location: "St. Therese of the Child Jesus and the Holy Face Parish Church, Lipa City, Batangas",
