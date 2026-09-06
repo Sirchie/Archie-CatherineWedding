@@ -800,7 +800,9 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   width:100%;border-radius:var(--radius);
   border:1px solid var(--rust-lt);
   box-shadow:0 18px 40px -28px rgba(122,52,19,.65);
-  aspect-ratio:4/5;object-fit:cover;background:var(--cream-deep);
+  /* 3:4 rather than 4:5 - the engagement photograph is a tall 9:16,
+     so a squarer frame would crop a third of it away */
+  aspect-ratio:3/4;object-fit:cover;background:var(--cream-deep);
 }
 /* Upright rather than italic: only the 400 italic of Cormorant is
    loaded, and its fine calligraphic strokes thin out badly at caption
@@ -1001,9 +1003,15 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 }
 .card__icon svg{width:34px;height:34px}
 .card h3{margin-bottom:.85rem}
+/* Date and time - the two facts a guest re-opens the page to check.
+   Weight 500 rather than 400 so Cormorant's thin strokes hold up,
+   brown rather than rust-dk to clear AAA on the card, and a tighter
+   line-height so the two lines read as one block rather than two. */
 .card__when{
-  font-family:var(--serif);font-size:1.1rem;color:var(--rust-dk);
-  letter-spacing:.06em;margin:0 0 1rem;
+  font-family:var(--serif);font-weight:500;
+  font-size:1.28rem;line-height:1.45;
+  letter-spacing:.02em;color:var(--brown);
+  margin:0 0 1rem;
 }
 .card__venue{font-weight:500;margin:0 0 .25rem}
 .card__addr{color:var(--muted);font-size:.94rem;margin:0 0 1.5rem}
@@ -1566,8 +1574,12 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   <symbol id="logo-ac" viewBox="0 0 96 60">
     <!-- one <text> for the whole acronym: the script face carries its
          own spacing and joins, and placing the letters separately
-         makes their swashes collide -->
-    <text class="logo-ac__word" x="48" y="32" font-size="30">A &amp; C</text>
+         makes their swashes collide.
+         [EDIT] font-size is the fit dial. It is sized for Parisienne
+         and its swashes; a different script may want more or less.
+         Too big and the ends clip against the 96-wide viewBox and
+         the tails run into the leaves at y=45. -->
+    <text class="logo-ac__word" x="48" y="31" font-size="25">A &amp; C</text>
     <use href="#leaf" x="16" y="45" width="15" height="15" transform="rotate(-135 23.5 52.5)"/>
     <use href="#leaf" x="65" y="45" width="15" height="15" transform="rotate(45 72.5 52.5)"/>
     <path class="logo-ac__rule" d="M33 52.5h30"/>
@@ -1732,9 +1744,8 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     <div class="story__grid">
       <!-- [EDIT PHOTO] replace the whole src with e.g. src="photos/us.jpg" -->
       <figure class="photo reveal">
-        <img
-          src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='800'%20height='1000'%3E%3Crect%20width='800'%20height='1000'%20fill='%23EFDCC2'/%3E%3Ccircle%20cx='400'%20cy='440'%20r='58'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'/%3E%3Ctext%20x='400'%20y='560'%20font-family='Georgia,serif'%20font-size='28'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='8'%3EPHOTO%3C/text%3E%3C/svg%3E"
-          alt="Chie and Cath together on the day they got engaged.">
+        <img src="engagement.jpg" width="728" height="1280" loading="lazy"
+             alt="Chie and Cath in silhouette on the beach the day they got engaged, one kneeling with the ring against a bright, cloud-filled sky.">
         <figcaption>Engagement day &middot; December 2025</figcaption><!-- [EDIT] -->
       </figure>
 
@@ -1923,7 +1934,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         <!-- [EDIT] -->
         <p class="card__when">Friday, 16 October 2026<br>12:00 in the Afternoon</p>
         <p class="card__venue">The Events Place by RML - RML Garden Resort and Pavilion</p>
-        <p class="card__addr">529 Purok 1, Lumbang,<br>Lipa City, Batangas</p>
+        <p class="card__addr">Purok 1, Lumbang,<br>Lipa City, Batangas</p>
         <a class="btn btn--ghost"
            href="https://www.google.com/maps/place/RML+Garden+Resort+and+Pavilion/@13.9822,121.2061422,300m/data=!3m1!1e3!4m6!3m5!1s0x33bd6b85145221c5:0x252e265267680bfa!8m2!3d13.9829529!4d121.2104799!16s%2Fg%2F11hdys_kk0?entry=ttu&g_ep=EgoyMDI2MDgyNS4wIKXMDSoASAFQAw%3D%3D"
            target="_blank" rel="noopener">
@@ -2061,8 +2072,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
            at least 600px wide.
            [EDIT] reword the notes and the avoid line to suit.
            ===================================================== -->
-      <p class="attire-roles__lede">Semi-formal, please, in the warm earth
-        tones of our palette.</p>
+      <p class="attire-roles__lede">We invite you to celebrate with us in style and elegance. We kindly request our guests to come in their best formal attire. To maintain a cohesive look for our photos, please strictly adhere to our color palette..</p>
 
       <div class="attire-roles reveal">
 
@@ -2086,6 +2096,26 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         </figure>
 
       </div>
+
+      <!-- =====================================================
+           COLOUR PALETTE
+           [EDIT] the five tones below. Each swatch is just a hex
+           value and a name; add or remove <li> items freely.
+           NOTE: white is listed here AND on the avoid line below.
+           Those contradict each other - drop it from one of them.
+           ===================================================== -->
+      <h3 class="attire-roles__title" style="margin-top:2.9rem">Our Palette</h3>
+      <p class="attire-roles__lede">Any of these tones will sit
+        beautifully with the day.</p>
+
+      <ul class="swatches reveal">
+        <!-- a stronger rim on the white one, or it vanishes into the page -->
+        <li class="swatch"><span style="background:#FFFFFF;border-color:rgba(61,46,34,.38)"></span><small>White</small></li>
+        <li class="swatch"><span style="background:#D9C3A5"></span><small>Beige</small></li>
+        <li class="swatch"><span style="background:#D2691E"></span><small>Clay</small></li>
+        <li class="swatch"><span style="background:#C1571F"></span><small>Rustic Orange</small></li>
+        <li class="swatch"><span style="background:#A8481A"></span><small>Terracotta</small></li>
+      </ul>
 
       <!-- [EDIT] what you would rather guests did not wear -->
       <p class="avoid"><strong>Kindly avoid</strong> white, ivory and cream &mdash; these
@@ -2337,6 +2367,28 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         <p class="error" id="err-name" role="alert" hidden></p>
       </div>
 
+      <!-- [EDIT] Contact details. Both are optional so nobody is
+           blocked from replying, but each is format-checked when
+           it is filled in. Add required aria-required="true" to
+           either input to make it compulsory. -->
+      <div class="field">
+        <label for="rsvp-email">Email address
+          <span class="hint" style="display:inline">(optional)</span></label>
+        <input class="input" type="email" id="rsvp-email" name="email"
+               autocomplete="email" inputmode="email"
+               aria-describedby="err-email" placeholder="e.g. juan@email.com">
+        <p class="error" id="err-email" role="alert" hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="rsvp-phone">Contact number
+          <span class="hint" style="display:inline">(optional)</span></label>
+        <input class="input" type="tel" id="rsvp-phone" name="phone"
+               autocomplete="tel" inputmode="tel"
+               aria-describedby="err-phone" placeholder="e.g. 0917 123 4567">
+        <p class="error" id="err-phone" role="alert" hidden></p>
+      </div>
+
       <fieldset>
         <legend class="legend">Will you be joining us? <span class="req" aria-hidden="true">*</span></legend>
         <div class="choices">
@@ -2538,13 +2590,39 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
      OPTION C - your own backend: point RSVP_ENDPOINT at any URL that
        accepts a POST. JSON is sent when GOOGLE_FORM_FIELDS is empty.
      ========================================================== */
-  var RSVP_ENDPOINT = "";
+  // Live: "Archie & Catherine Wedding | 16-10-2026" Google Form.
+  // Note it ends in /formResponse, NOT /viewform.
+  var RSVP_ENDPOINT =
+    "https://docs.google.com/forms/d/e/1FAIpQLSdq6jA5vZTkwfuvpv8aUcKF3161g-iASaj5Rno_dEoyqHrM3w/formResponse";
 
+  /* ----------------------------------------------------------
+     GOOGLE FORM SETUP - the four entry IDs
+     ----------------------------------------------------------
+     Build the Google Form with FOUR questions, in this order,
+     and make every one of them SHORT ANSWER. Do not use
+     multiple-choice: Google silently drops an answer that does
+     not exactly match one of its options, and this page sends
+     its own wording.
+
+       1. Name              <- free text
+       2. Attending         <- "Yes, attending" or "No, cannot attend"
+       3. Number of guests  <- "1"-"5", or "0" when not attending
+       4. Message           <- free text, often empty
+
+     Mark NONE of them required - a guest who declines sends
+     guests "0" and usually an empty message, and a required
+     question would make Google reject the whole reply.
+
+     These four were read from the live form, and all four check
+     out: every question is short answer, and none is required.
+     ---------------------------------------------------------- */
   var GOOGLE_FORM_FIELDS = {
-    // name:      "entry.111111111",
-    // attending: "entry.222222222",
-    // guests:    "entry.333333333",
-    // message:   "entry.444444444"
+    name:      "entry.877086558",    // Name
+    email:     "entry.1803313751",   // Email Address
+    phone:     "entry.1380062786",   // Contact Number
+    attending: "entry.1498135098",   // Will you be joining us?
+    guests:    "entry.1424661284",   // Number of Guests?
+    message:   "entry.2606285"       // Message to the Couple
   };
 
   var reduceMotion = !!(window.matchMedia &&
@@ -3487,6 +3565,8 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   var submitBtn = document.getElementById("rsvp-submit");
   var yesOnly   = document.getElementById("yes-only");
   var nameEl    = document.getElementById("rsvp-name");
+  var emailEl   = document.getElementById("rsvp-email");
+  var phoneEl   = document.getElementById("rsvp-phone");
   var guestsEl  = document.getElementById("rsvp-guests");
   var messageEl = document.getElementById("rsvp-message");
   var attendEls = form.querySelectorAll('input[name="attending"]');
@@ -3511,7 +3591,8 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   }
 
   function clearAllErrors() {
-    ["err-name", "err-attending", "err-guests", "err-form"].forEach(function (id) {
+    ["err-name", "err-email", "err-phone", "err-attending",
+     "err-guests", "err-form"].forEach(function (id) {
       clearError(id, null);
     });
     [nameEl, guestsEl].forEach(function (el) { el.removeAttribute("aria-invalid"); });
@@ -3545,6 +3626,23 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       firstBad = firstBad || nameEl;
     }
 
+    // Both contact fields are optional; only the shape of whatever
+    // was actually typed gets checked. The email test is loose on
+    // purpose - strict patterns reject valid addresses more often
+    // than they catch typos.
+    var email = emailEl.value.trim();
+    if (email && !/^[^ @]+@[^ @.]+([.][^ @.]+)+$/.test(email)) {
+      showError("err-email", emailEl, "That does not look like an email address.");
+      firstBad = firstBad || emailEl;
+    }
+
+    // Digits only, so +63, 0917, spaces and dashes all pass.
+    var phone = phoneEl.value.trim();
+    if (phone && phone.replace(/[^0-9]/g, "").length < 7) {
+      showError("err-phone", phoneEl, "Please give a complete contact number.");
+      firstBad = firstBad || phoneEl;
+    }
+
     if (!form.querySelector('input[name="attending"]:checked')) {
       showError("err-attending", null, "Please let us know if you can make it.");
       firstBad = firstBad || attendEls[0];
@@ -3566,6 +3664,8 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     var attending = form.querySelector('input[name="attending"]:checked');
     return {
       name:      nameEl.value.trim(),
+      email:     emailEl.value.trim(),
+      phone:     phoneEl.value.trim(),
       attending: attending ? attending.value : "",
       guests:    isAttending() ? guestsEl.value : "0",
       message:   messageEl.value.trim()
