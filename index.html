@@ -449,47 +449,60 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 }
 /* The one on top of the stack is drawn out first, then the two
    beneath it fan left and right - and each leans out as it rises.
-   The lift is set so roughly a quarter of each photograph is still
-   behind the pocket at full height: enough occlusion to read as
-   coming OUT of the envelope, little enough that you see the face.
-   These are the phone-sized spreads; the fan opens wider below. */
+   Each rises until only a sliver is left inside the pocket - under
+   a tenth on a phone or a tall screen - which is all the overlap it
+   takes to read as coming OUT of the envelope. How high they can go
+   is capped by the room above the envelope, which the splash clips,
+   hence the shorter-screen tiers below. These are the phone spreads. */
 .is-opening .env-photos img:nth-child(2){
-  transform:translate(-50%,-68%) rotate(0deg) rotateX(-8deg) scale(1.08);
+  transform:translate(-50%,-83%) rotate(0deg) rotateX(-8deg) scale(1.12);
   transition-delay:.5s;
 }
 .is-opening .env-photos img:nth-child(1){
-  transform:translate(-112%,-58%) rotate(-13deg) rotateX(-7deg) scale(1);
+  transform:translate(-114%,-79%) rotate(-12deg) rotateX(-7deg) scale(1.04);
   transition-delay:.72s;
 }
 .is-opening .env-photos img:nth-child(3){
-  transform:translate(12%,-58%) rotate(13deg) rotateX(-7deg) scale(1);
+  transform:translate(14%,-79%) rotate(12deg) rotateX(-7deg) scale(1.04);
   transition-delay:.94s;
 }
-/* room for a wider fan once the screen can take it */
+/* a wider fan and the highest lift, once the screen is tall enough */
 @media (min-width:34rem){
   .is-opening .env-photos img:nth-child(2){
-    transform:translate(-50%,-76%) rotate(0deg) rotateX(-8deg) scale(1.12);
+    transform:translate(-50%,-84%) rotate(0deg) rotateX(-8deg) scale(1.18);
   }
   .is-opening .env-photos img:nth-child(1){
-    transform:translate(-126%,-64%) rotate(-15deg) rotateX(-7deg) scale(1.04);
+    transform:translate(-128%,-83%) rotate(-15deg) rotateX(-7deg) scale(1.1);
   }
   .is-opening .env-photos img:nth-child(3){
-    transform:translate(26%,-64%) rotate(15deg) rotateX(-7deg) scale(1.04);
+    transform:translate(28%,-83%) rotate(15deg) rotateX(-7deg) scale(1.1);
   }
 }
-/* Wide but short - a landscape phone, or a small laptop window. The
-   splash is already close to scrolling there, and the screen clips
-   its overflow, so hold the lift back to keep the top photograph
-   inside the frame rather than cropping its head off. */
-@media (min-width:34rem) and (max-height:41rem){
+/* Wide but not tall - a laptop window up to 736px. Less room above
+   the envelope, so the lift comes back a little. */
+@media (min-width:34rem) and (max-height:46rem){
   .is-opening .env-photos img:nth-child(2){
-    transform:translate(-50%,-54%) rotate(0deg) rotateX(-7deg) scale(1.02);
+    transform:translate(-50%,-75%) rotate(0deg) rotateX(-8deg) scale(1.1);
   }
   .is-opening .env-photos img:nth-child(1){
-    transform:translate(-114%,-46%) rotate(-13deg) rotateX(-6deg) scale(.96);
+    transform:translate(-124%,-73%) rotate(-14deg) rotateX(-7deg) scale(1.02);
   }
   .is-opening .env-photos img:nth-child(3){
-    transform:translate(14%,-46%) rotate(13deg) rotateX(-6deg) scale(.96);
+    transform:translate(24%,-73%) rotate(14deg) rotateX(-7deg) scale(1.02);
+  }
+}
+/* Short - a landscape phone, or a small window up to 656px. The
+   splash is already close to scrolling and clips its overflow, so
+   hold the lift back further to keep the top photograph whole. */
+@media (min-width:34rem) and (max-height:41rem){
+  .is-opening .env-photos img:nth-child(2){
+    transform:translate(-50%,-66%) rotate(0deg) rotateX(-7deg) scale(1.02);
+  }
+  .is-opening .env-photos img:nth-child(1){
+    transform:translate(-116%,-64%) rotate(-13deg) rotateX(-6deg) scale(.96);
+  }
+  .is-opening .env-photos img:nth-child(3){
+    transform:translate(16%,-64%) rotate(13deg) rotateX(-6deg) scale(.96);
   }
 }
 
@@ -689,12 +702,6 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   color:var(--brown);
 }
 
-.hero__photo{
-  margin:1.8rem auto 0;width:min(60vw,13rem);aspect-ratio:3/4;
-  border:1px solid var(--rust-lt);border-radius:2px;background:var(--cream-deep);
-  overflow:hidden;
-}
-.hero__photo img{width:100%;height:100%;object-fit:cover}
 /* ---- "now playing" ----
    No frame around it: the play disc, the two lines of text and the
    clock sit straight on the page, with a hairline timeline under
@@ -1477,14 +1484,15 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     <div class="envelope" id="envelope-art">
       <span class="env-body" aria-hidden="true"></span>
       <!-- [EDIT PHOTO] these three slide out of the envelope as it
-           opens. They are blank templates - replace each whole
-           src="data:image/svg+xml,..." with your own picture, e.g.
-           src="photos/us-1.jpg". Portrait crops (3:4) sit best in
-           the frames; the middle one is the top of the stack. -->
+           opens: left, top of the stack (drawn out first), then right.
+           They are 720px web copies of prenup_81, 82 and 83.jpg; the
+           originals run 1.5 to 3 MB each, far too heavy for the first
+           screen a guest sees. To swap one, save a portrait copy
+           (2:3 or 3:4) about 720px wide and point its src at it. -->
       <span class="env-photos" aria-hidden="true">
-        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Crect%20x='26'%20y='26'%20width='548'%20height='748'%20fill='none'%20stroke='%23D9B58C'%20stroke-width='2'/%3E%3Ccircle%20cx='300'%20cy='352'%20r='62'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'/%3E%3Cpath%20d='M268%20372l26-30%2022%2024%2016-16%2030%2034z'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='278'%20cy='330'%20r='9'%20fill='%23C1571F'/%3E%3Ctext%20x='300'%20y='486'%20font-family='Georgia,serif'%20font-size='30'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='9'%3EPHOTO%201%3C/text%3E%3C/svg%3E" alt="" width="600" height="800">
-        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Crect%20x='26'%20y='26'%20width='548'%20height='748'%20fill='none'%20stroke='%23D9B58C'%20stroke-width='2'/%3E%3Ccircle%20cx='300'%20cy='352'%20r='62'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'/%3E%3Cpath%20d='M268%20372l26-30%2022%2024%2016-16%2030%2034z'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='278'%20cy='330'%20r='9'%20fill='%23C1571F'/%3E%3Ctext%20x='300'%20y='486'%20font-family='Georgia,serif'%20font-size='30'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='9'%3EPHOTO%202%3C/text%3E%3C/svg%3E" alt="" width="600" height="800">
-        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Crect%20x='26'%20y='26'%20width='548'%20height='748'%20fill='none'%20stroke='%23D9B58C'%20stroke-width='2'/%3E%3Ccircle%20cx='300'%20cy='352'%20r='62'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'/%3E%3Cpath%20d='M268%20372l26-30%2022%2024%2016-16%2030%2034z'%20fill='none'%20stroke='%23C1571F'%20stroke-width='2'%20stroke-linejoin='round'/%3E%3Ccircle%20cx='278'%20cy='330'%20r='9'%20fill='%23C1571F'/%3E%3Ctext%20x='300'%20y='486'%20font-family='Georgia,serif'%20font-size='30'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='9'%3EPHOTO%203%3C/text%3E%3C/svg%3E" alt="" width="600" height="800">
+        <img src="prenup_81-sm.jpg" alt="" width="720" height="1081">
+        <img src="prenup_82-sm.jpg" alt="" width="720" height="1081">
+        <img src="prenup_83-sm.jpg" alt="" width="720" height="1081">
       </span>
       <!-- the pocket comes after the photographs so it covers them -->
       <span class="env-front" aria-hidden="true"></span>
@@ -1714,12 +1722,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       <span class="dot" aria-hidden="true"></span>
       <span>Santo Tomas-Lipa Rd, Talisay, Lipa City, Batangas</span>
     </p>
-
-    <!-- [EDIT PHOTO] replace src with e.g. src="photos/hero.jpg" -->
-    <figure class="hero__photo">
-      <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='412'%20font-family='Georgia,serif'%20font-size='28'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='8'%3EPHOTO%3C/text%3E%3C/svg%3E"
-           alt="Archie and Catherine" loading="lazy">
-    </figure>
 
     <button class="hero__music is-paused" id="music-toggle-hero" type="button" aria-label="Play background music">
       <span class="hero__music-row">
