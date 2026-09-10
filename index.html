@@ -345,7 +345,7 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 }
 
 /* ---- the envelope ---- */
-/* purely a picture now - the slide control below opens it */
+/* the picture; a transparent tap-to-open button is laid over it */
 .envelope{
   position:relative;display:block;
   width:min(86vw,25rem);aspect-ratio:7/5.9;
@@ -534,90 +534,44 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   letter-spacing:.3em;text-transform:uppercase;
   color:var(--muted);margin:0;
 }
-/* ---- slide to open ----
-   Drag-to-confirm rather than a tap, so the invitation only opens on
-   a deliberate gesture. The thumb starts at the left and is pulled
-   right; let go before the end and it springs back. JS writes two
-   custom properties as it moves: --x, the thumb offset in px, and
-   --p, the same thing as 0-1 for the fade. */
-.slide-open{
-  --thumb:2.75rem;
-  width:min(86vw,21rem);margin:0 auto 1.6rem;
+/* ---- tap to open ----
+   One transparent button laid over the whole envelope, so a tap
+   anywhere on it - flap, seal or pocket - opens the invitation. Only
+   the label is drawn: it sits on the pocket below the seal and
+   breathes gently to invite the tap. Its padding and line-height are
+   kept tight so it clears the seal even on a narrow phone. */
+.env-tap{
+  position:absolute;inset:0;z-index:6;
+  display:flex;align-items:flex-end;justify-content:center;
+  margin:0;padding:0 0 5%;border:0;border-radius:4px;
+  background:transparent;cursor:pointer;
+  font:inherit;color:inherit;
+  -webkit-tap-highlight-color:transparent;
   transition:opacity .3s ease;
 }
-.slide-open__track{
-  position:relative;display:flex;align-items:center;
-  height:calc(var(--thumb) + .55rem);padding:.275rem;
-  border-radius:999px;overflow:hidden;
-  background:var(--paper);
-  border:1px solid var(--rust-lt);
-  box-shadow:inset 0 2px 6px rgba(122,52,19,.13);
-}
-/* the trail the thumb leaves behind it */
-.slide-open__fill{
-  position:absolute;left:0;top:0;bottom:0;pointer-events:none;
-  width:calc(var(--x,0px) + var(--thumb) + .55rem);
-  border-radius:999px;
-  background:linear-gradient(90deg,var(--rust-pale),var(--rust-lt));
-  opacity:.8;
-}
-.slide-open__label{
-  position:absolute;left:calc(var(--thumb) + .9rem);right:1rem;
-  text-align:center;pointer-events:none;
-  font-size:clamp(.7rem,.64rem + .3vw,.82rem);
-  letter-spacing:.22em;text-transform:uppercase;
-  color:var(--rust-dk);
-  /* fades out as the thumb travels; the nudge only moves it, so the
-     two never fight over opacity */
-  opacity:calc(1 - var(--p,0) * 1.7);
-}
-.slide-open__label span{
-  display:inline-block;
-  animation:slideNudge 2.4s ease-in-out infinite;
-}
-@keyframes slideNudge{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
-
-.slide-open__thumb{
-  position:relative;z-index:2;flex:none;
-  width:var(--thumb);height:var(--thumb);
-  display:grid;place-items:center;
-  padding:0;border:0;border-radius:50%;cursor:grab;
-  background:linear-gradient(150deg,var(--rust-mid) 0%,var(--rust) 55%,var(--rust-deep) 100%);
-  color:var(--shell);
-  box-shadow:0 6px 14px -6px rgba(74,28,8,.8);
-  transform:translateX(var(--x,0px));
-  transition:transform .4s cubic-bezier(.22,.9,.3,1.05);
-  -webkit-tap-highlight-color:transparent;
-  touch-action:none;              /* we handle the horizontal drag */
-}
-.slide-open__thumb svg{
-  width:22px;height:22px;fill:none;stroke:currentColor;
-  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
-}
-.slide-open__thumb:active{cursor:grabbing}
-.slide-open__thumb:focus-visible{outline:2px solid var(--rust-dk);outline-offset:3px}
-/* no easing while a finger is on it, or it lags behind */
-.slide-open.is-dragging .slide-open__thumb{transition:none}
-.slide-open.is-done .slide-open__thumb{cursor:default}
-.slide-open.is-done .slide-open__label{opacity:0}
-
-.is-opening .slide-open{opacity:0;pointer-events:none}
-
-/* ---- the slider, riding on the envelope pocket ----
-   It sits below the wax seal, inside the envelope art rather than
-   under it. The thumb scales with the viewport so the track always
-   clears the seal on a narrow phone. */
-.envelope .slide-open{
-  --thumb:clamp(1.9rem,9vw,2.6rem);
-  position:absolute;left:50%;bottom:4%;z-index:6;
-  width:82%;margin:0;transform:translateX(-50%);
-}
-.envelope .slide-open__track{
+/* The focus ring goes round the label, not the whole envelope: the
+   button is focused when the page loads, and a big box round the
+   envelope would read as a mistake. */
+.env-tap:focus{outline:none}
+.env-tap:focus-visible .env-tap__label{outline:2px solid var(--rust-dk);outline-offset:3px}
+.env-tap__label{
+  display:inline-block;padding:.6rem 1.4rem;
+  border-radius:999px;line-height:1.2;
   background:rgba(255,251,245,.95);
-  border-color:rgba(251,234,218,.7);
-  box-shadow:inset 0 2px 6px rgba(74,28,8,.18),
-             0 7px 18px -8px rgba(46,22,8,.85);
+  border:1px solid rgba(251,234,218,.7);
+  box-shadow:0 7px 18px -8px rgba(46,22,8,.85);
+  font-family:var(--sans);font-weight:500;
+  font-size:clamp(.72rem,.66rem + .3vw,.84rem);
+  letter-spacing:.2em;text-transform:uppercase;
+  color:var(--rust-dk);
+  animation:tapPulse 2.4s ease-in-out infinite;
 }
+@keyframes tapPulse{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.06)}
+}
+.env-tap:hover .env-tap__label{background:#fff}
+.is-opening .env-tap{opacity:0;pointer-events:none}
 /* the flap folds back across this line as it opens, so it steps aside */
 .env-eyebrow{transition:opacity .35s ease}
 .is-opening .env-eyebrow{opacity:0}
@@ -1206,6 +1160,17 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 .entourage{display:grid;gap:2.4rem;grid-template-columns:1fr;margin-top:2.5rem;text-align:center}
 @media (min-width:34rem){.entourage{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:56rem){.entourage{grid-template-columns:repeat(3,1fr);gap:2.75rem 2rem}}
+/* A card left alone on the last row sits in the middle rather than
+   hugging the left edge - with ten cards the desktop grid ends on
+   one, and this keeps working if cards are added or removed. */
+@media (min-width:34rem) and (max-width:55.99rem){
+  .entourage > :last-child:nth-child(2n+1){
+    grid-column:1 / -1;justify-self:center;width:calc((100% - 2.4rem) / 2);
+  }
+}
+@media (min-width:56rem){
+  .entourage > :last-child:nth-child(3n+1){grid-column:2}
+}
 .role{
   font-size:.8rem;font-weight:500;letter-spacing:.17em;text-transform:uppercase;
   color:var(--rust-dk);margin:0 0 1.15rem;padding-bottom:.7rem;
@@ -1480,7 +1445,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   <div class="env-inner">
     <p class="env-eyebrow">You are invited to the wedding of</p>
 
-    <!-- the envelope, with the slide-to-open sitting on its pocket -->
+    <!-- the envelope; a tap anywhere on it opens the invitation -->
     <div class="envelope" id="envelope-art">
       <span class="env-body" aria-hidden="true"></span>
       <!-- [EDIT PHOTO] these three slide out of the envelope as it
@@ -1499,22 +1464,14 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       <span class="env-flap" aria-hidden="true"></span>
       <span class="env-seal" aria-hidden="true">A&nbsp;&amp;&nbsp;C</span>
 
-      <!-- [EDIT] slide-to-open. Change the wording in .slide-open__label
-           to suit; the thumb is a real <button>, so Enter or Space
-           opens the invitation for anyone using a keyboard. -->
-      <div class="slide-open" id="slide-open">
-        <div class="slide-open__track" id="slide-track">
-          <span class="slide-open__fill" aria-hidden="true"></span>
-          <button class="slide-open__thumb" type="button" id="env-open"
-                  aria-label="Slide to open the invitation, or press Enter">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M8 6l5 6-5 6"/>
-              <path d="M14 6l5 6-5 6" opacity=".5"/>
-            </svg>
-          </button>
-          <span class="slide-open__label" aria-hidden="true"><span>Slide to open</span></span>
-        </div>
-      </div>
+      <!-- [EDIT] tap to open. The whole envelope is one real button,
+           so a tap, a mouse click, Enter or Space all open it. Change
+           the wording in .env-tap__label to suit - if you do, keep the
+           same words at the start of the aria-label too. -->
+      <button class="env-tap" type="button" id="env-open"
+              aria-label="Tap to open the invitation">
+        <span class="env-tap__label" aria-hidden="true">Tap to open</span>
+      </button>
     </div>
 
     <p class="env-names" id="env-names">Archie <em>&amp;</em> Catherine</p>
@@ -2300,6 +2257,14 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
           <li>Flower Girl Five</li>
         </ul>
       </div>
+
+      <!-- walks just ahead of the bride, carrying the sign -->
+      <div>
+        <h3 class="role">Here Comes the Bride</h3>
+        <ul class="names">
+          <li>Sign Bearer Name</li><!-- [EDIT] -->
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -2710,96 +2675,16 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     }, reduceMotion ? 900 : OPEN_HOLD_MS);
   }
 
-  /* ---- slide to open -------------------------------------
-     The thumb is dragged from the left end of the track to the
-     right. Let go past OPEN_AT of the way and the invitation
-     opens; short of it, the thumb springs back. A bare tap does
-     nothing on purpose - that is the point of a slider - but the
-     thumb is a real <button>, so Enter, Space, arrow keys and
-     Escape all still work.
+  /* ---- tap to open ----------------------------------------
+     The whole envelope is one real button, so a tap, a mouse
+     click, Enter and Space all open the invitation - and Escape
+     does too, from anywhere. A tap is a genuine user gesture, so
+     the browser still lets the music start.
      -------------------------------------------------------- */
-  var slide      = document.getElementById("slide-open");
-  var slideTrack = document.getElementById("slide-track");
-  var OPEN_AT    = 0.92;   // [EDIT] how far along counts as "opened"
-
-  if (envelope && envBtn && slide && slideTrack) {
+  if (envelope && envBtn) {
     try { envBtn.focus({ preventScroll: true }); } catch (err) { envBtn.focus(); }
 
-    var drag = null;
-
-    // how far the thumb can travel: the track's inner width less itself
-    function maxTravel() {
-      var cs = window.getComputedStyle(slideTrack);
-      var inner = slideTrack.clientWidth -
-                  parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-      return Math.max(0, inner - envBtn.offsetWidth);
-    }
-
-    function thumbAt() {
-      return parseFloat(slide.style.getPropertyValue("--x")) || 0;
-    }
-
-    function setThumb(x) {
-      var t = maxTravel();
-      x = Math.max(0, Math.min(x, t));
-      slide.style.setProperty("--x", x + "px");
-      slide.style.setProperty("--p", t ? (x / t).toFixed(4) : "0");
-      return x;
-    }
-
-    function complete() {
-      slide.classList.add("is-done");
-      setThumb(maxTravel());
-      openInvitation();
-    }
-
-    function settle(x) {
-      var t = maxTravel();
-      if (t && x >= t * OPEN_AT) { complete(); } else { setThumb(0); }
-    }
-
-    envBtn.addEventListener("pointerdown", function (e) {
-      if (e.button || slide.classList.contains("is-done")) { return; }
-      drag = { id: e.pointerId, from: e.clientX, at: thumbAt() };
-      slide.classList.add("is-dragging");
-      if (envBtn.setPointerCapture) { envBtn.setPointerCapture(e.pointerId); }
-    });
-
-    envBtn.addEventListener("pointermove", function (e) {
-      if (!drag || e.pointerId !== drag.id) { return; }
-      setThumb(drag.at + (e.clientX - drag.from));
-    });
-
-    function endDrag(e) {
-      if (!drag || (e && e.pointerId !== drag.id)) { return; }
-      drag = null;
-      slide.classList.remove("is-dragging");
-      settle(thumbAt());
-    }
-    envBtn.addEventListener("pointerup", endDrag);
-    envBtn.addEventListener("pointercancel", endDrag);
-
-    // A keyboard "click" reports detail 0; a tap or mouse click does
-    // not, and is ignored so the slider cannot be defeated by tapping.
-    envBtn.addEventListener("click", function (e) {
-      if (e.detail === 0) { complete(); }
-    });
-
-    // Arrow keys walk the thumb along, End sends it home.
-    envBtn.addEventListener("keydown", function (e) {
-      var t = maxTravel(), at = thumbAt(), to;
-      if (e.key === "ArrowRight" || e.key === "Right") { to = at + t / 4; }
-      else if (e.key === "ArrowLeft" || e.key === "Left") { to = at - t / 4; }
-      else if (e.key === "End") { to = t; }
-      else { return; }
-      e.preventDefault();
-      if (t && to >= t * OPEN_AT) { complete(); } else { setThumb(to); }
-    });
-
-    // The track is a different width after a rotate or resize.
-    window.addEventListener("resize", function () {
-      if (!slide.classList.contains("is-done")) { setThumb(0); }
-    });
+    envBtn.addEventListener("click", openInvitation);
 
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && !envelope.hidden) { openInvitation(); }
