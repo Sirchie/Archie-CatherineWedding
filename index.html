@@ -319,10 +319,15 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   display:flex;overflow-y:auto;
   position:fixed;inset:0;z-index:110;
   padding:2rem 1.25rem;text-align:center;
+  /* [EDIT] the backdrop photo. A cream wash sits over it so the
+     eyebrow, names and date keep their contrast - the photo runs
+     from bright sky to dark hedge, and bare text would vanish into
+     one or the other. Lower .78/.84 to show more of the photo, but
+     below about .72 the small grey-brown text drops under AA. */
   background:
-    radial-gradient(ellipse 100% 60% at 50% 0%,   #FDF4E9 0%, transparent 65%),
-    radial-gradient(ellipse 100% 65% at 50% 105%, #EFC69C 0%, transparent 70%),
-    var(--cream);
+    radial-gradient(ellipse 100% 65% at 50% 105%, rgba(239,198,156,.5) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(252,246,238,.78) 0%, rgba(252,246,238,.84) 100%),
+    var(--cream) url("prenup_29.jpg") center / cover no-repeat;
   transition:opacity .7s ease,visibility .7s ease;
 }
 .js .envelope-screen[hidden]{display:none}
@@ -814,8 +819,8 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   width:100%;border-radius:var(--radius);
   border:1px solid var(--rust-lt);
   box-shadow:0 18px 40px -28px rgba(122,52,19,.65);
-  /* 3:4 rather than 4:5 - the engagement photograph is a tall 9:16,
-     so a squarer frame would crop a third of it away */
+  /* 3:4 suits the 2:3 prenup photograph: only a strip of grass comes
+     off the top and bottom, and both of them stay whole in frame */
   aspect-ratio:3/4;object-fit:cover;background:var(--cream-deep);
 }
 /* Upright rather than italic: only the 400 italic of Cormorant is
@@ -1775,9 +1780,9 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     <div class="story__grid">
       <!-- [EDIT PHOTO] replace the whole src with e.g. src="photos/us.jpg" -->
       <figure class="photo reveal">
-        <img src="engagement.jpg" width="728" height="1280" loading="lazy"
-             alt="Chie and Cath in silhouette on the beach the day they got engaged, one kneeling with the ring against a bright, cloud-filled sky.">
-        <figcaption>Engagement day &middot; December 2025</figcaption><!-- [EDIT] -->
+        <img src="prenup_43.jpg" width="1364" height="2048" loading="lazy"
+             alt="Chie and Cath at a picnic on the grass, wrapped in an embrace, with a ukulele and a basket of fruit and flowers.">
+        <figcaption>Our prenup session</figcaption><!-- [EDIT] add the date if you like -->
       </figure>
 
       <div class="reveal">
