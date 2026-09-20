@@ -14,8 +14,8 @@
           (look for  WEDDING_DATE ).
        3. The RSVP endpoint also lives in that script
           (look for  RSVP_ENDPOINT ).
-       4. Photos and the video go in the GALLERY section - see the
-          [EDIT PHOTO] and [EDIT VIDEO] notes there.
+       4. Photos go in the GALLERY section - see the [EDIT PHOTO]
+          notes there.
      ============================================================ -->
 
 <title>Archie &amp; Catherine · Wedding Invitation</title>
@@ -799,7 +799,7 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 }
 
 /* =========================================================
-   7. GALLERY  ·  photos + video
+   7. GALLERY  ·  photos
    ========================================================= */
 .gallery{
   display:grid;gap:.6rem;grid-template-columns:repeat(2,1fr);margin-top:.5rem;
@@ -919,17 +919,6 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 .spin-dot.is-on{background:var(--rust);border-color:var(--rust);transform:scale(1.25)}
 .spin-dot:focus-visible{outline:2px solid var(--rust-dk);outline-offset:3px}
 
-.video-block{margin-top:clamp(2rem,6vw,3rem)}
-.video-block h3{text-align:center;margin-bottom:1.1rem}
-.video-wrap{
-  margin:0 auto;max-width:46rem;overflow:hidden;
-  border-radius:var(--radius);border:1px solid var(--rust-lt);
-  background:#2E1A0C;box-shadow:0 22px 46px -32px rgba(122,52,19,.75);
-}
-.video-wrap video{display:block;width:100%;aspect-ratio:16/9;background:#2E1A0C}
-/* used only if you switch to a YouTube / Vimeo embed */
-.video-wrap--embed{position:relative;aspect-ratio:16/9}
-.video-wrap--embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 
 /* ---- lightbox (progressive enhancement; needs <dialog>) ---- */
 .lightbox{
@@ -1755,7 +1744,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
 
 
 <!-- =========================================================
-     3 · GALLERY  ·  photos + video
+     3 · GALLERY  ·  photos
      ---------------------------------------------------------
      [EDIT PHOTO] Each <img> below is a placeholder. Put your
      files in a "photos" folder beside this HTML file and swap
@@ -1770,7 +1759,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   <div class="wrap">
     <div class="center reveal">
       <p class="eyebrow">Moments so far</p>
-      <h2 id="gallery-h">Photos &amp; Video</h2>
+      <h2 id="gallery-h">Photos</h2>
       <div class="divider" aria-hidden="true"><svg><use href="#floral-rule"></use></svg></div>
       <p class="lede narrow">A few of our favourites from the years that brought us here.
         Swipe the ring or use the arrows to turn it &mdash; tap the photo
@@ -1828,45 +1817,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       </div>
       <p class="sr-only" id="spin-live" role="status" aria-live="polite"></p>
     </div><!-- /.spinner -->
-
-    <!-- ---------------------------------------------------
-         [EDIT VIDEO]
-         Put your video file beside this HTML in a "videos"
-         folder and a still frame in "photos", then replace:
-           poster="photos/video-poster.jpg"
-           <source src="videos/prenup.mp4" ...>
-         MP4 (H.264) plays everywhere. Keep it under ~30 MB so
-         it loads on mobile data; preload="metadata" means only
-         a few KB download until someone presses play.
-         --------------------------------------------------- -->
-    <div class="video-block reveal">
-      <h3>Our Prenup Video</h3><!-- [EDIT] -->
-      <div class="video-wrap">
-        <video controls playsinline preload="metadata"
-               poster="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='1280'%20height='720'%3E%3Crect%20width='1280'%20height='720'%20fill='%232E1A0C'/%3E%3Ccircle%20cx='640'%20cy='330'%20r='52'%20fill='none'%20stroke='%23E9BE96'%20stroke-width='3'/%3E%3Cpath%20d='M625%20305%20l38%2025%20-38%2025%20z'%20fill='%23E9BE96'/%3E%3Ctext%20x='640'%20y='450'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23E9BE96'%20text-anchor='middle'%20letter-spacing='8'%3EVIDEO%3C/text%3E%3C/svg%3E">
-          <source src="videos/prenup.mp4" type="video/mp4">
-          <source src="videos/prenup.webm" type="video/webm">
-          <p style="color:#FBEADA;padding:1.5rem;text-align:center">
-            Your browser cannot play this video.
-            <a href="videos/prenup.mp4" style="color:#F3C49A">Download it instead</a>.
-          </p>
-        </video>
-      </div>
-
-      <!-- ALTERNATIVE - YouTube or Vimeo instead of a self-hosted file.
-           Note: this is the only thing on the page that loads from an
-           outside server. Delete the .video-wrap block above, then
-           uncomment this and swap VIDEO_ID:
-
-      <div class="video-wrap video-wrap--embed">
-        <iframe src="https://www.youtube-nocookie.com/embed/VIDEO_ID"
-                title="Chie and Cath prenup video"
-                loading="lazy" allowfullscreen
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                referrerpolicy="strict-origin-when-cross-origin"></iframe>
-      </div>
-      -->
-    </div>
   </div>
 </section>
 
@@ -2059,13 +2009,12 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     <div class="narrow" style="max-width:44rem">
       <!-- =====================================================
            DRESS CODE
-           Two reference pictures - ladies and gentlemen - then a
-           short note on what not to wear.
+           Two reference pictures - ladies and gentlemen.
            [EDIT PHOTO] replace each src with e.g.
            src="attire-ladies.jpg" - portrait crops (3:4) fit the
            frames best, and the frames are large, so use pictures
            at least 600px wide.
-           [EDIT] reword the notes and the avoid line to suit.
+           [EDIT] reword the notes to suit.
            ===================================================== -->
       <p class="attire-roles__lede">We invite you to celebrate with us in style and elegance. We kindly request our guests to come in their best formal attire. To maintain a cohesive look for our photos, please strictly adhere to our color palette..</p>
 
@@ -2096,8 +2045,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
            COLOUR PALETTE
            [EDIT] the five tones below. Each swatch is just a hex
            value and a name; add or remove <li> items freely.
-           NOTE: white is listed here AND on the avoid line below.
-           Those contradict each other - drop it from one of them.
            ===================================================== -->
       <h3 class="attire-roles__title" style="margin-top:2.9rem">Our Palette</h3>
       <p class="attire-roles__lede">Any of these tones will sit
@@ -2111,10 +2058,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         <li class="swatch"><span style="background:#C1571F"></span><small>Rustic Orange</small></li>
         <li class="swatch"><span style="background:#A8481A"></span><small>Terracotta</small></li>
       </ul>
-
-      <!-- [EDIT] what you would rather guests did not wear -->
-      <p class="avoid"><strong>Kindly avoid</strong> white, ivory and cream &mdash; these
-        are kept for the bride &mdash; and denim, shorts, slippers or casual sneakers.</p>
     </div>
   </div>
 </section>
@@ -2153,36 +2096,34 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       <div>
         <h3 class="role">Principal Sponsors</h3>
         <ul class="names pair">
-          <li>Ninang Name One</li>
-          <li>Ninong Name One</li>
-          <li>Ninang Name Two</li>
-          <li>Ninong Name Two</li>
-          <li>Ninang Name Three</li>
-          <li>Ninong Name Three</li>
-          <li>Ninang Name Four</li>
-          <li>Ninong Name Four</li>
-          <li>Ninang Name Five</li>
-          <li>Ninong Name Five</li>
-          <li>Ninang Name Six</li>
-          <li>Ninong Name Six</li>
-          <li>Ninang Name Seven</li>
-          <li>Ninong Name Seven</li>
-          <li>Ninang Name Eight</li>
-          <li>Ninong Name Eight</li>
-          <li>Ninang Name Nine</li>
-          <li>Ninong Name Nine</li>
-          <li>Ninang Name Ten</li>
-          <li>Ninong Name Ten</li>
-          <li>Ninang Name Eleven</li>
-          <li>Ninong Name Eleven</li>
-          <li>Ninang Name Twelve</li>
-          <li>Ninong Name Twelve</li>
-          <li>Ninang Name Thirteen</li>
-          <li>Ninong Name Thirteen</li>
-          <li>Ninang Name Fourteen</li>
-          <li>Ninong Name Fourteen</li>
-          <li>Ninang Name Fifteen</li>
-          <li>Ninong Name Fifteen</li>
+          <li>Mr. Maximo Nieva</li>
+          <li>Mrs. Tonette Nieva</li>
+          <li>Mr. Regino Oña</li>
+          <li>Mrs. Rinalyn Oña</li>
+          <li>Mr. Jimmy Ramilo</li>
+          <li>Mrs. Nora Ramilo</li>
+          <li>Mr. Jun Marasigan</li>
+          <li>Mrs. Teresita Marasigan</li>
+          <li>Mr. Jason Saludo</li>
+          <li>Mrs. Maricel Saludo</li>
+          <li>Mr. Segundo Oña</li>
+          <li>Mrs. Ghie Oña</li>
+          <li>Mr. Renato Mercado</li>
+          <li>Mrs. Sharon Mercado</li>
+          <li>Mr. Robert Lazarat</li>
+          <li>Mrs. Paula Mendoza</li>
+          <li>Mr. Casiano Caraan</li>
+          <li>Mrs. Marissa Caraan</li>
+          <li>Mr. Amado Gequinto</li>
+          <li>Mrs. Angelina Gequinto</li>
+          <li>Mr. Alison Mercado</li>
+          <li>Mrs. Gemma Mercado</li>
+          <li>Mr. Bonifacio Corto</li>
+          <li>Mrs. Josephine Corto</li>
+          <li>Mr. Loreto Corpus</li>
+          <li>Mrs. Emerinciana Corpus</li>
+          <li>Mr. Binito Casanovan</li>
+          <li>Mrs. Virginia Casanova</li>
         </ul>
       </div>
 
@@ -2190,51 +2131,49 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         <h3 class="role">Best Man &amp; Maid of Honour</h3>
         <ul class="names">
           <li>John Erick Almojuela<em>Best Man</em></li>
-          <li>Abegail G. Javier<em>Maid of Honour</em></li>
+          <li>Abegail Javier<em>Maid of Honour</em></li>
         </ul>
       </div>
 
       <div>
         <h3 class="role">Groomsmen</h3>
         <ul class="names">
-          <li>Groomsman One</li>
-          <li>Groomsman Two</li>
-          <li>Groomsman Three</li>
-          <li>Groomsman Four</li>
-          <li>Groomsman Five</li>
-          <li>Groomsman Six</li>
-          <li>Groomsman Seven</li>
-          <li>Groomsman Eight</li>
-          <li>Groomsman Nine</li>
-          <li>Groomsman Ten</li>
+          <li>Noriel Javier</li>
+          <li>Daniel Kelly Caraan</li>
+          <li>Andrei Javier</li>
+          <li>Juneland Gamara</li>
+          <li>Jayson Tagle</li>
+          <li>Arjay Mesinas</li>
+          <li>Jessie Almojuela</li>
+          <li>Kert Reyster Oña</li>
+          <li>Symon Ramilo</li>
         </ul>
       </div>
 
       <div>
         <h3 class="role">Bridesmaids</h3>
         <ul class="names">
-          <li>Bridesmaid One</li>
-          <li>Bridesmaid Two</li>
-          <li>Bridesmaid Three</li>
-          <li>Bridesmaid Four</li>
-          <li>Bridesmaid Five</li>
-          <li>Bridesmaid Six</li>
-          <li>Bridesmaid Seven</li>
-          <li>Bridesmaid Eight</li>
-          <li>Bridesmaid Nine</li>
-          <li>Bridesmaid Ten</li>
+          <li>Carmela Javier</li>
+          <li>Mariel Antonette Javier</li>
+          <li>Samielle Lat</li>
+          <li>Ruth Zyrille Javier</li>
+          <li>Pauline Irish Javier</li>
+          <li>Jessica Menisis</li>
+          <li>Mary Joy Nieva</li>
+          <li>Mary Jane Nieva</li>
+          <li>Aurora Maeyaca Javier</li>
         </ul>
       </div>
 
       <div>
         <h3 class="role">Secondary Sponsors</h3>
         <ul class="names pair">
-          <li>Candle Name One</li>
-          <li>Candle Name Two</li>
-          <li>Veil Name One</li>
-          <li>Veil Name Two</li>
-          <li>Cord Name One</li>
-          <li>Cord Name Two</li>
+          <li>John Erick Almojuela</li>
+          <li>Abegail Javier</li>
+          <li>Arjay Mesinas</li>
+          <li>Jessica Menisis</li>
+          <li>Noriel Javier</li>
+          <li>Carmela Javier</li>
         </ul>
       </div>
 
@@ -2247,22 +2186,35 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         </ul>
       </div>
 
-      <div>
-        <h3 class="role">Flower Girls</h3>
-        <ul class="names">
-          <li>Flower Girl One</li>
-          <li>Flower Girl Two</li>
-          <li>Flower Girl Three</li>
-          <li>Flower Girl Four</li>
-          <li>Flower Girl Five</li>
-        </ul>
-      </div>
-
-      <!-- walks just ahead of the bride, carrying the sign -->
+      <!-- [EDIT] the one who carries the sign -->
       <div>
         <h3 class="role">Here Comes the Bride</h3>
         <ul class="names">
-          <li>Sign Bearer Name</li><!-- [EDIT] -->
+          <li>Arianna Maureen Javier</li><!-- [EDIT] -->
+        </ul>
+      </div>
+
+      <!-- [EDIT] the escorts who walk with the flower girls -->
+      <div>
+        <h3 class="role">Escorts</h3>
+        <ul class="names">
+          <li>Mark Exequiel Javier</li>
+          <li>Angelo Patrick Bagaporo</li>
+          <li>Angelo Patrick Bagaporo</li>
+          <li>Johann Skyler De Castro</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="role">Flower Girls</h3>
+        <ul class="names">
+          <li>Brayleigh Jace Almojuela</li>
+          <li>Sabrina Mendoza</li>
+          <li>Kelsey Sophia Lat</li>
+          <li>Savannah Aguila</li>
+          <li>Carmel Amiela Javier</li>
+          <li>Khalee Blaire Rivera</li>
+          <li>Zione Corrine Panganiban</li>
         </ul>
       </div>
     </div>
@@ -2407,23 +2359,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         <p class="error" id="err-attending" role="alert" hidden></p>
       </fieldset>
 
-      <!-- shown only when "attending" is Yes -->
-      <div id="yes-only" hidden>
-        <div class="field">
-          <label for="rsvp-guests">Number of guests <span class="req" aria-hidden="true">*</span></label>
-          <select class="select" id="rsvp-guests" name="guests" aria-describedby="hint-guests err-guests">
-            <option value="">Please select&hellip;</option>
-            <option value="1">1 &mdash; just me</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-          <p class="hint" id="hint-guests">Including yourself, and only as many seats as your invitation reserves.</p>
-          <p class="error" id="err-guests" role="alert" hidden></p>
-        </div>
-      </div><!-- /#yes-only -->
-
       <div class="field">
         <label for="rsvp-message">A message for the couple <span class="hint" style="display:inline">(optional)</span></label>
         <textarea class="textarea" id="rsvp-message" name="message"
@@ -2442,7 +2377,7 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
         <circle cx="16" cy="16" r="13"/><path d="M10 16.5l4 4 8-8.5"/>
       </svg>
       <h3 id="thanks-title">Thank you!</h3>
-      <p id="thanks-body">Your RSVP has been received. We cannot wait to celebrate with you.</p>
+      <p id="thanks-body">Your RSVP has been received, and we have reserved a seat in your name. We cannot wait to celebrate with you.</p>
       <p style="margin-top:1.25rem">
         <button class="btn btn--ghost" type="button" id="rsvp-again">Submit another response</button>
       </p>
@@ -2606,32 +2541,33 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     "https://docs.google.com/forms/d/e/1FAIpQLSdq6jA5vZTkwfuvpv8aUcKF3161g-iASaj5Rno_dEoyqHrM3w/formResponse";
 
   /* ----------------------------------------------------------
-     GOOGLE FORM SETUP - the four entry IDs
+     GOOGLE FORM SETUP - the entry IDs
      ----------------------------------------------------------
-     Build the Google Form with FOUR questions, in this order,
-     and make every one of them SHORT ANSWER. Do not use
-     multiple-choice: Google silently drops an answer that does
-     not exactly match one of its options, and this page sends
-     its own wording.
+     Every question on the live form is SHORT ANSWER. Do not switch
+     any of them to multiple-choice: Google silently drops an answer
+     that does not exactly match one of its options, and this page
+     sends its own wording.
 
        1. Name              <- free text
-       2. Attending         <- "Yes, attending" or "No, cannot attend"
-       3. Number of guests  <- "1"-"5", or "0" when not attending
-       4. Message           <- free text, often empty
+       2. Email Address     <- free text, often empty
+       3. Contact Number    <- free text, often empty
+       4. Attending         <- "Yes, attending" or "No, cannot attend"
+       5. Number of Guests  <- no longer sent; see the note below
+       6. Message           <- free text, often empty
 
-     Mark NONE of them required - a guest who declines sends
-     guests "0" and usually an empty message, and a required
-     question would make Google reject the whole reply.
+     Mark NONE of them required - most replies leave at least one
+     of these empty, and a required question would make Google
+     reject the whole submission.
 
-     These four were read from the live form, and all four check
-     out: every question is short answer, and none is required.
+     The page no longer asks for a guest count, so question 5 is not
+     mapped below and its column stays blank. Deleting it in the form
+     is safe: removing a question does not change the other entry IDs.
      ---------------------------------------------------------- */
   var GOOGLE_FORM_FIELDS = {
     name:      "entry.877086558",    // Name
     email:     "entry.1803313751",   // Email Address
     phone:     "entry.1380062786",   // Contact Number
     attending: "entry.1498135098",   // Will you be joining us?
-    guests:    "entry.1424661284",   // Number of Guests?
     message:   "entry.2606285"       // Message to the Couple
   };
 
@@ -2783,7 +2719,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   var FADE_MS     = 1400;   // [EDIT] length of the fade in and out
 
   var fadeTimer = null;
-  var hushedForVideo = false;
 
   // Remember a guest's choice between visits, where storage allows.
   function musicWanted() {
@@ -2901,25 +2836,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
           : "0";
       }
     });
-
-    // Never talk over the prenup video.
-    var film = document.querySelector(".video-wrap video");
-    if (film) {
-      film.addEventListener("play", function () {
-        if (!music.paused) {
-          hushedForVideo = true;
-          stopMusic();
-        }
-      });
-      ["pause", "ended"].forEach(function (evt) {
-        film.addEventListener(evt, function () {
-          if (hushedForVideo) {
-            hushedForVideo = false;
-            startMusic();
-          }
-        });
-      });
-    }
   }
 
   /* ==========================================================
@@ -3493,18 +3409,11 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   var form      = document.getElementById("rsvp-form");
   var thanks    = document.getElementById("rsvp-thanks");
   var submitBtn = document.getElementById("rsvp-submit");
-  var yesOnly   = document.getElementById("yes-only");
   var nameEl    = document.getElementById("rsvp-name");
   var emailEl   = document.getElementById("rsvp-email");
   var phoneEl   = document.getElementById("rsvp-phone");
-  var guestsEl  = document.getElementById("rsvp-guests");
   var messageEl = document.getElementById("rsvp-message");
   var attendEls = form.querySelectorAll('input[name="attending"]');
-
-  function isAttending() {
-    var chosen = form.querySelector('input[name="attending"]:checked');
-    return !!chosen && chosen.value.indexOf("Yes") === 0;
-  }
 
   function showError(id, field, message) {
     var box = document.getElementById(id);
@@ -3521,20 +3430,17 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   }
 
   function clearAllErrors() {
-    ["err-name", "err-email", "err-phone", "err-attending",
-     "err-guests", "err-form"].forEach(function (id) {
+    ["err-name", "err-email", "err-phone",
+     "err-attending", "err-form"].forEach(function (id) {
       clearError(id, null);
     });
-    [nameEl, guestsEl].forEach(function (el) { el.removeAttribute("aria-invalid"); });
+    nameEl.removeAttribute("aria-invalid");
   }
 
-  // The guest count only applies to those attending. Everything
-  // else - the message and the Send button - stays put either way.
+  // Yes or no is the whole question now, so this just clears the
+  // "please answer" error once either one is picked.
   function syncAttending() {
-    var yes = isAttending();
-    yesOnly.hidden = !yes;
     clearError("err-attending", null);
-    if (!yes) { clearError("err-guests", guestsEl); }
   }
 
   attendEls.forEach(function (r) { r.addEventListener("change", syncAttending); });
@@ -3542,9 +3448,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
   // Clear a field's error as soon as the guest starts fixing it.
   nameEl.addEventListener("input", function () {
     if (nameEl.value.trim()) { clearError("err-name", nameEl); }
-  });
-  guestsEl.addEventListener("change", function () {
-    if (guestsEl.value) { clearError("err-guests", guestsEl); }
   });
 
   function validate() {
@@ -3576,11 +3479,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     if (!form.querySelector('input[name="attending"]:checked')) {
       showError("err-attending", null, "Please let us know if you can make it.");
       firstBad = firstBad || attendEls[0];
-    } else if (isAttending()) {
-      if (!guestsEl.value) {
-        showError("err-guests", guestsEl, "Please choose how many will attend.");
-        firstBad = firstBad || guestsEl;
-      }
     }
 
     if (firstBad) {
@@ -3597,7 +3495,6 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       email:     emailEl.value.trim(),
       phone:     phoneEl.value.trim(),
       attending: attending ? attending.value : "",
-      guests:    isAttending() ? guestsEl.value : "0",
       message:   messageEl.value.trim()
     };
   }
@@ -3675,7 +3572,8 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     syncAttending();
     document.getElementById("thanks-title").textContent = "Thank you!";
     document.getElementById("thanks-body").textContent =
-      "Your RSVP has been received. We cannot wait to celebrate with you.";
+      "Your RSVP has been received, and we have reserved a seat in your name. " +
+      "We cannot wait to celebrate with you.";
     thanks.hidden = true;
     form.hidden = false;
     nameEl.focus();
