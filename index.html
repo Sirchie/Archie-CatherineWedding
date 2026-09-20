@@ -589,17 +589,38 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   display:flex;align-items:center;justify-content:center;
   padding:clamp(3rem,10vw,5rem) 1.25rem;
   text-align:center;
+  /* [EDIT] the hero photo. The wash is light, so the garden still
+     reads as a garden; the text sits on the frosted card below,
+     which carries its own contrast whatever falls behind it.
+     "center 40%" keeps both faces in frame when a tall phone
+     screen crops the sides away. */
   background:
-    radial-gradient(ellipse 110% 60% at 50% -8%,  #FFFCF7 0%, transparent 60%),
-    radial-gradient(ellipse 105% 62% at 50% 108%, #EFC69C 0%, transparent 68%),
-    radial-gradient(ellipse 140% 90% at 50% 50%,  #FDF4E9 0%, transparent 70%),
-    var(--cream);
+    radial-gradient(ellipse 105% 62% at 50% 108%, rgba(239,198,156,.45) 0%, transparent 68%),
+    linear-gradient(180deg, rgba(252,246,238,.35) 0%, rgba(252,246,238,.5) 100%),
+    var(--cream) url("prenup_39.jpg") center 40% / cover no-repeat;
 }
 .hero__frame{
   border:1px solid var(--rust-lt);
   padding:clamp(2.25rem,7vw,3.75rem) clamp(1.1rem,5vw,3rem);
   position:relative;width:100%;max-width:44rem;
-  background:rgba(255,251,245,.45);
+  /* Frosted over the photo: solid enough on its own to keep every
+     line readable, and blurred where the browser supports it. */
+  background:rgba(255,251,245,.9);
+  box-shadow:0 30px 60px -34px rgba(46,22,8,.6);
+}
+@supports ((backdrop-filter:blur(8px)) or (-webkit-backdrop-filter:blur(8px))){
+  .hero__frame{
+    background:rgba(255,251,245,.8);
+    -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  }
+}
+/* On a wide screen the card narrows and steps to the left, so the
+   two of you - who walk right of centre in this photograph - are not
+   hidden behind it. Narrower than this there is no room beside the
+   card, so it stays centred and the photo reads around its edges. */
+@media (min-width:68rem){
+  .hero{justify-content:flex-start;padding-left:clamp(2.5rem,6vw,6rem)}
+  .hero__frame{max-width:34rem}
 }
 .hero__frame::after{
   content:"";position:absolute;inset:6px;border:1px solid rgba(193,87,31,.24);
