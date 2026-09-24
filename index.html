@@ -592,12 +592,12 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   /* [EDIT] the hero photo. The wash is light, so the garden still
      reads as a garden; the text sits on the frosted card below,
      which carries its own contrast whatever falls behind it.
-     "center 40%" keeps both faces in frame when a tall phone
-     screen crops the sides away. */
+     "60% 40%" leans the framing towards the two of you, so both
+     faces survive the narrow crop a tall phone screen takes. */
   background:
     radial-gradient(ellipse 105% 62% at 50% 108%, rgba(239,198,156,.45) 0%, transparent 68%),
     linear-gradient(180deg, rgba(252,246,238,.35) 0%, rgba(252,246,238,.5) 100%),
-    var(--cream) url("prenup_39.jpg") center 40% / cover no-repeat;
+    var(--cream) url("prenup_18.jpg") 60% 40% / cover no-repeat;
 }
 .hero__frame{
   border:1px solid var(--rust-lt);
@@ -615,7 +615,7 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   }
 }
 /* On a wide screen the card narrows and steps to the left, so the
-   two of you - who walk right of centre in this photograph - are not
+   two of you - who sit right of centre in this photograph - are not
    hidden behind it. Narrower than this there is no room beside the
    card, so it stays centred and the photo reads around its edges. */
 @media (min-width:68rem){
