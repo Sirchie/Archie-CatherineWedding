@@ -602,7 +602,7 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 .hero__frame{
   border:1px solid var(--rust-lt);
   padding:clamp(2.25rem,7vw,3.75rem) clamp(1.1rem,5vw,3rem);
-  position:relative;width:100%;max-width:44rem;
+  position:relative;z-index:2;width:100%;max-width:44rem;
   /* Frosted over the photo: solid enough on its own to keep every
      line readable, and blurred where the browser supports it. */
   background:rgba(255,251,245,.9);
@@ -621,6 +621,44 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 @media (min-width:68rem){
   .hero{justify-content:flex-start;padding-left:clamp(2.5rem,6vw,6rem)}
   .hero__frame{max-width:34rem}
+}
+
+/* ---- the verse, lower right of the photograph ----
+   What sits behind it changes with the viewport: pale grass and the
+   hem of the dress on a wide screen, darker grass on the narrow crop
+   a phone takes, where the brown would fall to 2.3:1. The cream glow
+   carries it to 6.2:1 or better at every size measured, and fades out
+   instead of reading as a second card. It also sits clear of the
+   floating music button, which is fixed to the same corner. */
+.hero__verse{
+  position:absolute;z-index:1;margin:0;
+  right:clamp(1.25rem,4vw,3.25rem);
+  bottom:clamp(4.9rem,4.2rem + 2vw,6.2rem);
+  width:min(19rem,66vw);text-align:right;
+  pointer-events:none;                 /* never swallows a tap */
+}
+.hero__verse::before{
+  content:"";position:absolute;z-index:-1;
+  inset:-1.5rem -1.6rem -1.4rem -2.4rem;
+  background:radial-gradient(ellipse at 62% 50%,
+    rgba(252,246,238,.88) 0%, rgba(252,246,238,.8) 52%,
+    rgba(252,246,238,0) 100%);
+}
+.hero__verse-line{
+  display:block;margin:0;
+  font-family:var(--script);
+  font-size:clamp(1.05rem,.9rem + .7vw,1.45rem);
+  line-height:1.4;color:var(--brown);
+}
+.hero__verse-ref{
+  display:block;margin-top:.5rem;font-style:normal;
+  font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--rust-deep);
+}
+@media (max-width:67.99rem){
+  /* the card is centred at these widths and would otherwise land on
+     the verse, so the foot of the photograph is reserved for it */
+  .hero{padding-bottom:clamp(9.5rem,8rem + 6vw,11rem)}
 }
 .hero__frame::after{
   content:"";position:absolute;inset:6px;border:1px solid rgba(193,87,31,.24);
@@ -1739,6 +1777,12 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       </span>
     </button>
   </div>
+
+  <!-- [EDIT] the verse over the photograph -->
+  <blockquote class="hero__verse">
+    <p class="hero__verse-line">He has made everything beautiful in its time.</p>
+    <cite class="hero__verse-ref">Ecclesiastes 3:11</cite>
+  </blockquote>
 </section>
 
 <!-- =========================================================
