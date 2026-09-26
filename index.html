@@ -794,7 +794,13 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
    ========================================================= */
 .story__grid{display:grid;gap:clamp(1.75rem,5vw,3rem);align-items:center}
 @media (min-width:48rem){
-  .story__grid{grid-template-columns:0.85fr 1fr}
+  /* The story runs long now. Aligned to the top and stuck there, the
+     photograph stays beside the words as they are read; centred, it
+     would have floated in the middle of a tall empty column. If a
+     browser will not stick it, it simply sits at the top instead.
+     5.75rem clears the 4.5rem header bar. */
+  .story__grid{grid-template-columns:0.85fr 1fr;align-items:start}
+  .story__grid > .photo{position:sticky;top:5.75rem}
 }
 .photo{margin:0}
 .photo img{
@@ -814,6 +820,14 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   font-size:1.08rem;letter-spacing:.02em;
   color:var(--brown);text-align:center;margin-top:.85rem;
 }
+/* the two turning points of the story, lifted out of the body text.
+   Cormorant sets oldstyle figures by default, which would drop the
+   dates below the baseline, hence the lining numerals. */
+.story__beat{
+  font-family:var(--serif);font-size:1.18rem;line-height:1.5;
+  font-variant-numeric:lining-nums;
+  color:var(--rust-dk);margin:1.35em 0;
+}
 .signature{
   font-family:var(--script);font-style:normal;font-size:1.35rem;
   line-height:1.35;color:var(--rust-dk);margin-top:1.4rem;
@@ -832,9 +846,12 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
   background:var(--cream-deep);
 }
 .g-item img{
-  width:100%;aspect-ratio:1/1;object-fit:cover;
+  width:100%;aspect-ratio:4/3;object-fit:cover;
   transition:transform .5s ease;
 }
+/* a portrait frame drops its middle third into a 4:3 crop, which for
+   this one starts above their heads - so the crop is pulled down */
+.g-item--low img{object-position:50% 70%}
 .g-item.is-clickable{cursor:zoom-in}
 .g-item.is-clickable:hover img{transform:scale(1.05)}
 .g-item:focus-visible{outline:2px solid var(--rust-dk);outline-offset:3px}
@@ -873,8 +890,12 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 .js .spinner__stage{
   /* [EDIT] --spin-w is how wide the photo at the front is.  */
   --spin-w:clamp(10rem,52vw,18.5rem);
+  /* the photos are 4:3, so a facet is three quarters as tall as it is
+     wide. The ring's radius still comes from the width alone, which is
+     all the script measures. */
+  --spin-h:calc(var(--spin-w) * .75);
   --spin-r:calc(var(--spin-w) * .92);    /* JS refines this to fit */
-  position:relative;height:calc(var(--spin-w) + 1rem);
+  position:relative;height:calc(var(--spin-h) + 1rem);
   perspective:1150px;perspective-origin:50% 46%;
   touch-action:pan-y;cursor:grab;
   user-select:none;-webkit-user-select:none;
@@ -895,7 +916,7 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 
 .js .spinner__ring .g-item{
   position:absolute;top:50%;left:50%;width:var(--spin-w);
-  margin:calc(var(--spin-w) / -2) 0 0 calc(var(--spin-w) / -2);
+  margin:calc(var(--spin-h) / -2) 0 0 calc(var(--spin-w) / -2);
   transform:rotateY(var(--slot,0deg)) translateZ(var(--spin-r));
   backface-visibility:hidden;
   box-shadow:0 14px 30px -24px rgba(122,52,19,.7);
@@ -1105,9 +1126,10 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
    10. DRESS CODE
    ========================================================= */
 /* ---- attire references ----
-   Entourage roles and guests share one card: reference photo on
-   top, who it is for underneath. One card per row on a phone so
-   the photo is big enough to read, two from small tablets up. */
+   One card per group: the reference drawing on top, who it is for
+   underneath. The three drawings were normalised onto one canvas at
+   one figure height, so the couples line up across the row. One card
+   per row on a phone, all three side by side from small tablets up. */
 .attire-roles__title{text-align:center;margin:2.9rem 0 .4rem}
 .attire-roles__title:first-of-type{margin-top:1.3rem}
 .attire-roles__lede{
@@ -1142,9 +1164,17 @@ section[id],.hero[id]{scroll-margin-top:5.6rem}
 .role-attire__note strong{color:var(--brown);font-weight:500}
 .role-attire__note + .role-attire__note{margin-top:.7rem}
 
-/* the guests get exactly the entourage card, on its own and centred */
-.attire-roles--guest{
-  grid-template-columns:1fr;max-width:22rem;margin-inline:auto;
+/* three cards, where the two-column rule above would leave an orphan.
+   One narrow column on a phone - the drawings are only 230px wide and
+   stretching them further just softens them - then all three in a row
+   as soon as there is width for it. */
+.attire-roles--three{
+  grid-template-columns:1fr;max-width:17rem;margin-inline:auto;
+}
+@media (min-width:34rem){
+  .attire-roles--three{
+    grid-template-columns:repeat(3,1fr);max-width:none;gap:1.6rem 1.1rem;
+  }
 }
 
 .swatches{
@@ -1755,8 +1785,50 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       </figure>
 
       <div class="reveal">
-        <!-- [EDIT] your story - two or three short paragraphs read best on a phone -->
-        <p>It started the way the best things usually do &mdash; quietly, and completely by accident.</p>
+        <!-- [EDIT] your story. class="story__beat" lifts a single line
+             out of the body text - keep those to one or two. -->
+        <p>Our story began in the most ordinary way&mdash;at our workplace,
+          where our colleagues would often mention our names to each other,
+          long before we ever thought we would become part of each
+          other&rsquo;s lives.</p>
+
+        <p>Then came a simple friend request. A small beginning that neither
+          of us knew would lead us here.</p>
+
+        <p>In October 2019, after Catherine passed her licensure examination,
+          Archie sent her a message to say congratulations. From that simple
+          message came conversations, invitations, birthday celebrations, and
+          eventually, courtship. What started quietly soon became something we
+          both cherished.</p>
+
+        <p class="story__beat">On December 17, 2019, Catherine said yes. ❤️</p>
+
+        <p>Since then, we have shared countless road trips, movie dates, lunch
+          breaks, celebrations, and ordinary days that became special simply
+          because we were together. We grew together, supported each other
+          through changes, and learned that love is not only found in grand
+          moments, but also in the little things we do for each other every
+          day.</p>
+
+        <p>When our careers eventually took us to different institutions, we
+          held on to a promise we made: when the time was right and we were
+          both ready, we would choose each other for a lifetime.</p>
+
+        <p>Six years later, Archie proposed on our anniversary. Our families
+          came together for our pamamanhikan on February 15, 2026, and the
+          promise we once made to each other was finally becoming a
+          reality.</p>
+
+        <p>Now, after all the memories, laughter, growth, and love we have
+          shared, we are ready for our next chapter.</p>
+
+        <p class="story__beat">On October 16, 2026, we will finally say
+          &ldquo;I do.&rdquo;</p>
+
+        <p>From a simple friend request to a lifetime of choosing each other,
+          this is our love story. And we would be honored to have you with us
+          as we begin forever. ❤️</p>
+
         <p class="signature">With love, Chie &amp; Cath</p>
       </div>
     </div>
@@ -1779,10 +1851,10 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
 <section class="section section--tint" id="gallery" aria-labelledby="gallery-h">
   <div class="wrap">
     <div class="center reveal">
-      <p class="eyebrow">Moments so far</p>
+      <p class="eyebrow">Before the big day</p>
       <h2 id="gallery-h">Photos</h2>
       <div class="divider" aria-hidden="true"><svg><use href="#floral-rule"></use></svg></div>
-      <p class="lede narrow">A few of our favourites from the years that brought us here.
+      <p class="lede narrow">A few favourites from our prenup session.
         Swipe the ring or use the arrows to turn it &mdash; tap the photo
         at the front to see it larger.</p>
     </div>
@@ -1796,33 +1868,33 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
           <div class="gallery spinner__ring" id="gallery-grid">
 
           <figure class="g-item"><!-- [EDIT PHOTO 1] -->
-            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%201%3C/text%3E%3C/svg%3E"
-                 alt="Chie and Cath on their first trip together." loading="lazy">
+            <img src="prenup_35.jpg" width="2048" height="1364"
+                 alt="Chie and Cath in an embrace on a jetty, with a red barn behind them." loading="lazy">
           </figure>
 
           <figure class="g-item"><!-- [EDIT PHOTO 2] -->
-            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%202%3C/text%3E%3C/svg%3E"
-                 alt="A quiet morning at home." loading="lazy">
+            <img src="prenup_39.jpg" width="2048" height="1364"
+                 alt="Chie and Cath walking arm in arm along a garden path." loading="lazy">
           </figure>
 
-          <figure class="g-item"><!-- [EDIT PHOTO 3] -->
-            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%203%3C/text%3E%3C/svg%3E"
-                 alt="The proposal, caught by a friend." loading="lazy">
+          <figure class="g-item g-item--low"><!-- [EDIT PHOTO 3] -->
+            <img src="prenup_52.jpg" width="1364" height="2048"
+                 alt="Chie and Cath on a scooter beside the red barn." loading="lazy">
           </figure>
 
           <figure class="g-item"><!-- [EDIT PHOTO 4] -->
-            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%204%3C/text%3E%3C/svg%3E"
-                 alt="Celebrating with family after the engagement." loading="lazy">
+            <img src="prenup_53.jpg" width="2048" height="1364"
+                 alt="Chie and Cath sitting together on a wooden bench, hand in hand." loading="lazy">
           </figure>
 
           <figure class="g-item"><!-- [EDIT PHOTO 5] -->
-            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%205%3C/text%3E%3C/svg%3E"
-                 alt="Prenup session in the Tagaytay highlands." loading="lazy">
+            <img src="prenup_57.jpg" width="1364" height="2048"
+                 alt="Chie and Cath standing at a white fence, a scooter in the foreground." loading="lazy">
           </figure>
 
           <figure class="g-item"><!-- [EDIT PHOTO 6] -->
-            <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='600'%3E%3Crect%20width='600'%20height='600'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='312'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EPHOTO%206%3C/text%3E%3C/svg%3E"
-                 alt="Sunset at the reception venue." loading="lazy">
+            <img src="prenup_76.jpg" width="2048" height="1364"
+                 alt="Chie and Cath at either end of a white fence, looking at each other." loading="lazy">
           </figure>
 
           </div><!-- /.spinner__ring -->
@@ -2030,33 +2102,45 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
     <div class="narrow" style="max-width:44rem">
       <!-- =====================================================
            DRESS CODE
-           Two reference pictures - ladies and gentlemen.
-           [EDIT PHOTO] replace each src with e.g.
-           src="attire-ladies.jpg" - portrait crops (3:4) fit the
-           frames best, and the frames are large, so use pictures
-           at least 600px wide.
+           Three reference drawings, one per group.
+           [EDIT PHOTO] attire-principal / attire-secondary /
+           attire-guest .png are normalised copies of attire3 /
+           attire2 / attire1 - same canvas, same figure height, so the
+           three cards line up. Swap like for like: artwork about
+           230x315 on a transparent background.
            [EDIT] reword the notes to suit.
            ===================================================== -->
-      <p class="attire-roles__lede">We invite you to celebrate with us in style and elegance. We kindly request our guests to come in their best formal attire. To maintain a cohesive look for our photos, please strictly adhere to our color palette..</p>
+      <p class="attire-roles__lede">We invite you to celebrate with us in style and elegance. We kindly request our guests to come in their best formal attire. To maintain a cohesive look for our photos, please strictly adhere to our color palette.</p>
 
-      <div class="attire-roles reveal">
+      <div class="attire-roles attire-roles--three reveal">
 
         <figure class="role-attire">
-          <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='412'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3ELADIES%3C/text%3E%3C/svg%3E" alt="Dress code reference for ladies." loading="lazy">
+          <img src="attire-principal.png" width="230" height="315" alt="Principal sponsors: a beige formal gown, and a cream Barong Tagalog worn with dark trousers." loading="lazy">
           <figcaption>
-            <span class="role-attire__name">Ladies</span>
-            <span class="role-attire__sub">Semi-formal</span><!-- [EDIT] -->
-            <span class="role-attire__note">A long dress or an elegant midi.</span><!-- [EDIT] -->
+            <span class="role-attire__name">Principal Sponsors</span>
+            <span class="role-attire__sub">Beige</span><!-- [EDIT] -->
+            <span class="role-attire__note">A long Beige Dress for the Ninang, and a
+              Beige Polo or Long Sleeve Barong Tagalog with black slacks for the
+              Ninong.</span><!-- [EDIT] -->
           </figcaption>
         </figure>
 
         <figure class="role-attire">
-          <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='600'%20height='800'%3E%3Crect%20width='600'%20height='800'%20fill='%23EFDCC2'/%3E%3Ctext%20x='300'%20y='412'%20font-family='Georgia,serif'%20font-size='26'%20fill='%23A8481A'%20text-anchor='middle'%20letter-spacing='6'%3EGENTLEMEN%3C/text%3E%3C/svg%3E" alt="Dress code reference for gentlemen." loading="lazy">
+          <img src="attire-secondary.png" width="230" height="315" alt="Secondary sponsors: a terracotta dress, and a tan suit worn with a white shirt." loading="lazy">
           <figcaption>
-            <span class="role-attire__name">Gentlemen</span>
-            <span class="role-attire__sub">Semi-formal</span><!-- [EDIT] -->
-            <span class="role-attire__note">Barong Tagalog, or a long-sleeved
-              shirt with dark slacks.</span><!-- [EDIT] -->
+            <span class="role-attire__name">Secondary Sponsors</span>
+            <span class="role-attire__sub">Rustic Orange &amp; Khaki</span><!-- [EDIT] -->
+            <span class="role-attire__note">A long Rustic Orange Dress for the Bridesmaid, and a
+              Khaki Coat and Pants for the Groomsmen.</span><!-- [EDIT] -->
+          </figcaption>
+        </figure>
+
+        <figure class="role-attire">
+          <img src="attire-guest.png" width="230" height="315" alt="Guests: a rust wrap dress, and a rust long-sleeved shirt worn with dark trousers." loading="lazy">
+          <figcaption>
+            <span class="role-attire__name">Guests</span>
+            <span class="role-attire__sub">White &amp; Rustic Orange</span><!-- [EDIT] -->
+            <span class="role-attire__note">Semi Formal White or Rustic Orange Polo, Long Sleeve, and Dress.</span><!-- [EDIT] -->
           </figcaption>
         </figure>
 
@@ -3046,7 +3130,9 @@ fieldset{border:0;padding:0;margin:0 0 1.4rem}
       lastOpener = fig;
       lbImg.src = img.currentSrc || img.src;
       lbImg.alt = img.alt || "";
-      lbCap.textContent = img.alt || "";
+      // the alt text stays for screen readers, but nothing is printed
+      // under the photo - these are prenup pictures, not captioned ones
+      lbCap.textContent = "";
       lightbox.showModal();
     };
 
