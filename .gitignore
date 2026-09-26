@@ -6,3 +6,6 @@ desktop.ini
 *~
 .vscode/
 .idea/
+
+# build output: the archive uploaded to Hostinger
+wedding-site-upload.zip
